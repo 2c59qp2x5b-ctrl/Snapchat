@@ -1,1 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <meta name="theme-color" content="#1e053d">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>Activation Snap Plus</title>
+    <style>
+        /* --- SYNC DU FOND ET FIX DU SCROLL --- */
+        html {
+            /* Couleur exacte du haut du dégradé pour une fusion parfaite */
+            background-color: #1e053d; 
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            /* Empêche le rebond blanc mais autorise le défilement */
+            overscroll-behavior-y: none; 
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* Dégradé fixé qui couvre toute la page */
+            background: radial-gradient(circle at top, #1e053d 0%, #0d011a 80%) no-repeat fixed;
+            background-color: #0d011a; 
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            /* Scroll autorisé sur l'axe vertical si besoin */
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 380px;
+            padding: 50px 20px; /* Plus d'espace pour le confort visuel */
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* --- LOGO SNAPCHAT --- */
+        .logo-wrapper {
+            position: relative;
+            width: 165px;
+            height: 165px;
+            margin: 0 auto 40px;
+        }
+
+        .border-gradient {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080);
+            border-radius: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
+        }
+
+        .snap-bg {
+            width: 88%;
+            height: 88%;
+            background-color: #fffc00;
+            border-radius: 34px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 75%;
+            height: auto;
+        }
+
+        .plus-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background-color: #ffb400;
+            color: #1a0133;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid #1e053d; /* Sync avec le haut du fond */
+        }
+
+        /* --- TITRE --- */
+        .title {
+            color: #df80ff;
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 45px;
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(223, 128, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* --- CHAMP DE SAISIE PRO --- */
+        .input-group {
+            display: flex;
+            border: 2px solid #ff00ff;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 45px;
+            background-color: #0d011a;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+            align-items: center;
+        }
+
+        .prefix {
+            background-color: #1a0533;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 16px;
+            border-right: 2px solid #4a0e7d;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            line-height: 1.2;
+            color: #ffffff;
+            min-width: 100px;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 18px;
+            color: #ffffff;
+            font-size: 18px;
+            text-align: right;
+            outline: none;
+            width: 100%;
+        }
+
+        input::placeholder {
+            color: #4b4b4b;
+            opacity: 1;
+        }
+
+        /* --- CARTE D'INFORMATION --- */
+        .info-box {
+            background-color: rgba(25, 10, 45, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .info-header {
+            color: #ffcc00;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .info-text {
+            color: #a0a0a0;
+            font-size: 14.5px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .info-text strong {
+            color: #ffffff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="logo-wrapper">
+            <div class="border-gradient">
+                <div class="snap-bg">
+                    <img src="logo-snapchat.png" alt="" class="logo-img">
+                </div>
+            </div>
+            <div class="plus-badge">+</div>
+        </div>
+
+        <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
+
+        <div class="input-group">
+            <div class="prefix">
+                Phone<br>Number
+            </div>
+            <input type="tel" placeholder="+33 123456789" maxlength="15">
+        </div>
+
+        <div class="info-box">
+            <div class="info-header">ATTENTION ⚠️</div>
+            <p class="info-text">
+                La tech marche qu'une seul fois en raisons d'abus. malheureusement la tech fonctionne qu'avec les opérateurs 
+                <strong>SFR, BOUYGUES, ORANGE</strong>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
 
