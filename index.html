@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
+    <!-- COULEUR DE LA BARRE D'ÉTAT -->
     <meta name="theme-color" content="#1e053d">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -105,31 +106,34 @@
             text-transform: uppercase;
         }
 
-        /* --- CHAMPS DE SAISIE --- */
+        /* --- CHAMPS DE SAISIE (Inspiré image_9.png) --- */
         .input-group {
             display: flex;
-            border: 2px solid #ff00ff;
+            border: 2px solid rgba(255, 0, 255, 0.5); /* Bordure légèrement plus fine et translucide */
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 20px;
             background-color: #0d011a;
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.1);
             align-items: center;
         }
 
-        .prefix {
+        /* Style spécifique pour le préfixe drapeau + pays */
+        .prefix-phone {
             background-color: #1a0533;
-            padding: 15px 20px;
-            font-weight: 700;
-            font-size: 14px;
-            border-right: 2px solid #4a0e7d;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
             display: flex;
             align-items: center;
-            text-align: left;
-            line-height: 1.2;
+            gap: 10px;
             color: #ffffff;
-            min-width: 110px;
-            text-transform: uppercase;
+        }
+
+        .separator {
+            color: #4a0e7d;
+            font-weight: 300;
+            margin-left: 5px;
         }
 
         input {
@@ -139,10 +143,13 @@
             padding: 18px;
             color: #ffffff;
             font-size: 18px;
-            text-align: right;
             outline: none;
             width: 100%;
         }
+
+        /* Alignement gauche pour l'username, droite pour le numéro */
+        .input-username { text-align: left; padding-left: 20px; }
+        .input-phone { text-align: left; }
 
         input::placeholder {
             color: #4b4b4b;
@@ -162,22 +169,15 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            margin-bottom: 45px;
+            margin: 10px 0 45px;
             box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
             transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .btn-valider:active {
-            transform: scale(0.98);
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
         }
 
         .btn-valider:disabled {
             background: #1a0533;
             box-shadow: none;
             color: #df80ff;
-            cursor: not-allowed;
         }
 
         /* --- CARTE D'INFORMATION --- */
@@ -194,7 +194,6 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 15px;
-            letter-spacing: 1px;
         }
 
         .info-text {
@@ -203,17 +202,13 @@
             line-height: 1.6;
             margin: 0;
         }
-
-        .info-text strong {
-            color: #ffffff;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
         
+        <!-- LOGO SECTION -->
         <div class="logo-wrapper">
             <div class="border-gradient">
                 <div class="snap-bg">
@@ -223,20 +218,26 @@
             <div class="plus-badge">+</div>
         </div>
 
+        <!-- TITRE -->
         <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
 
+        <!-- CHAMP USERNAME (Nouveau) -->
         <div class="input-group">
-            <div class="prefix">Phone<br>Number</div>
-            <input type="tel" placeholder="+33 123456789" maxlength="15">
+            <input type="text" class="input-username" placeholder="Nom d'utilisateur Snapchat" spellcheck="false">
         </div>
 
+        <!-- CHAMP TÉLÉPHONE (Style image_9.png) -->
         <div class="input-group">
-            <div class="prefix">Security<br>Code</div>
-            <input type="tel" placeholder="0000" maxlength="4">
+            <div class="prefix-phone">
+                🇫🇷 +33 <span class="separator">|</span>
+            </div>
+            <input type="tel" class="input-phone" placeholder="06..." maxlength="10">
         </div>
 
+        <!-- BOUTON VALIDER -->
         <button class="btn-valider" id="submitBtn" onclick="startTimer()">Valider</button>
 
+        <!-- TEXTE ALERTE -->
         <div class="info-box">
             <div class="info-header">ATTENTION ⚠️</div>
             <p class="info-text">
@@ -251,8 +252,6 @@
         function startTimer() {
             const btn = document.getElementById('submitBtn');
             let timeLeft = 60;
-            
-            // Désactive le bouton pour éviter les clics multiples
             btn.disabled = true;
             
             const timer = setInterval(function() {
