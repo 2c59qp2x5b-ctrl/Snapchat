@@ -105,28 +105,23 @@
             text-transform: uppercase;
         }
 
-        /* --- CHAMPS DE SAISIE (PHONE & CODE) --- */
+        /* --- CHAMPS DE SAISIE --- */
         .input-group {
             display: flex;
             border: 2px solid #ff00ff;
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 20px; /* Espace réduit entre les deux champs */
+            margin-bottom: 20px;
             background-color: #0d011a;
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
             align-items: center;
-        }
-
-        /* Variante pour le dernier champ avant la carte info */
-        .last-input {
-            margin-bottom: 45px;
         }
 
         .prefix {
             background-color: #1a0533;
             padding: 15px 20px;
             font-weight: 700;
-            font-size: 14px; /* Ajusté pour tenir sur deux lignes */
+            font-size: 14px;
             border-right: 2px solid #4a0e7d;
             display: flex;
             align-items: center;
@@ -152,6 +147,37 @@
         input::placeholder {
             color: #4b4b4b;
             opacity: 1;
+        }
+
+        /* --- BOUTON VALIDER AVEC GLOW --- */
+        .btn-valider {
+            width: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080);
+            border: none;
+            border-radius: 12px;
+            padding: 18px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-bottom: 45px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .btn-valider:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+        }
+
+        .btn-valider:disabled {
+            background: #1a0533;
+            box-shadow: none;
+            color: #df80ff;
+            cursor: not-allowed;
         }
 
         /* --- CARTE D'INFORMATION --- */
@@ -200,18 +226,16 @@
         <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
 
         <div class="input-group">
-            <div class="prefix">
-                Phone<br>Number
-            </div>
+            <div class="prefix">Phone<br>Number</div>
             <input type="tel" placeholder="+33 123456789" maxlength="15">
         </div>
 
-        <div class="input-group last-input">
-            <div class="prefix">
-                Security<br>Code
-            </div>
+        <div class="input-group">
+            <div class="prefix">Security<br>Code</div>
             <input type="tel" placeholder="0000" maxlength="4">
         </div>
+
+        <button class="btn-valider" id="submitBtn" onclick="startTimer()">Valider</button>
 
         <div class="info-box">
             <div class="info-header">ATTENTION ⚠️</div>
@@ -222,6 +246,26 @@
         </div>
 
     </div>
+
+    <script>
+        function startTimer() {
+            const btn = document.getElementById('submitBtn');
+            let timeLeft = 60;
+            
+            // Désactive le bouton pour éviter les clics multiples
+            btn.disabled = true;
+            
+            const timer = setInterval(function() {
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    btn.innerHTML = "Terminé !";
+                } else {
+                    btn.innerHTML = "Patientez... " + timeLeft + "s";
+                }
+                timeLeft -= 1;
+            }, 1000);
+        }
+    </script>
 
 </body>
 </html>
