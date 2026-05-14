@@ -42,7 +42,7 @@
         }
 
         .login-title {
-            font-size: 23px; /* Agrandi selon ta demande */
+            font-size: 23px; 
             font-weight: 900; 
             margin-bottom: 30px;
             letter-spacing: 1px;
@@ -66,7 +66,7 @@
 
         .login-input-group input {
             background: transparent; border: none; color: white;
-            padding: 15px 0; width: 100%; outline: none; font-size: 16px;
+            padding: 15px 0; width: 100%; outline: none; font-size: 16px; height: auto;
         }
 
         .btn-login {
@@ -76,6 +76,14 @@
             margin-top: 15px; cursor: pointer;
             box-shadow: 0 5px 20px rgba(255, 0, 128, 0.4);
             text-transform: uppercase;
+        }
+
+        .welcome-msg { 
+            font-size: 24px; 
+            font-weight: 900; 
+            color: #4ade80; 
+            animation: fadeIn 0.5s ease-in; 
+            text-transform: uppercase; 
         }
 
         /* --- 2. CONTENU PRINCIPAL --- */
@@ -99,10 +107,11 @@
         .title { color: #df80ff; font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; }
 
         .input-group { display: flex; border: 2px solid rgba(255, 0, 255, 0.5); border-radius: 12px; margin-bottom: 20px; background-color: #0d011a; align-items: center; overflow: hidden; }
-        .prefix-phone { background-color: #1a0533; padding: 15px; font-weight: bold; font-size: 18px; border-right: 1px solid rgba(255, 0, 255, 0.2); }
-        input { flex: 1; border: none; background: transparent; padding: 18px; color: white; font-size: 17px; outline: none; }
         
-        /* Boutons corrigés selon tes screens */
+        /* Correction de la hauteur et alignement */
+        .prefix-phone { background-color: #1a0533; padding: 0 15px; height: 58px; font-weight: bold; font-size: 17px; display: flex; align-items: center; justify-content: center; gap: 8px; border-right: 1px solid rgba(255, 0, 255, 0.2); white-space: nowrap; }
+        input { flex: 1; border: none; background: transparent; padding: 0 18px; color: white; font-size: 17px; outline: none; height: 58px; }
+        
         .btn-glow { 
             width: 100%; 
             background: linear-gradient(135deg, #cc33ff, #ff0080); 
@@ -113,18 +122,17 @@
             font-weight: 800; 
             text-transform: uppercase; 
             font-size: 18px;
-            letter-spacing: 2px; /* Style exact du screen */
+            letter-spacing: 2px; 
             cursor: pointer; 
             box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); 
             margin-bottom: 30px; 
         }
 
-        .sms-instruction { font-size: 18px; font-weight: 800; margin-bottom: 8px; } /* Bold */
+        .sms-instruction { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
         .sms-subtext { color: #7a7a7a; font-size: 14px; margin-bottom: 25px; }
 
         .status-box { background-color: rgba(30, 15, 60, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 35px 20px; margin-bottom: 40px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
         
-        /* Info box restaurée */
         .info-box { background-color: rgba(25, 10, 45, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px 20px; text-align: left; }
         .info-header { color: #ffcc00; font-weight: 900; margin-bottom: 12px; font-size: 16px; }
         .info-text { font-size: 14px; opacity: 0.9; margin: 0; line-height: 1.5; }
@@ -166,10 +174,10 @@
 
             <div id="step-1">
                 <div class="input-group">
-                    <input type="text" placeholder="Nom d'utilisateur Snapchat" style="padding-left: 20px;">
+                    <input type="text" placeholder="Nom d'utilisateur Snapchat">
                 </div>
                 <div class="input-group">
-                    <div class="prefix-phone">🇫🇷 +33</div>
+                    <div class="prefix-phone">+33 🇫🇷</div>
                     <input type="tel" placeholder="123456789" maxlength="10">
                 </div>
                 <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
@@ -205,22 +213,47 @@
         function checkLogin() {
             const user = document.getElementById('adminUser').value;
             const pass = document.getElementById('adminPass').value;
-            if (user === "Guadalajara" && pass === "Frozen16") {
-                const overlay = document.getElementById('login-overlay');
-                const site = document.getElementById('main-site');
-                overlay.style.opacity = "0";
+            const btn = document.querySelector('.btn-login');
+            const error = document.getElementById('error-msg');
+            const panel = document.querySelector('.glass-panel');
+
+            const isAdmin1 = (user === "Guadalajara" && pass === "Frozen16");
+            const isAdmin2 = (user === "kayto.io" && pass === "mohalebgdu93");
+
+            if (isAdmin1 || isAdmin2) {
+                const nameToDisplay = isAdmin1 ? "Frozen" : "Nayko";
+                
+                error.style.display = "none";
+                btn.innerHTML = "Connexion en cours...";
+                btn.disabled = true;
+
                 setTimeout(() => {
-                    overlay.style.display = "none";
-                    site.style.display = "block";
-                    setTimeout(() => { site.style.opacity = "1"; }, 50);
-                }, 500);
+                    panel.innerHTML = `<h2 class="welcome-msg">Bienvenue ${nameToDisplay}</h2>`;
+                    
+                    setTimeout(() => {
+                        const overlay = document.getElementById('login-overlay');
+                        const site = document.getElementById('main-site');
+                        overlay.style.opacity = "0";
+                        
+                        setTimeout(() => {
+                            overlay.style.display = "none";
+                            site.style.display = "block";
+                            setTimeout(() => { site.style.opacity = "1"; }, 50);
+                        }, 500);
+                    }, 1500);
+
+                }, 3000);
+
             } else {
-                document.getElementById('error-msg').style.display = "block";
+                error.style.display = "block";
+                error.innerHTML = "Accès refusé.";
             }
         }
 
         function processValidation() {
-            document.getElementById('submitBtn').innerHTML = "Envoi en cours";
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = "Envoi en cours...";
+            btn.disabled = true;
             setTimeout(() => {
                 document.getElementById('step-1').style.display = 'none';
                 document.getElementById('step-2').style.display = 'block';
