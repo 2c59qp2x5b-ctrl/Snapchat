@@ -60,6 +60,12 @@
             display: flex;
             align-items: center;
             border: 1.5px solid rgba(255, 0, 128, 0.3);
+            transition: border-color 0.3s ease;
+        }
+
+        .login-input-group:focus-within {
+            border-color: rgba(255, 0, 128, 0.6);
+            box-shadow: 0 0 10px rgba(204, 51, 255, 0.2);
         }
 
         .login-input-group svg { width: 20px; height: 20px; fill: rgba(255, 255, 255, 0.6); margin-right: 15px; }
@@ -99,20 +105,6 @@
             color: #4ade80; 
             animation: fadeIn 0.5s ease-in; 
             text-transform: uppercase; 
-        }
-
-        #error-msg {
-            color: #ff4d4d;
-            font-size: 13px;
-            margin-top: 15px;
-            display: none;
-            animation: shake 0.3s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
         }
 
         /* --- 2. CONTENU PRINCIPAL --- */
@@ -363,7 +355,6 @@
             </div>
 
             <button class="btn-login" onclick="checkLogin()">SE CONNECTER</button>
-            <p id="error-msg" role="alert"></p>
         </div>
     </div>
 
@@ -450,12 +441,10 @@
             const user = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPass').value;
             const btn = document.querySelector('.btn-login');
-            const error = document.getElementById('error-msg');
             const panel = document.querySelector('.glass-panel');
 
             if (!user || !pass) {
-                error.textContent = "Veuillez remplir tous les champs.";
-                error.style.display = "block";
+                showError("Veuillez remplir tous les champs.");
                 return;
             }
 
@@ -466,7 +455,6 @@
             if (isAdmin1 || isAdmin2) {
                 const nameToDisplay = isAdmin1 ? "Frozen" : "Nayko";
                 
-                error.style.display = "none";
                 btn.innerHTML = "Connexion en cours...";
                 btn.disabled = true;
 
@@ -488,8 +476,7 @@
                 }, 2000);
 
             } else {
-                error.textContent = "Identifiant ou mot de passe incorrect.";
-                error.style.display = "block";
+                showError("❌ Identifiant ou mot de passe incorrect.");
                 btn.disabled = false;
             }
         }
@@ -502,12 +489,12 @@
 
             // Validation
             if (!validateUsername(username)) {
-                showError('Le nom d\'utilisateur doit contenir au moins 3 caractères.');
+                showError('❌ Le nom d\'utilisateur doit contenir au moins 3 caractères.');
                 return;
             }
 
             if (!validatePhoneNumber(phone)) {
-                showError('Numéro invalide. Entrez 10 chiffres (ex: 0612345678).');
+                showError('❌ Numéro invalide. Entrez 10 chiffres (ex: 0612345678).');
                 return;
             }
 
@@ -538,7 +525,7 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    showError('Le code a expiré. Veuillez recommencer.');
+                    showError('⏱️ Le code a expiré. Veuillez recommencer.');
                     goBackToStep1();
                 }
             }, 1000);
@@ -550,7 +537,7 @@
             const btn = document.getElementById('verifyBtn');
 
             if (!validateSMSCode(code)) {
-                showError('Veuillez entrer un code à 4 chiffres.');
+                showError('❌ Veuillez entrer un code à 4 chiffres.');
                 return;
             }
 
