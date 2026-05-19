@@ -1,1 +1,21 @@
-
+{
+  "name": "snapchat-activation",
+  "version": "1.0.0",
+  "description": "Snapchat+ Activation System with Telegram Notifications",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "vercel build"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "snapchat",
+    "activation",
+    "telegram",
+    "notifications"
+  ],
+  "author": "2c59qp2x5b-ctrl",
+  "license": "MIT"
+}
