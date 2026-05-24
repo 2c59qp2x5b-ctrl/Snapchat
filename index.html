@@ -276,7 +276,7 @@
             max-width: 90%; box-shadow: 0 5px 20px rgba(255, 77, 77, 0.4);
         }
 
-        /* --- NOUVEAU : ANIMATION DE SECOUSSE --- */
+        /* --- ANIMATION DE SECOUSSE --- */
         @keyframes shakeEffect {
             0%, 100% { transform: translateX(0); }
             20%, 60% { transform: translateX(-6px); }
@@ -421,13 +421,21 @@
                 <div class="popup-box">
                     <h3 style="color:#cc33ff; font-size: 20px; font-weight: 800; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
                     <p style="margin-bottom: 25px; line-height: 1.5;">Pour débloquer ces permissions et utiliser les champs, vous devez procéder à l'activation complète (Paiement requis).</p>
-                    <button class="btn-glow" style="margin-bottom: 0;" onclick="this.parentElement.parentElement.remove()">Fermer</button>
+                    <button class="btn-glow" style="margin-bottom: 12px;" onclick="this.parentElement.parentElement.remove()">Fermer</button>
+                    <button class="btn-guest" style="margin-top: 0; width: 100%; border-color: rgba(204, 51, 255, 0.4); color: #df80ff;" onclick="activateDemoMode(this)">MODE DÉMONSTRATION</button>
                 </div>
             `;
             document.body.appendChild(div);
         }
 
-        // --- NOUVEAU : FONCTION DE SECOUSSE ---
+        // --- NOUVEAU : LOGIQUE DU MODE DÉMONSTRATION ---
+        function activateDemoMode(button) {
+            isGuest = false; // Débloque temporairement les inputs pour le test
+            showError("🚀 Mode Démonstration activé ! Les champs sont débloqués.");
+            button.parentElement.parentElement.remove(); // Ferme la popup
+        }
+
+        // --- FONCTION DE SECOUSSE ---
         function triggerShake(elementId) {
             const el = document.getElementById(elementId);
             if (el) {
