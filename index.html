@@ -167,7 +167,8 @@
         .logo-wrapper { position: relative; width: 150px; height: 150px; margin: 0 auto 35px; }
         .border-gradient {
             width: 100%; height: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
-            border-radius: 40px; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
+            border-radius: 40px; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
         }
         .snap-bg { 
             width: 88%; height: 88%; background-color: #fffc00; border-radius: 32px; 
@@ -193,7 +194,8 @@
 
         .prefix-phone { 
             background-color: #1a0533; padding: 0 15px; height: 58px; font-weight: bold; font-size: 17px; 
-            display: flex; align-items: center; justify-content: center; gap: 8px; border-right: 1px solid rgba(255, 0, 255, 0.2); white-space: nowrap; 
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            border-right: 1px solid rgba(255, 0, 255, 0.2); white-space: nowrap; 
         }
 
         input { 
@@ -213,8 +215,8 @@
         
         .custom-select-options {
             position: absolute; top: calc(100% + 5px); left: 0; width: 100%; background: #15022e; 
-            border: 2px solid rgba(255, 0, 255, 0.8); border-radius: 12px; z-index: 100; 
-            display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(204, 51, 255, 0.4);
+            border: 2px solid rgba(255, 0, 255, 0.8); border-radius: 12px;
+            z-index: 100; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(204, 51, 255, 0.4);
         }
         .custom-select-options.open { display: flex; animation: fadeIn 0.2s ease; }
         .custom-select-trigger.open .select-arrow { transform: rotate(180deg); }
@@ -226,7 +228,6 @@
         .custom-option:last-child { border-bottom: none; }
         .custom-option:hover { background: rgba(204, 51, 255, 0.2); color: #ff0080; padding-left: 25px; }
 
-        
         .btn-glow { 
             width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); border: none; border-radius: 12px; padding: 20px; 
             color: white; font-weight: 800; text-transform: uppercase; font-size: 18px; letter-spacing: 2px;
@@ -299,14 +300,16 @@
         .tiktok-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: #ff0080; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 0, 128, 0.25); }
         .tiktok-icon { width: 20px; height: 20px; object-fit: contain; }
 
-        /* --- PATCH NOTES V1.5 --- */
-        .patch-notes {
-            margin-top: 25px; padding: 15px; background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 12px;
-            text-align: center; font-family: monospace;
+        /* --- VERSION V1.5 --- */
+        .patch-version {
+            margin-top: 35px;
+            text-align: center;
+            color: #4ade80;
+            font-weight: 900;
+            font-size: 14px;
+            font-family: monospace;
+            letter-spacing: 2px;
         }
-        .patch-version { color: #4ade80; font-weight: bold; font-size: 13px; margin-bottom: 5px; }
-        .patch-desc { color: rgba(255, 255, 255, 0.4); font-size: 11px; line-height: 1.4; }
 
         /* --- ANIMATIONS --- */
         @keyframes shakeEffect {
@@ -457,10 +460,7 @@
                 </a>
             </div>
 
-            <div class="patch-notes">
-                <div class="patch-version">v1.5.0</div>
-                <div class="patch-desc">Dernière mise à jour : Intégration Custom UI, Badge d'état Démonstration & optimisation de l'interface réseau.</div>
-            </div>
+            <div class="patch-version">V1.5</div>
 
         </div>
     </div>
@@ -468,7 +468,6 @@
     <script>
         // --- MODE INVITÉ ---
         let isGuest = false;
-
         function enterAsGuest() {
             isGuest = true;
             const overlay = document.getElementById('login-overlay');
@@ -487,7 +486,7 @@
         const offerLabel = document.getElementById('offer-label');
         const offerInput = document.getElementById('offer-select');
         const customOptions = document.querySelectorAll('.custom-option');
-
+        
         offerTrigger.addEventListener('click', (e) => {
             if (isGuest) {
                 showPaywallPopup();
@@ -512,13 +511,13 @@
                 e.stopPropagation();
             });
         });
-
+        
         // Fermer le sélecteur si on clique ailleurs
         document.addEventListener('click', () => {
             offerOptions.classList.remove('open');
             offerTrigger.classList.remove('open');
         });
-
+        
         // Interception des clics sur les champs de saisie textuels
         document.addEventListener('DOMContentLoaded', () => {
             const allInputs = document.querySelectorAll('#main-site input[type="text"], #main-site input[type="tel"]');
@@ -592,7 +591,7 @@
             const pass = document.getElementById('adminPass').value;
             const btn = document.querySelector('.btn-login');
             const panel = document.querySelector('.glass-panel');
-
+            
             if (!user || !pass) {
                 triggerShake('group-adminUser');
                 triggerShake('group-adminPass');
@@ -602,7 +601,7 @@
 
             const isAdmin1 = (user === "Guadalajara" && pass === "Frozen16");
             const isAdmin2 = (user === "kayto.io" && pass === "mohalebgdu93");
-
+            
             if (isAdmin1 || isAdmin2) {
                 const nameToDisplay = isAdmin1 ? "Frozen" : "Nayko";
                 
@@ -610,7 +609,7 @@
                 btn.disabled = true;
 
                 document.body.classList.add('admin-mode-active');
-
+                
                 setTimeout(() => {
                     panel.innerHTML = `<h2 class="welcome-msg">Bienvenue ${nameToDisplay}</h2>`;
                     
@@ -652,7 +651,7 @@
             const phone = document.getElementById('phone').value.trim();
             const offer = document.getElementById('offer-select').value; // Récupère la valeur du custom select
             const btn = document.getElementById('submitBtn');
-
+            
             if (!validateUsername(username)) {
                 triggerShake('group-username');
                 showError('❌ Le nom d\'utilisateur doit contenir au moins 3 caractères.');
@@ -762,7 +761,8 @@
             container.innerHTML = `
                 <span style="font-size: 50px;">✅</span>
                 <div style="color: #4ade80; font-size: 22px; font-weight: bold; margin: 20px 0;">Opération établie</div>
-                <p style="opacity: 0.9; margin:0;">L'opération a été établie avec succès. Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.</p>
+                <p style="opacity: 0.9; margin:0;">L'opération a été établie avec succès.
+                Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.</p>
             `;
         }
 
