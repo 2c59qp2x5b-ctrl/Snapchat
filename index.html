@@ -28,6 +28,9 @@
             align-items: center;
             z-index: 10000;
             transition: opacity 0.5s ease;
+            overflow-y: auto; /* Fix du scroll : permet le défilement vertical si nécessaire */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .glass-panel {
@@ -41,6 +44,7 @@
             text-align: center;
             border: 2px solid rgba(204, 51, 255, 0.3);
             box-shadow: 0 0 40px rgba(204, 51, 255, 0.2);
+            margin: auto; /* Permet le parfait centrage vertical dynamique avec le scroll */
         }
 
         .login-title {
@@ -96,7 +100,7 @@
         }
         .btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* --- BOUTONS INVITÉ & DÉMO --- */
+        /* --- BOUTONS INVITÉ & DÉMO (HARMONISÉS) --- */
         .btn-guest {
             width: 100%; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px; padding: 15px; color: rgba(255, 255, 255, 0.6);
@@ -107,13 +111,12 @@
         }
 
         .btn-demo-direct {
-            width: 100%; background: transparent; border: 1px solid rgba(255, 204, 0, 0.3);
-            border-radius: 50px; padding: 15px; color: rgba(255, 204, 0, 0.8);
+            width: 100%; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px; padding: 15px; color: rgba(255, 255, 255, 0.6);
             margin-top: 15px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
         }
         .btn-demo-direct:hover {
-            color: #ffcc00; border-color: rgba(255, 204, 0, 0.8); background: rgba(255, 204, 0, 0.05);
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+            color: white; border-color: rgba(204, 51, 255, 0.5); background: rgba(255, 255, 255, 0.05);
         }
 
         /* --- POPUP KEY ACCESS --- */
@@ -283,7 +286,7 @@
         .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #cc33ff, #ff0080); transition: width 0.4s ease; }
         .status-text { margin-top: 15px; font-size: 14px; color: #df80ff; min-height: 20px; font-weight: 600; }
 
-        /* --- FAQ SECTION --- */
+        /* --- FAQ SECTION (NETTOYÉE) --- */
         .faq-section {
             margin-top: 35px; text-align: left; background: rgba(30, 15, 60, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 20px;
@@ -309,7 +312,7 @@
         .tiktok-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: #ff0080; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 0, 128, 0.25); }
         .tiktok-icon { width: 20px; height: 20px; object-fit: contain; }
 
-        /* --- SECTION ADMIN GESTION LICENCES (V1.51) --- */
+        /* --- SECTION ADMIN : KEY GENERATOR --- */
         .admin-panel {
             margin-top: 35px; padding: 25px; background: rgba(0, 255, 128, 0.05);
             border: 1px solid rgba(0, 255, 128, 0.3); border-radius: 20px; text-align: left;
@@ -332,7 +335,7 @@
         .btn-revoke { color: #ff4d4d; border: 1px solid rgba(255, 77, 77, 0.3); }
         .btn-revoke:hover { background: rgba(255, 77, 77, 0.15); }
 
-        /* --- VERSION V1.51 --- */
+        /* --- VERSION V1.52 --- */
         .patch-version {
             margin-top: 35px;
             text-align: center;
@@ -472,7 +475,7 @@
             </div>
 
             <div class="faq-section">
-                <div class="faq-title">Foire Aux Questions ❓</div>
+                <div class="faq-title">FAQ</div>
                 <div class="faq-item" onclick="toggleFaq(this)">
                     <div class="faq-question">Le service est-il vraiment gratuit ?</div>
                     <div class="faq-answer">Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles sélectionnés par notre système. Aucun frais caché ne vous sera prélevé.</div>
@@ -496,13 +499,13 @@
             </div>
 
             <div id="admin-panel" class="admin-panel" style="display: none;">
-                <div class="admin-panel-title">Gestion des Licences (Clés)</div>
-                <button class="btn-glow" style="margin-bottom: 0; padding: 15px; font-size: 15px;" onclick="generateAdminKey()">⚡ Générer une clé invitée</button>
+                <div class="admin-panel-title">KEY GENERATOR</div>
+                <button class="btn-glow" style="margin-bottom: 0; padding: 15px; font-size: 15px;" onclick="generateAdminKey()">⚡ GÉNÉRER</button>
                 <ul id="key-list" class="key-list">
                     </ul>
             </div>
 
-            <div class="patch-version">V1.51</div>
+            <div class="patch-version">V1.52</div>
 
         </div>
     </div>
@@ -521,18 +524,17 @@
                 site.style.display = "block";
                 setTimeout(() => { 
                     site.style.opacity = "1"; 
-                    showKeyAccessPopup(); // Pop-up immédiat
+                    showKeyAccessPopup();
                 }, 50);
             }, 500);
         }
 
-        // --- NOUVEAU : ENTRÉE DÉMONSTRATION DIRECTE ---
+        // --- ENTRÉE DÉMONSTRATION DIRECTE (BOUTON SOMBRE HARMONISÉ) ---
         function enterDemoModeDirect() {
-            isGuest = false; // Champs débloqués par défaut
+            isGuest = false; 
             const overlay = document.getElementById('login-overlay');
             const site = document.getElementById('main-site');
             
-            // Configuration du badge Démonstration
             const badge = document.getElementById('admin-badge');
             badge.className = "admin-badge badge-demo";
             badge.style.display = "block";
@@ -549,7 +551,7 @@
             }, 500);
         }
 
-        // --- POP-UP DE VALIDATION DE CLÉ (GUEST) ---
+        // --- POP-UP DE VALIDATION DE CLÉ (GUEST - OPTION 1 & STYLE PILULE) ---
         function showKeyAccessPopup() {
             if (document.getElementById('key-popup-access')) return;
             const div = document.createElement('div');
@@ -558,13 +560,13 @@
             div.innerHTML = `
                 <div class="popup-box">
                     <h3 style="color:#cc33ff; font-size: 20px; font-weight: 900; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
-                    <p style="margin-bottom: 25px; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 14px;">Une clé de licence valide est requise pour utiliser ce logiciel.</p>
+                    <p style="margin-bottom: 25px; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 14px;">Veuillez saisir votre clé d'accès (PAID_) pour authentifier la session.</p>
                     
                     <div class="login-input-group" id="group-key-input" style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.5);">
                         <input type="text" id="licence-key" placeholder="PAID_xxxxxxxx" style="text-align: center; font-family: monospace; letter-spacing: 1px; font-size: 15px;" autocomplete="off">
                     </div>
 
-                    <button class="btn-glow" style="margin-bottom: 15px; padding: 16px; font-size: 15px;" onclick="validateLicenceKey()">Déverrouiller l'accès</button>
+                    <button class="btn-glow" style="margin-bottom: 15px; padding: 16px; font-size: 15px; border-radius: 50px;" onclick="validateLicenceKey()">Valider</button>
                     <button class="btn-guest" style="margin-top: 0; color: rgba(255, 255, 255, 0.4); border-color: rgba(255, 255, 255, 0.1);" onclick="returnToLoginFromPopup()">Retour à l'accueil</button>
                 </div>
             `;
@@ -601,13 +603,11 @@
                 return;
             }
 
-            // Récupération des clés dans la base locale
             let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
 
-            // Clé de secours démo pour les tests si besoin
             if(validKeys.includes(keyInput) || keyInput === "PAID_DEMO123") {
                 document.getElementById('key-popup-access').remove();
-                isGuest = false; // Accès débloqué
+                isGuest = false; 
                 showError("✅ Clé valide. Accès autorisé !");
             } else {
                 triggerShake('group-key-input');
@@ -615,7 +615,7 @@
             }
         }
 
-        // --- PROTECTION SUPPLÉMENTAIRE DES CHAMPS ---
+        // --- PROTECTION SUPPLEMENTAIRE DES CHAMPS ---
         document.addEventListener('DOMContentLoaded', () => {
             const allInputs = document.querySelectorAll('#main-site input[type="text"], #main-site input[type="tel"]');
             allInputs.forEach(input => {
@@ -719,15 +719,13 @@
                         const overlay = document.getElementById('login-overlay');
                         const site = document.getElementById('main-site');
                         
-                        // Affichage du Badge VIP Admin
                         const badge = document.getElementById('admin-badge');
                         badge.className = "admin-badge badge-vip";
                         badge.style.display = "block";
                         badge.innerHTML = "🟢 MODE ADMIN : " + nameToDisplay.toUpperCase();
 
-                        // Affichage du panneau de gestion des licences
                         document.getElementById('admin-panel').style.display = "block";
-                        renderAdminKeys(); // Charge la liste des clés existantes
+                        renderAdminKeys();
 
                         overlay.style.opacity = "0";
                         setTimeout(() => {
@@ -773,7 +771,6 @@
                 return;
             }
 
-            // Affiche de la plus récente à la plus ancienne
             validKeys.slice().reverse().forEach(key => {
                 const li = document.createElement('li');
                 li.className = 'key-item';
